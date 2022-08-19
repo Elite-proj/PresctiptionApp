@@ -48,6 +48,21 @@ namespace E_prescription
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "doctor",
+                    areaName: "Doctor",
+                    pattern: "Doctor/{controller=Home}/{action=index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "pharmacist",
+                    areaName: "Pharmacist",
+                    pattern: "Pharmacist/{controller=Home}/{action=index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "patient",
+                    areaName: "Patient",
+                    pattern: "Patient/{controller=Home}/{action=index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
