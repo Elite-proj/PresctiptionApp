@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Eprescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="bg-white">
+        <div class="jumbotron mt-2">
+            <a class="navbar-brand">Pharmacy name</a><br />
+        </div>
+        <nav class="nav navbar-expand-sm navbar-toggleable-sm nav-tabs nav-justified navbar-nav navbar-light text-white bg-success mb-3">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-collapse collapse d-sm-inline-flex  navbar-nav flex-grow-1" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link text-dark @(ViewContext.RouteData.Values["Controller"].ToString()=="Aprescriptions" && ViewContext.RouteData.Values["area"].ToString() == "Pharmacist" ?"active":"")" role="tab" asp-area="Pharmacist" asp-controller="Aprescriptions" asp-action="Display">Active Prescriptions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark @(ViewContext.RouteData.Values["Controller"].ToString()=="History" && ViewContext.RouteData.Values["area"].ToString() == "Pharmacist" ?"active":"")" role="tab" asp-area="Pharmacist" asp-controller="History" asp-action="Display">History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark @(ViewContext.RouteData.Values["Controller"].ToString()=="Rejected" && ViewContext.RouteData.Values["area"].ToString() == "Pharmacist" ?"active":"")" role="tab" asp-area="Pharmacist" asp-controller="Rejected" asp-action="Display">Rejected prescriptions</a>
+                </li>
+               
+            </ul>
+            
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - E_prescription - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

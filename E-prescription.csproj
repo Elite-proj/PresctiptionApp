@@ -14,4 +14,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Doctor\Models\" />
+    <Folder Include="Areas\Patient\Models\" />
+    <Folder Include="Areas\Pharmacist\Models\" />
+  </ItemGroup>
+
 </Project>
