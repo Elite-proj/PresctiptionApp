@@ -1,5 +1,246 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
+<partial name="_DashboardHeaderPartial" />
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>  <title>@ViewData["Title"] - Eprescription</title>
+    <link rel="stylesheet" href="~/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/vendor/ionicons/css/ionicons.min.css" />
+    <link rel="stylesheet" href="~/vendor/animate.css/animate.min.css" />
+    <link rel="stylesheet" href="~/vendor/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/vendor/owl.carousel/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link href="~/styles/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/styles/style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <!-- ======= Header/Navbar ======= -->
+        <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+            <div class="container">
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <a class="navbar-brand text-brand" href="index.html">E-Prescription<span class="color-b"></span></a>
+                <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+                    <ul class="navbar-nav">
+                        <li class="@(ViewBag.Title == "Home" ? "nav-item active" : "nav-item")">
+                            <a class="nav-link" asp-area="Public" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="@(ViewBag.Title == "About" ? "nav-item active" : "nav-item")">
+                            <a class="nav-link" asp-area="Public" asp-controller="About" asp-action="Index">About</a>
+                       @* </li>
+                        <li class="@(ViewBag.Title == "Centres" ? "nav-item active" : "nav-item")">
+                            <a class="nav-link" asp-area="Public" asp-controller="Centres" asp-action="Index">Centres</a>
+                        </li>*@
+                        @*<li class="@(ViewBag.Title == "News" ? "nav-item active" : "nav-item")">
+                        <a class="nav-link" asp-area="Public" asp-controller="News" asp-action="Index">News</a>
+                        </li>*@
+                        <li class="@(ViewBag.Title == "Contact" ? "nav-item active" : "nav-item")">
+                            <a class="nav-link" asp-area="Public" asp-controller="Contact" asp-action="Index">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav><!-- End Header/Navbar -->
+
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+        @RenderBody()
+        </main>
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <section class="section-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="widget-a">
+                        <div class="w-header-a">
+                            <h3 class="w-title-a text-brand">abc</h3>
+                        </div>
+                        <div class="w-body-a">
+                            <p class="w-text-a color-text-a">
+                                For Quick services and early reply please find us on the following Contacts.
+                            </p>
+                        </div>
+                        <div class="w-footer-a">
+                            <ul class="list-unstyled">
+                                <li class="color-a">
+                                    <span class="color-text-a">Email .</span> abc
+                                </li>
+                                <li class="color-a">
+                                    <span class="color-text-a">Phone .</span> 041 234 4678
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 section-md-t3">
+                    <div class="widget-a">
+                        <div class="w-header-a">
+                            <h3 class="w-title-a text-brand">Quick Links</h3>
+                        </div>
+                        <div class="w-body-a">
+                            <div class="w-body-a">
+                                <ul class="list-unstyled">
+                                   @* <li class="item-list-a">
+                                        <i class="fa fa-angle-right"></i> <a href="#">Centres </a>
+                                    </li>*@
+                                    <li class="item-list-a">
+                                        <i class="fa fa-angle-right"></i> <a href="#">Services</a>
+                                    </li>
+                                    <li class="item-list-a">
+                                        <i class="fa fa-angle-right"></i> <a href="#">About</a>
+                                    </li>
+                                 @*   <li class="item-list-a">
+                                        <i class="fa fa-angle-right"></i> <a href="#">Careers</a>
+                                    </li>*@
+                                    <li class="item-list-a">
+                                        <i class="fa fa-angle-right"></i> <a href="#">News</a>
+                                    </li>
+                                    <li class="item-list-a">
+                                        <i class="fa fa-angle-right"></i> <a href="#">Privacy Policy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 section-md-t3">
+                    <div class="widget-a">
+                        <div class="w-header-a">
+                            <h3 class="w-title-a text-brand">Contact</h3>
+                        </div>
+                        <div class="w-body-a">
+                            <ul class="list-unstyled">
+                                <li class="item-list-a">
+                                    <i class="fa fa-envelope"></i> <a href="#">Info@eprescring.com</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="fa fa-map-marker"></i> <a href="#">123 Some Street, Central</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="fa fa-angle-right"></i> <a href="#">South Africa</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="fa fa-angle-right"></i> <a href="#">Port Elizabeth</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="fa fa-angle-right"></i> <a href="#">Johannersburg</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="fa fa-angle-right"></i> <a href="#">Pretoria</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="nav-footer">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a asp-controller="About" asp-action="Index">About</a>
+                            </li>
+                           @* <li class="list-inline-item">
+                                <a asp-controller="Centres" asp-action="Index">Centres</a>
+                            </li>*@
+                            <li class="list-inline-item">
+                                <a asp-controller="News" asp-action="Index">News</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a asp-controller="Contact" asp-action="Index">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="socials-a">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            @*<li class="list-inline-item">
+                            <a href="#">
+                            <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                            </a>
+                            </li>
+                            <li class="list-inline-item">
+                            <a href="#">
+                            <i class="fa fa-dribbble" aria-hidden="true"></i>
+                            </a>
+                            </li>*@
+                        </ul>
+                    </div>
+                    <div class="copyright-footer">
+                        <p class="copyright color-text-a">
+                            &copy; Copyright
+                            <span class="color-a">E-Prescribing</span> All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><!-- End  Footer -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="~/vendor/php-email-form/validate.js"></script>
+    <script src="~/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="~/vendor/scrollreveal/scrollreveal.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+
+
+
+@*<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,9 +270,11 @@
             </div>
         </nav>
     </header>
+    
+
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+        @RenderBody()
         </main>
     </div>
 
@@ -45,4 +288,4 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
-</html>
+</html>*@

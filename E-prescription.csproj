@@ -16,8 +16,20 @@
 
   <ItemGroup>
     <Folder Include="Areas\Doctor\Models\" />
+    <Folder Include="Areas\Doctor\Views\Dosage\" />
+    <Folder Include="Areas\Doctor\Views\Instruction\" />
+    <Folder Include="Areas\Doctor\Views\Patient\" />
     <Folder Include="Areas\Patient\Models\" />
     <Folder Include="Areas\Pharmacist\Models\" />
+    <Folder Include="Views\ActiveIngredient\" />
+    <Folder Include="Views\AdminReport\" />
+    <Folder Include="Views\ConditionDiagnosis\" />
+    <Folder Include="Views\DoctorRec\" />
+    <Folder Include="Views\MedicalPracticeRec\" />
+    <Folder Include="Views\MedicationRec\" />
+    <Folder Include="Views\MedicationInteraction\" />
+    <Folder Include="Views\PharmacyRec\" />
+    <Folder Include="Views\PharmacistRec\" />
   </ItemGroup>
 
 </Project>
