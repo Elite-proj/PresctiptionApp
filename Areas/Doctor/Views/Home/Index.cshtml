@@ -2,6 +2,11 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Home Page";
 }
 
-
+<div class="text-center">
+    <h1 class="display-4">Welcome to the home page</h1>
+    <a asp-action="Display" asp-controller="Aprescriptions" asp-area="Pharmacist" class="btn btn-primary">Search Patient</a>
+    <p></p>
+</div>
