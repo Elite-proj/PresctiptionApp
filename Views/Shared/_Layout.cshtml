@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - E-Prescription</title>  <title>@ViewData["Title"] - Eprescription</title>
+    <title>@ViewData["Title"] -  E-Prescription</title>  <title>@ViewData["Title"] -  Eprescription</title>
     <link rel="stylesheet" href="~/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/vendor/ionicons/css/ionicons.min.css" />
     <link rel="stylesheet" href="~/vendor/animate.css/animate.min.css" />
@@ -16,6 +16,7 @@
     <link href="~/styles/style.css" rel="stylesheet" />
 </head>
 <body>
+   
     <header>
         <!-- ======= Header/Navbar ======= -->
         <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
@@ -36,13 +37,7 @@
                         </li>
                         <li class="@(ViewBag.Title == "About" ? "nav-item active" : "nav-item")">
                             <a class="nav-link" asp-area="Public" asp-controller="About" asp-action="Index">About</a>
-                       @* </li>
-                        <li class="@(ViewBag.Title == "Centres" ? "nav-item active" : "nav-item")">
-                            <a class="nav-link" asp-area="Public" asp-controller="Centres" asp-action="Index">Centres</a>
-                        </li>*@
-                        @*<li class="@(ViewBag.Title == "News" ? "nav-item active" : "nav-item")">
-                        <a class="nav-link" asp-area="Public" asp-controller="News" asp-action="Index">News</a>
-                        </li>*@
+                        
                         <li class="@(ViewBag.Title == "Contact" ? "nav-item active" : "nav-item")">
                             <a class="nav-link" asp-area="Public" asp-controller="Contact" asp-action="Index">Contact</a>
                         </li>
@@ -61,11 +56,156 @@
         </nav><!-- End Header/Navbar -->
 
     </header>
-    <div>
-        <main role="main" class="pb-3">
+    
+
+    <main role="main" class="pb-3">
+     @* <main id="main">*@
+   @* <div>
+        <div class="intro intro-carousel">
+            <div id="carousel" class="owl-carousel owl-theme">
+                <div class="carousel-item-a intro-item bg-image" style="background-image: url('images\eprescription.png');)">
+                    <div class="overlay overlay-a"></div>
+                    <div class="intro-content display-table">
+                        <div class="table-cell">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="intro-body">
+                                            <p class="intro-title-top">
+                                                E-Prescription
+                                                <br> 2022
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    
+                    <!-- ======= Latest Centres Section ======= -->
+                    <section class="section-Centres section-t8">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="title-wrap d-flex justify-content-between">
+                                        <div class="title-box">
+                                            <h2 class="title-a">Development Centres</h2>
+                                        </div>
+                                        <div class="title-link">
+                                            <a href="property-grid.html">
+                                                All Centres
+                                                <span class="ion-ios-arrow-forward"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="property-carousel" class="owl-carousel owl-theme">
+                                <div class="carousel-item-b">
+                                    <div class="card-box-a card-shadow">
+                                        <div class="img-box-a">
+                                            <img src="~/img/property-6.jpg" alt="" class="img-a img-fluid">
+                                        </div>
+                                        <div class="card-overlay">
+                                            <div class="card-overlay-a-content">
+                                                <div class="card-header-a">
+                                                    <h2 class="card-title-a">
+                                                        <a href="property-single.html">
+                                                            Akhanani
+                                                            <br /> Childhood Centre
+                                                        </a>
+                                                    </h2>
+                                                </div>
+                                                <div class="card-body-a">
+                                                    <div class=>
+                                                        <span class=></span>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item-b">
+                                    <div class="card-box-a card-shadow">
+                                        <div class="img-box-a">
+                                            <img src="~/img/property-3.jpg" alt="" class="img-a img-fluid">
+                                        </div>
+                                        <div class="card-overlay">
+                                            <div class="card-overlay-a-content">
+                                                <div class="card-header-a">
+                                                    <h2 class="card-title-a">
+                                                        <a href="property-single.html">
+                                                            Sunridge
+                                                            <br /> Childhood Centre
+                                                        </a>
+                                                    </h2>
+                                                </div>
+                                                <div class="card-body-a">
+                                                    <div class="-">
+                                                        <span class=""></span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item-b">
+                                        <div class="card-box-a card-shadow">
+                                            <div class="img-box-a">
+                                                <img src="~/img/about-2.jpg" alt="" class="img-a img-fluid">
+                                            </div>
+                                            <div class="card-overlay">
+                                                <div class="card-overlay-a-content">
+                                                    <div class="card-header-a">
+                                                        <h2 class="card-title-a">
+                                                            <a href="property-single.html">
+                                                                ABC Childhood  Centre
+                                                                <br />
+                                                            </a>
+                                                        </h2>
+                                                    </div>
+                                                    <div class="card-body-a">
+                                                        <div class=">
+                                                            <span class="price-a"> | </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item-b">
+                                        <div class="card-box-a card-shadow">
+                                            <div class="img-box-a">
+                                                <img src="~/img/property-10.jpg" alt="" class="img-a img-fluid">
+                                            </div>
+                                            <div class="card-overlay">
+                                                <div class="card-overlay-a-content">
+                                                    <div class="card-header-a">
+                                                        <h2 class="card-title-a">
+                                                            <a href="property-single.html">
+
+                                                                <br />
+                                                            </a>
+                                                        </h2>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </section>
+
+*@
+
+       
         @RenderBody()
         </main>
-    </div>
 
     <!-- ======= Footer ======= -->
     <section class="section-footer">
@@ -84,7 +224,7 @@
                         <div class="w-footer-a">
                             <ul class="list-unstyled">
                                 <li class="color-a">
-                                    <span class="color-text-a">Email .</span> abc
+                                    <span class="color-text-a">Email .</span> ifo@eprescribingtechnites.ac.za
                                 </li>
                                 <li class="color-a">
                                     <span class="color-text-a">Phone .</span> 041 234 4678
@@ -101,18 +241,12 @@
                         <div class="w-body-a">
                             <div class="w-body-a">
                                 <ul class="list-unstyled">
-                                   @* <li class="item-list-a">
-                                        <i class="fa fa-angle-right"></i> <a href="#">Centres </a>
-                                    </li>*@
                                     <li class="item-list-a">
                                         <i class="fa fa-angle-right"></i> <a href="#">Services</a>
                                     </li>
                                     <li class="item-list-a">
                                         <i class="fa fa-angle-right"></i> <a href="#">About</a>
                                     </li>
-                                 @*   <li class="item-list-a">
-                                        <i class="fa fa-angle-right"></i> <a href="#">Careers</a>
-                                    </li>*@
                                     <li class="item-list-a">
                                         <i class="fa fa-angle-right"></i> <a href="#">News</a>
                                     </li>
@@ -168,9 +302,6 @@
                             <li class="list-inline-item">
                                 <a asp-controller="About" asp-action="Index">About</a>
                             </li>
-                           @* <li class="list-inline-item">
-                                <a asp-controller="Centres" asp-action="Index">Centres</a>
-                            </li>*@
                             <li class="list-inline-item">
                                 <a asp-controller="News" asp-action="Index">News</a>
                             </li>
@@ -196,7 +327,7 @@
                                     <i class="fa fa-instagram" aria-hidden="true"></i>
                                 </a>
                             </li>
-                            @*<li class="list-inline-item">
+                            <li class="list-inline-item">
                             <a href="#">
                             <i class="fa fa-pinterest-p" aria-hidden="true"></i>
                             </a>
@@ -205,8 +336,8 @@
                             <a href="#">
                             <i class="fa fa-dribbble" aria-hidden="true"></i>
                             </a>
-                            </li>*@
-                        </ul>
+                            </li>
+                       </ul>
                     </div>
                     <div class="copyright-footer">
                         <p class="copyright color-text-a">
@@ -235,57 +366,3 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-
-
-
-
-@*<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - E_prescription</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E_prescription</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    
-
-    <div class="container">
-        <main role="main" class="pb-3">
-        @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - E_prescription - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
-</html>*@

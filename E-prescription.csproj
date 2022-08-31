@@ -12,6 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,12 +25,13 @@
     <Folder Include="Views\ActiveIngredient\" />
     <Folder Include="Views\AdminReport\" />
     <Folder Include="Views\ConditionDiagnosis\" />
-    <Folder Include="Views\DoctorRec\" />
-    <Folder Include="Views\MedicalPracticeRec\" />
     <Folder Include="Views\MedicationRec\" />
     <Folder Include="Views\MedicationInteraction\" />
+    <Folder Include="Views\ContraIndication\" />
+    <Folder Include="Views\Pages\" />
     <Folder Include="Views\PharmacyRec\" />
     <Folder Include="Views\PharmacistRec\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
 
 </Project>
