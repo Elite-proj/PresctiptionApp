@@ -42,10 +42,10 @@
                             <a class="nav-link" asp-area="Public" asp-controller="Contact" asp-action="Index">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                            <a class="btn btn-success" asp-area="" asp-page="/Account/Register">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            <a class="btn btn-primary" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
                         </li>
                     </ul>
                 </div>
@@ -59,151 +59,7 @@
     
 
     <main role="main" class="pb-3">
-     @* <main id="main">*@
-   @* <div>
-        <div class="intro intro-carousel">
-            <div id="carousel" class="owl-carousel owl-theme">
-                <div class="carousel-item-a intro-item bg-image" style="background-image: url('images\eprescription.png');)">
-                    <div class="overlay overlay-a"></div>
-                    <div class="intro-content display-table">
-                        <div class="table-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="intro-body">
-                                            <p class="intro-title-top">
-                                                E-Prescription
-                                                <br> 2022
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
     
-                    <!-- ======= Latest Centres Section ======= -->
-                    <section class="section-Centres section-t8">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="title-wrap d-flex justify-content-between">
-                                        <div class="title-box">
-                                            <h2 class="title-a">Development Centres</h2>
-                                        </div>
-                                        <div class="title-link">
-                                            <a href="property-grid.html">
-                                                All Centres
-                                                <span class="ion-ios-arrow-forward"></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="property-carousel" class="owl-carousel owl-theme">
-                                <div class="carousel-item-b">
-                                    <div class="card-box-a card-shadow">
-                                        <div class="img-box-a">
-                                            <img src="~/img/property-6.jpg" alt="" class="img-a img-fluid">
-                                        </div>
-                                        <div class="card-overlay">
-                                            <div class="card-overlay-a-content">
-                                                <div class="card-header-a">
-                                                    <h2 class="card-title-a">
-                                                        <a href="property-single.html">
-                                                            Akhanani
-                                                            <br /> Childhood Centre
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div class="card-body-a">
-                                                    <div class=>
-                                                        <span class=></span>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item-b">
-                                    <div class="card-box-a card-shadow">
-                                        <div class="img-box-a">
-                                            <img src="~/img/property-3.jpg" alt="" class="img-a img-fluid">
-                                        </div>
-                                        <div class="card-overlay">
-                                            <div class="card-overlay-a-content">
-                                                <div class="card-header-a">
-                                                    <h2 class="card-title-a">
-                                                        <a href="property-single.html">
-                                                            Sunridge
-                                                            <br /> Childhood Centre
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div class="card-body-a">
-                                                    <div class="-">
-                                                        <span class=""></span>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item-b">
-                                        <div class="card-box-a card-shadow">
-                                            <div class="img-box-a">
-                                                <img src="~/img/about-2.jpg" alt="" class="img-a img-fluid">
-                                            </div>
-                                            <div class="card-overlay">
-                                                <div class="card-overlay-a-content">
-                                                    <div class="card-header-a">
-                                                        <h2 class="card-title-a">
-                                                            <a href="property-single.html">
-                                                                ABC Childhood  Centre
-                                                                <br />
-                                                            </a>
-                                                        </h2>
-                                                    </div>
-                                                    <div class="card-body-a">
-                                                        <div class=">
-                                                            <span class="price-a"> | </span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item-b">
-                                        <div class="card-box-a card-shadow">
-                                            <div class="img-box-a">
-                                                <img src="~/img/property-10.jpg" alt="" class="img-a img-fluid">
-                                            </div>
-                                            <div class="card-overlay">
-                                                <div class="card-overlay-a-content">
-                                                    <div class="card-header-a">
-                                                        <h2 class="card-title-a">
-                                                            <a href="property-single.html">
-
-                                                                <br />
-                                                            </a>
-                                                        </h2>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </section>
-
-*@
-
-       
         @RenderBody()
         </main>
 

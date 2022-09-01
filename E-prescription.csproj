@@ -28,6 +28,7 @@
     <Folder Include="Views\MedicationRec\" />
     <Folder Include="Views\MedicationInteraction\" />
     <Folder Include="Views\ContraIndication\" />
+    <Folder Include="Views\Register\" />
     <Folder Include="Views\Pages\" />
     <Folder Include="Views\PharmacyRec\" />
     <Folder Include="Views\PharmacistRec\" />
