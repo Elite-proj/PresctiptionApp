@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using E_prescription.Models;
 
 namespace E_prescription
 {
@@ -24,6 +26,7 @@ namespace E_prescription
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<EPrescriptiondbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

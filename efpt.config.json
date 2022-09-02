@@ -1,0 +1,147 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "EPrescriptiondbContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": null,
+   "ProjectRootNamespace": "E_prescription",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[ActiveIngredient]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ActiveIngredientStrength]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Admin]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ChronicHistory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ChronicMedication]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[City]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ConditionDiagnosis]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContraIndication]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DispensedMedication]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Doctor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DosageForm]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HighestQualification]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[InteractionLevel]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MedicalPractice]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MedicationInteraction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MedicationRecord]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MedInteraction_ActiveIngredient]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Patient]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PatientAllergy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PatientDoctorVisit]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pharmacist]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pharmacy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Prescription]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Prescription_Medication]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Repeat]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Schedule]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Suburb]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[User]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "SICT-SQL.GRP-4-2-EPrescription",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
