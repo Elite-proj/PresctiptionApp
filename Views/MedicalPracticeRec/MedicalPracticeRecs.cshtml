@@ -1,3 +1,48 @@
-﻿@{
+﻿@model IEnumerable<MedicalPractice>
+@{
     ViewData["Title"] = "MedicationPracticeRec";
 }
+@*<div class="row">
+    <div class="col-sm-2">
+        <a asp-controller="MedicalPracticeRecord" asp-action="MedicalPractce" class="btn btn-primary">CANCEL</a>
+    </div>
+</div>
+*@
+
+ <div class="col-12 border p-3">
+        <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Medical Practice ID</th>
+                    <th>Practice Name</th>
+                    <th>Address</th>
+                    <th>Practice Email</th>
+                    <th>Pracice Contact No</th>
+                    <th>Practice No</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var medicalPractice in Model)
+                {
+                    <tr>
+                        <td>@medicalPractice.MedicalPracticeId</td>
+                        <td>@medicalPractice.PracticeName</td>
+                        <td>@medicalPractice.AddressLine1 @medicalPractice.AddressLine2 , @*@medicalPractice.Suburb*@ , @medicalPractice.City , @*@medicalPractice.Province*@ </td>
+                        <td>@medicalPractice.PracticeEmail</td>
+                        <td>@medicalPractice.PracticeNo</td>
+                        <td>
+                            <a asp-controller="MedicalPracticeRec" asp-action="Update" asp-route-CenterID="@medicalPractice.MedicalPracticeId" class="material-icons">edit</a>
+                            @*<a asp-controller="Report" asp-action="DownloadCenterReport" asp-route-BudgetID="@center.CenterID" class="text-primary"><i class="material-icons">description</i></a>*@
+                            @*<a asp-controller="Center" asp-action="Centers" class="text-primary"><i class="material-icons"></i></a>*@
+                            <a href="javascript:deleteCenter(@medicalPractice.MedicalPracticeId);" class="text-danger"> <i class="material-icons">delete</i></a>
+                        </td>
+
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+
+    </div>

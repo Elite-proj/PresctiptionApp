@@ -1,40 +1,77 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_prescription.Services;
+using E_prescription.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace E_prescription.Controllers
 {
     public class MedicalPracticeRecController : Controller
     {
-        // public MedicalPracticeRecController(IMedicalPracticeRecService medicalPracticeRecService)
-        //{
-        //    _medicalPracticeRecService = medicalPracticeRecService;
-        //}
+        private readonly IMedicalPracticeRecService _medicalPracticeRecService;
 
-        //public IActionResult MedicalPracticeRecs()
-        //{ var medicalPracticeRec = _MedicalPracticeRec.List();
-        //    return View(new MedicalPracticeRec);
-        //}
+        public MedicalPracticeRecController(IMedicalPracticeRecService medicalPracticeRecService)
+        {
+            _medicalPracticeRecService = medicalPracticeRecService;
+        }
 
-        //[HttpGet]
-        //public IActionResult Add()
-        //{
-        //    return View(/*new MedicalPracticeMedDTO()*/);
-        //}
-        //[HttpPost]
+        public IActionResult MedicalPracticeRecs()
+        {
+            var medicalPracticeRec = _medicalPracticeRecService.List();
+            return View(medicalPracticeRec);
+        }
 
-        //public IActionResult Add(MeicalPracticeMedDTO medicalPractiseRec)
-        //{
-        //    var isSuccess = _medicalPractiseRecService.Add(medicalPractiseRec);
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View(/*new MedicalPracticeMedDTO()*/);
+        }
 
-        //    if (isSuccess)
-        //        return Redirect("MedicalPracticeRecs");
+        [HttpPost]
+        public IActionResult Add(MedicalPractice medicalPractiseRec)
+        {
+            var isSuccess = _medicalPracticeRecService.Add(medicalPractiseRec);
 
-        //    return View(medicalPractiseRec);
-        //}
+            if (isSuccess)
+                return Redirect("MedicalPracticeRecs");
 
+            return View(medicalPractiseRec);
+        }
+
+        [HttpGet]
+
+        public IActionResult UpdateMedicalPracticeRec(int MedicalPracticeId)
+        {
+            var medicalPracticeRec = _medicalPracticeRecService.GetMedicalPractice(MedicalPracticeId);
+            return View();
+        }
+        [HttpPost]
+        public IActionResult UpdateCenter(MedicalPractice medicalpractice)
+        {
+            var isSuccess = _medicalPracticeRecService.Update(medicalpractice);
+
+            if (isSuccess)
+                return Redirect("MedicalPracticeRec");
+
+            return View(medicalpractice);
+        }
+        [HttpDelete]
+        public IActionResult DeleteMedicalPracticeRec(int id)
+        {
+            try
+            {
+                var result = _medicalPracticeRecService.Delete(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }
