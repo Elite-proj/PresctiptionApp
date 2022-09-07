@@ -43,12 +43,12 @@ namespace E_prescription.Controllers
         }
 
         [HttpGet]
-
         public IActionResult UpdateMedicalPracticeRec(int MedicalPracticeId)
         {
             var medicalPracticeRec = _medicalPracticeRecService.GetMedicalPractice(MedicalPracticeId);
             return View();
         }
+
         [HttpPost]
         public IActionResult UpdateCenter(MedicalPractice medicalpractice)
         {
@@ -59,6 +59,7 @@ namespace E_prescription.Controllers
 
             return View(medicalpractice);
         }
+
         [HttpDelete]
         public IActionResult DeleteMedicalPracticeRec(int id)
         {
