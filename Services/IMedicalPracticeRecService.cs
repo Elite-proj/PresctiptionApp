@@ -4,7 +4,7 @@ using System;
 using E_prescription.Models;
 
 namespace E_prescription.Services
-{
+{//interface classes
     public interface IMedicalPracticeRecService
     {
         bool Add(MedicalPractice model);

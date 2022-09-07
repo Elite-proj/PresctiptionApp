@@ -28,7 +28,7 @@ namespace E_prescription.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View(/*new MedicalPracticeMedDTO()*/);
+            return View(new MedicalPractice());
         }
 
         [HttpPost]
