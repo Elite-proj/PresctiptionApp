@@ -70,6 +70,26 @@ namespace E_prescription.Controllers.PharmacyRecords
 
             return Json(list);
         }
+        //Get province by ID
+
+        public JsonResult LoadProvince(int id)
+        {
+            data = new DataAccess(configuration);
+
+            DataTable dt = new DataTable();
+
+            dt = data.GetProvinces();
+
+            List<ProvinceModel> provinces = new List<ProvinceModel>();
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                list.Add(new SelectListItem { Text = dt.Rows[i]["ProvinceName"].ToString(), Value = Convert.ToInt32(dt.Rows[i]["ProvinceID"]).ToString() });
+            }
+
+            return Json(list);
+        }
         //Get Suburbs by city
         public JsonResult LoadSuburbs(int id)
         {
@@ -116,6 +136,70 @@ namespace E_prescription.Controllers.PharmacyRecords
             ViewBag.Pharmacies = pharmacies.ToList();
 
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            data = new DataAccess(configuration);
+
+           
+            //Get provinces
+            DataTable dt = new DataTable();
+            DataTable city = new DataTable();
+            DataTable suburb = new DataTable();
+            DataTable province = new DataTable();
+            DataTable getProv = new DataTable();
+
+            getProv = data.GetProvinces();
+
+            List<ProvinceModel> provinces = new List<ProvinceModel>();
+
+            for (int i = 0; i < getProv.Rows.Count; i++)
+            {
+                ProvinceModel prov = new ProvinceModel();
+                prov.ProvinceID = Convert.ToInt32(getProv.Rows[i]["ProvinceID"]);
+                prov.ProvinceName = getProv.Rows[i]["ProvinceName"].ToString();
+
+                provinces.Add(prov);
+            }
+            var getProvinces = provinces.ToList();
+            ViewBag.Provinces = new SelectList(getProvinces, "ProvinceID", "ProvinceName");
+
+            dt = data.GetPharmacyById(id);
+            
+            
+
+            PharmacyRecordsVM pharmacy = new PharmacyRecordsVM();
+            pharmacy.PharmacyId = Convert.ToInt32(dt.Rows[0]["PharmacyID"]);
+            pharmacy.PharmacyName = dt.Rows[0]["PharmacyName"].ToString();
+            pharmacy.PharmacyEmail = dt.Rows[0]["PharmacyEmail"].ToString();
+            pharmacy.PharmacyContactNo = int.Parse(dt.Rows[0]["PharmacyContactNo"].ToString());
+            pharmacy.LicenseNo = int.Parse(dt.Rows[0]["LicenseNo"].ToString());
+            pharmacy.AddressLine1 = dt.Rows[0]["AddressLine1"].ToString();
+            pharmacy.AddressLine2 = dt.Rows[0]["AddressLine2"].ToString();
+            pharmacy.SuburbID = int.Parse(dt.Rows[0]["SuburbID"].ToString());
+            city = data.GetSuburbById(int.Parse(pharmacy.SuburbID.ToString()));
+            pharmacy.CityId = int.Parse(city.Rows[0]["CityID"].ToString());
+            province = data.GetCityById(int.Parse(pharmacy.CityId.ToString()));
+            pharmacy.ProvinceId = int.Parse(province.Rows[0]["ProvinceID"].ToString());
+
+            return View(pharmacy);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            data = new DataAccess(configuration);
+
+            //Get provinces
+            DataTable dt = new DataTable();
+
+            int x= data.DeletePharmacy(id);
+
+            TempData["PharmacyDelete"] = $"Pharmacy successfully removed";
+
+            return RedirectToAction("List", "PharmacyRecords");
         }
 
         //Submit add pharmacy page

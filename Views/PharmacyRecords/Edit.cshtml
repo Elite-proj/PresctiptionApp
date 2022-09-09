@@ -1,10 +1,9 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@using E_prescription.Models.Account
-@model PatientAccount
+@model PharmacyRecordsVM
 @{
-    ViewBag.Title="Patient Registration";
+    ViewBag.Title = "Pharmacy Records";
     Layout = null;
 }
 
@@ -28,31 +27,19 @@
             </div>
 
             <br /><br />
-            <form asp-controller="Account" asp-action="Register" method="post">
+            <form asp-controller="PharmacyRecords" asp-action="Add" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="input-group">
                     <div class="col-6 form-group">
-                        <label asp-for="FirstName">First Name</label>
-                        <input asp-for="FirstName" class="form-control" />
-                        <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
+                        <label asp-for="PharmacyName">Pharmacy Name</label>
+                        <input asp-for="PharmacyName" class="form-control" />
+                        <div><span asp-validation-for="PharmacyName" class="text-danger"></span></div>
                     </div>
                     <div class="col-6 form-group">
-                        <label asp-for="Surname">Surname</label>
-                        <input class="form-control" asp-for="Surname" />
-                        <div><span asp-validation-for="Surname" class="text-danger"></span></div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="IDnumber">ID Number</label>
-                        <input class="form-control" asp-for="IDnumber" type="number" />
-                        <div><span asp-validation-for="IDnumber" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="DateOfBith">Date of Birth</label>
-                        <input class="form-control" asp-for="DateOfBith" type="date" />
-                        <div><span asp-validation-for="DateOfBith" class="text-danger"></span></div>
+                        <label asp-for="LicenseNo">Lisense number</label>
+                        <input class="form-control" asp-for="LicenseNo" />
+                        <div><span asp-validation-for="LicenseNo" class="text-danger"></span></div>
                     </div>
                 </div>
                 <div class="input-group">
@@ -68,18 +55,18 @@
                 </div>
                 <div class="input-group">
                     <div class="col-6 form-group">
-                        <label asp-for="ProvinceID">Province</label>
-                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
+                        <label asp-for="ProvinceId">Province</label>
+                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" asp-for="ProvinceId" class="form-control">
                             <option>-- Select Province --</option>
                         </select>
-                        <div><span asp-validation-for="ProvinceID" class="text-danger"></span></div>
+                        <div><span asp-validation-for="ProvinceId" class="text-danger"></span></div>
                     </div>
                     <div class="col-6 form-group">
-                        <label asp-for="CityID">City</label>
-                        <select id="CityList" asp-for="CityID" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                        <label asp-for="CityId">City</label>
+                        <select id="CityList" asp-for="CityId" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
                             <option>-- Select City --</option>
                         </select>
-                        <div><span asp-validation-for="CityID" class="text-danger"></span></div>
+                        <div><span asp-validation-for="CityId" class="text-danger"></span></div>
                     </div>
                 </div>
                 <div class="input-group">
@@ -91,37 +78,20 @@
                         <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
                     </div>
                     <div class="col-6 form-group">
-                        <label asp-for="ContactNo">Contact number</label>
-                        <input class="form-control" asp-for="ContactNo" type="number" />
-                        <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
+                        <label asp-for="PharmacyContactNo">Pharmacy Contact number</label>
+                        <input class="form-control" asp-for="PharmacyContactNo" type="number" />
+                        <div><span asp-validation-for="PharmacyContactNo" class="text-danger"></span></div>
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="col-6 form-group">
-                        <label asp-for="Email">Email Address</label>
-                        <input class="form-control" asp-for="Email" type="email" />
-                        <div><span asp-validation-for="Email" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="ConfirmEmail">Confirm Email Address</label>
-                        <input class="form-control" asp-for="ConfirmEmail" type="email" />
-                        <div><span asp-validation-for="ConfirmEmail" class="text-danger"></span></div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="Password">Password</label>
-                        <input class="form-control" asp-for="Password" type="password" />
-                        <div><span asp-validation-for="Password" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="ConfirmPassword">Confirm Password</label>
-                        <input class="form-control" asp-for="ConfirmPassword" type="password" />
-                        <div><span asp-validation-for="ConfirmPassword" class="text-danger"></span></div>
+                        <label asp-for="PharmacyEmail">Email Address</label>
+                        <input class="form-control" asp-for="PharmacyEmail" type="email" />
+                        <div><span asp-validation-for="PharmacyEmail" class="text-danger"></span></div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary">Add Pharmacy</button>
 
             </form>
 
@@ -129,8 +99,22 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
+            $.getJSON("/PharmacyRecords/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+                var row = "";
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                });
+                $("#CityList").html(row);
+            })
+
+            
+        })
+        $(document).ready(function () {
+           
+        })
+        $(document).ready(function () {
             $("#ProvinceList").change(function () {
-                $.getJSON("/Account/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+                $.getJSON("/PharmacyRecords/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
                     var row = "";
                     $("#CityList").empty();
                     $("#SuburbList").empty();
@@ -142,7 +126,7 @@
             })
 
             $("#CityList").change(function () {
-                $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+                $.getJSON("/PharmacyRecords/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
                     var row = "";
                     $("#SuburbList").empty();
                     $.each(d, function (i, v) {
@@ -153,4 +137,5 @@
             })
         })
     </script>
+       
 </body>

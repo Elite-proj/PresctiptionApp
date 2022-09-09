@@ -1,10 +1,9 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@using E_prescription.Models.Account
-@model PatientAccount
+@model PharmacistAccount
 @{
-    ViewBag.Title="Patient Registration";
+    ViewBag.Title = "Edit pharmacist";
     Layout = null;
 }
 
@@ -45,18 +44,6 @@
                 </div>
                 <div class="input-group">
                     <div class="col-6 form-group">
-                        <label asp-for="IDnumber">ID Number</label>
-                        <input class="form-control" asp-for="IDnumber" type="number" />
-                        <div><span asp-validation-for="IDnumber" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="DateOfBith">Date of Birth</label>
-                        <input class="form-control" asp-for="DateOfBith" type="date" />
-                        <div><span asp-validation-for="DateOfBith" class="text-danger"></span></div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
                         <label asp-for="AddressLine1">AddressLine1</label>
                         <textarea asp-for="AddressLine1" class="form-control" rows="5"></textarea>
                         <div><span asp-validation-for="AddressLine1" class="text-danger"></span></div>
@@ -69,7 +56,7 @@
                 <div class="input-group">
                     <div class="col-6 form-group">
                         <label asp-for="ProvinceID">Province</label>
-                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
+                        <select id="ProvinceList" asp-for="ProvinceID" asp-items="@ViewBag.Provinces" class="form-control">
                             <option>-- Select Province --</option>
                         </select>
                         <div><span asp-validation-for="ProvinceID" class="text-danger"></span></div>
@@ -98,27 +85,25 @@
                 </div>
                 <div class="input-group">
                     <div class="col-6 form-group">
-                        <label asp-for="Email">Email Address</label>
-                        <input class="form-control" asp-for="Email" type="email" />
-                        <div><span asp-validation-for="Email" class="text-danger"></span></div>
+                        <label asp-for="RegNumber">Registratiion Number</label>
+                        <input class="form-control" asp-for="RegNumber" type="number" />
+                        <div><span asp-validation-for="RegNumber" class="text-danger"></span></div>
                     </div>
                     <div class="col-6 form-group">
-                        <label asp-for="ConfirmEmail">Confirm Email Address</label>
-                        <input class="form-control" asp-for="ConfirmEmail" type="email" />
-                        <div><span asp-validation-for="ConfirmEmail" class="text-danger"></span></div>
+                        <label asp-for="PharmacyID">Date of Birth</label>
+                        <select asp-for="PharmacyID" asp-items="@ViewBag.Pharmacies" class="form-control">
+                            <option>-- Select Suburb --</option>
+                        </select>
+                        <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="col-6 form-group">
-                        <label asp-for="Password">Password</label>
-                        <input class="form-control" asp-for="Password" type="password" />
-                        <div><span asp-validation-for="Password" class="text-danger"></span></div>
+                        <label asp-for="Email">Email Address</label>
+                        <input class="form-control" asp-for="Email" type="email" />
+                        <div><span asp-validation-for="Email" class="text-danger"></span></div>
                     </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="ConfirmPassword">Confirm Password</label>
-                        <input class="form-control" asp-for="ConfirmPassword" type="password" />
-                        <div><span asp-validation-for="ConfirmPassword" class="text-danger"></span></div>
-                    </div>
+                    
                 </div>
 
                 <button type="submit" class="btn btn-primary">Register</button>
@@ -129,6 +114,23 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
+            $.getJSON("/PharmacistRecords/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+                var row = "";
+                $("#CityList").empty();
+                $("#SuburbList").empty();
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                });
+                $("#CityList").html(row);
+            })
+            $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+                var row = "";
+                $("#SuburbList").empty();
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                });
+                $("#SuburbList").html(row);
+            })
             $("#ProvinceList").change(function () {
                 $.getJSON("/Account/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
                     var row = "";
@@ -154,3 +156,4 @@
         })
     </script>
 </body>
+

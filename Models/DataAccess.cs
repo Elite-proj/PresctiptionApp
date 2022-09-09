@@ -129,7 +129,7 @@ namespace E_prescription.Models
 
             dbComm.Parameters.AddWithValue("@Name", pharmacist.FirstName);
             dbComm.Parameters.AddWithValue("@Surname", pharmacist.Surname);
-            dbComm.Parameters.AddWithValue("@Password", pharmacist.Password);
+           
             dbComm.Parameters.AddWithValue("@Contacts", pharmacist.ContactNo.ToString());
             dbComm.Parameters.AddWithValue("@Email", pharmacist.Email);
             dbComm.Parameters.AddWithValue("@AddressLine1", pharmacist.AddressLine1);
@@ -223,6 +223,93 @@ namespace E_prescription.Models
             dbComm.CommandType = CommandType.StoredProcedure;
 
             dbComm.Parameters.AddWithValue("@CityID",suburb.CityID);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        //Get suburb by ID
+        public DataTable GetSuburbById(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetSuburbById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@Id", id);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        // Get city by ID
+        public DataTable GetCityById(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetCityById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@Id", id);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        //Get Province by ID
+        public DataTable GetProvinceById(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetProvinceById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@Id", id);
 
             dt = new DataTable();
             dbAdapter = new SqlDataAdapter(dbComm);
@@ -380,5 +467,151 @@ namespace E_prescription.Models
 
             return dt;
         }
+
+        public DataTable GetPharmacyById(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPharmacyById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@Id", id);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public int DeletePharmacy(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_DeletePharmacy", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@Id", id);
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+
+        public int UpdatePharmacy(PharmacyRecordsVM pharmacy)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_UpdatePharmacy", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+
+            dbComm.Parameters.AddWithValue("@Name", pharmacy.PharmacyName);
+            dbComm.Parameters.AddWithValue("@Contacts", pharmacy.PharmacyContactNo.ToString());
+            dbComm.Parameters.AddWithValue("@Email", pharmacy.PharmacyEmail);
+            dbComm.Parameters.AddWithValue("@LicenseNo", pharmacy.LicenseNo.ToString());
+            dbComm.Parameters.AddWithValue("@Suburb", pharmacy.SuburbID);
+            dbComm.Parameters.AddWithValue("@AddressLine1", pharmacy.AddressLine1);
+            dbComm.Parameters.AddWithValue("@AddressLine2", pharmacy.AddressLine2);
+            dbComm.Parameters.AddWithValue("@Id", pharmacy.PharmacyId);
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+
+        //Pharmacist Records
+
+        public DataTable GetPhamacists()
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPharmacists", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable GetPharmacistById(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPharmacistById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@Id", id);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
     }
 }
