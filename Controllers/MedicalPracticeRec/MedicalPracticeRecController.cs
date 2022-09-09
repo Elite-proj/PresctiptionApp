@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using E_prescription.Services;
 using E_prescription.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using E_prescription.Services.MedicalPracticeRec;
 
 namespace E_prescription.Controllers
 {
@@ -21,25 +21,25 @@ namespace E_prescription.Controllers
 
         public IActionResult MedicalPracticeRecs()
         {
-            var medicalPracticeRec = _medicalPracticeRecService.List();
-            return View(medicalPracticeRec);
+            var medicalPracticeRecs = _medicalPracticeRecService.List();
+            return View(medicalPracticeRecs);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            return View(new MedicalPractice());
+            return View(new MedicalPracticeRecModel());
         }
 
         [HttpPost]
-        public IActionResult Add(MedicalPractice medicalPractiseRec)
+        public IActionResult Add(MedicalPracticeRecModel medicalPracticeRec)
         {
-            var isSuccess = _medicalPracticeRecService.Add(medicalPractiseRec);
+            var isSuccess = _medicalPracticeRecService.Add(medicalPracticeRec);
 
             if (isSuccess)
                 return Redirect("MedicalPracticeRecs");
 
-            return View(medicalPractiseRec);
+            return View(medicalPracticeRec);
         }
 
         [HttpGet]
@@ -50,7 +50,7 @@ namespace E_prescription.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateCenter(MedicalPractice medicalpractice)
+        public IActionResult Update(MedicalPracticeRecModel medicalpractice)
         {
             var isSuccess = _medicalPracticeRecService.Update(medicalpractice);
 
@@ -73,6 +73,5 @@ namespace E_prescription.Controllers
                 return BadRequest();
             }
         }
-
     }
 }
