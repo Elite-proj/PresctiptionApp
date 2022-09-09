@@ -1,0 +1,73 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">Login</h1>
+                        <span class="color-text-a"> </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Intro Single-->
+
+
+    <section>
+        <div class="row">
+            <div class="card col-md-8 mx-auto p-4">
+                <div class="title-section text-center">
+                    <h4 class="title-single">Welcome Back</h4>
+                    <p class="color-text-a">Please Login To Continue</p>
+                </div>
+                <form method="post" role="form" class="php-email-form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3 mx-auto">
+                            <div class="form-group">
+                                <input type="email" asp-for="Email" name="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="col-md-6 mb-3 mx-auto">
+                            <div class="form-group">
+                                <input name="password" asp-for="Password" type="password" class="form-control form-control-lg form-control-a" placeholder="Your Password" data-rule="text">
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <a href="url"> Forgot Password?</a><br />
+                        <p>Don't have an account ? <a href="url">Click here to register</a></p>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="mb-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>

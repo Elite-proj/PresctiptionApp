@@ -1,0 +1,131 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model PharmacyRecordsVM
+@{
+    ViewBag.Title = "Pharmacy Records";
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <main>
+            <div class="text-center">
+                <p2>
+                    You are required to fill all fields in this form.<br />
+                    If City/suburb you reside in is not listed, choose the nearest one.
+                </p2>
+            </div>
+
+            <br /><br />
+            <form asp-controller="PharmacyRecords" asp-action="Add" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="PharmacyName">Pharmacy Name</label>
+                        <input asp-for="PharmacyName" class="form-control" />
+                        <div><span asp-validation-for="PharmacyName" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="LicenseNo">Lisense number</label>
+                        <input class="form-control" asp-for="LicenseNo" />
+                        <div><span asp-validation-for="LicenseNo" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="AddressLine1">AddressLine1</label>
+                        <textarea asp-for="AddressLine1" class="form-control" rows="5"></textarea>
+                        <div><span asp-validation-for="AddressLine1" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="AddressLine2">AddressLine2</label>
+                        <textarea asp-for="AddressLine2" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="ProvinceId">Province</label>
+                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
+                            <option>-- Select Province --</option>
+                        </select>
+                        <div><span asp-validation-for="ProvinceId" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="CityId">City</label>
+                        <select id="CityList" asp-for="CityId" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                            <option>-- Select City --</option>
+                        </select>
+                        <div><span asp-validation-for="CityId" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="SuburbID">Suburb</label>
+                        <select id="SuburbList" asp-for="SuburbID" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                            <option>-- Select Suburb --</option>
+                        </select>
+                        <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="PharmacyContactNo">Pharmacy Contact number</label>
+                        <input class="form-control" asp-for="PharmacyContactNo" type="number" />
+                        <div><span asp-validation-for="PharmacyContactNo" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="PharmacyEmail">Email Address</label>
+                        <input class="form-control" asp-for="PharmacyEmail" type="email" />
+                        <div><span asp-validation-for="PharmacyEmail" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="ConfirmEmail">Confirm Email Address</label>
+                        <input class="form-control" asp-for="ConfirmEmail" type="email" />
+                        <div><span asp-validation-for="ConfirmEmail" class="text-danger"></span></div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Add Pharmacy</button>
+
+            </form>
+
+        </main>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ProvinceList").change(function () {
+                $.getJSON("/PharmacyRecords/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+                    var row = "";
+                    $("#CityList").empty();
+                    $("#SuburbList").empty();
+                    $.each(d, function (i, v) {
+                        row += "<option value=" + v.value + ">" + v.text + "</option>";
+                    });
+                    $("#CityList").html(row);
+                })
+            })
+
+            $("#CityList").change(function () {
+                $.getJSON("/PharmacyRecords/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+                    var row = "";
+                    $("#SuburbList").empty();
+                    $.each(d, function (i, v) {
+                        row += "<option value=" + v.value + ">" + v.text + "</option>";
+                    });
+                    $("#SuburbList").html(row);
+                })
+            })
+        })
+    </script>
+</body>
