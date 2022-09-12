@@ -25,7 +25,7 @@ namespace E_prescription.Services.DoctorRec
                         Hcrn = model.Hcrn,
                         Qualification = model.Qualification,
                         //MedicalPracticeId = model.MedicalPracticeId,
-                        User = model.User,
+                        //User = model.User,
                    
                     });
 
@@ -62,7 +62,7 @@ namespace E_prescription.Services.DoctorRec
                     Hcrn = doctor.Hcrn,
                     Qualification = doctor.Qualification,
                     //MedicalPracticeId = doctor.MedicalPracticeId,
-                    User = doctor.User
+                    //User = doctor.User
 
                 };
 
@@ -76,7 +76,7 @@ namespace E_prescription.Services.DoctorRec
                     Hcrn = b.Hcrn,
                     Qualification = b.Qualification,
                     //MedicalPracticeId = b.MedicalPracticeId,
-                    User = b.User,
+                    //User = b.User,
 
                 }).ToList();
 
@@ -93,7 +93,7 @@ namespace E_prescription.Services.DoctorRec
                 doctor.Hcrn = model.Hcrn;
                 doctor.Qualification = model.Qualification;
                 //doctor.MedicalPracticeId = model.MedicalPracticeId;
-                doctor.User = model.User;
+                //doctor.User = model.User;
 
                 return _context.SaveChanges() > 0;
             }

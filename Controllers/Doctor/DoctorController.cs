@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace E_prescription.Controllers.DoctorRec
+namespace E_prescription.Controllers
 {
     public class DoctorController : Controller
     {
@@ -20,9 +20,9 @@ namespace E_prescription.Controllers.DoctorRec
 
         public IActionResult Doctors()
         {
-            var doctor = _doctorService.List();
+            var doctors = _doctorService.List();
 
-            return View(doctor);
+            return View(doctors);
         }
 
         [HttpGet]
@@ -45,8 +45,8 @@ namespace E_prescription.Controllers.DoctorRec
         [HttpGet]
         public IActionResult UpdateDoctor(int DoctorId)
         {
-            var model = _doctorService.GetDoctor(DoctorId);
-            return View(model);
+            var doctor = _doctorService.GetDoctor(DoctorId);
+            return View();
         }
 
         [HttpPost]
@@ -55,7 +55,7 @@ namespace E_prescription.Controllers.DoctorRec
             var isSuccess = _doctorService.Update(doctor);
 
             if (isSuccess)
-                return Redirect("Doctors");
+                return Redirect("Doctor");
 
             return View(doctor);
         }
