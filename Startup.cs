@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using E_prescription.Models;
 using E_prescription.Services;
 using E_prescription.Services.MedicalPracticeRec;
+using E_prescription.Services.DoctorRec;
+
 
 namespace E_prescription
 {
@@ -32,6 +34,7 @@ namespace E_prescription
             services.AddControllersWithViews();
             services.AddDbContext<EPrescriptiondbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connString")));
 
+            services.AddTransient<IDoctorRecService, DoctorRecService>();
             services.AddTransient<IMedicalPracticeRecService, MedicalPracticeRecService>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
 
