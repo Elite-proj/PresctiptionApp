@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\PharmacyRec\**" />
+    <Content Remove="Views\PharmacyRec\**" />
+    <EmbeddedResource Remove="Views\PharmacyRec\**" />
+    <None Remove="Views\PharmacyRec\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
@@ -30,7 +37,6 @@
     <Folder Include="Views\ContraIndication\" />
     <Folder Include="Views\Register\" />
     <Folder Include="Views\Pages\" />
-    <Folder Include="Views\PharmacyRec\" />
     <Folder Include="Views\PharmacistRec\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

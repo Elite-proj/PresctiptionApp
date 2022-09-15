@@ -1,5 +1,150 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model MedicalPracticeRecModel
 @{
+    Layout = null;
 }
+<body>
+<div class="container" style="padding:30px;">
+    <div class="section-title">
+        <h2>Medication</h2>
+    </div>
+    
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <div class="cold-6">
+                    <div>
+                        <label asp-for="PracticeName"> Medical Practice Name</label>
+                    </div>
+                    <input asp-for="PracticeName" class="form-control" />
+                    <span asp-validation-for="PracticeName" class="text-danger"></span>
+                </div>
+            </div>
+
+             <div class="form-group row">
+            <div class="col-sm-12">
+                <div class="cold-6">
+                    <div>
+                        <label asp-for="PracticeContactNo">Practice ContactNo</label>
+                    </div>
+                    <input asp-for="PracticeContactNo" class="form-control" />
+                    <span asp-validation-for="PracticeContactNo" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <div class="cold-6">
+                    <div>
+                        <label asp-for="PracticeNo">Practice No</label>
+                        </div>
+                    <input asp-for="PracticeNo" class="form-control" />
+                    <span asp-validation-for="PracticeNo" class="text-danger"></span>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <div class="cold-6">
+                        <div>
+                            <label asp-for="PracticeContactNo">Practice Contact No</label>
+                        </div>
+                        <input asp-for="PracticeContactNo" class="form-control" />
+                        <span asp-validation-for="PracticeContactNo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="cold-6">
+                    <div>
+                        <label asp-for="PracticeEmail">Practice Email</label>
+                    </div>
+                    <input asp-for="PracticeEmail" class="form-control" />
+                    <span asp-validation-for="PracticeEmail" class="text-danger"></span>
+                </div>
+            </div>
+   
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <div class="cold-6">
+                        <div>
+                            <label asp-for="AddressLine1">Addressline 1</label>
+                        </div>
+                        <input asp-for="AddressLine1" class="form-control" />
+                        <span asp-validation-for="AddressLine1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <div class="cold-6">
+                        <div>
+                            <label asp-for="AddressLine2">Addressline 2</label>
+                        </div>
+                        <input asp-for="AddressLine2" class="form-control" />
+                        <span asp-validation-for="AddressLine2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="form-group row">
+            <div class="col-sm-12">
+                <div class="cold-6">
+                    <div>
+                        <label asp-for="Suburb">Suburb</label>
+                    </div>
+                    <input asp-for="Suburb" class="form-control" />
+                    <span asp-validation-for="Suburb" class="text-danger"></span>
+                </div>
+            </div>
+
+            
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <div class="cold-6">
+                    <div>
+                        <label asp-for="City">City</label>
+                    </div>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+        </div>*@
+
+           @* <div class="form-group row">
+                <div class="col-sm-12">
+                    <div class="cold-6">
+                        <div>
+                            <label asp-for="Province">Province</label>
+                        </div>
+                        <input asp-for="Province" class="form-control" />
+                        <span asp-validation-for="Province" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+*@
+               
+        <div class="row">
+            <div class="col-sm-2">
+                <a asp-controller="MedicalPracticeRec" asp-action="MedicalPracticeRecs" class="btn btn-success form-control">VIEW LIST</a>
+            </div>
+
+
+            <div class="col-sm-2 align-content-end">
+                <button type="submit" class="btn btn-primary text-capitalize" form-control>
+                    ADD MEDICAL PRACTICE
+                </button>
+            </div>
+        </div>
+      
+    </form>
+    </div>
+</body>
+
+<partial name="_ValidationScriptsPartial" />
+
