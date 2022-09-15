@@ -118,9 +118,9 @@ namespace E_prescription.Services
             medicalpractice.PracticeEmail = model.PracticeEmail;
             medicalpractice.PracticeContactNo = model.PracticeContactNo;
             medicalpractice.PracticeNo = model.PracticeNo;
-            //medicalpractice.Province = model.Province;
-            //medicalpractice.Suburb = model.Suburb;
-            //medicalpractice.City = model.City;
+            medicalpractice.Province = model.Province;
+            medicalpractice.Suburb = model.Suburb;
+            medicalpractice.City = model.City;
 
             return _context.SaveChanges() > 0;
         }
