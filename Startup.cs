@@ -13,6 +13,8 @@ using E_prescription.Models;
 using E_prescription.Services;
 using E_prescription.Services.MedicalPracticeRec;
 using E_prescription.Services.DoctorRec;
+using E_prescription.Services.ConditionDiagnosisRec;
+
 
 
 namespace E_prescription
@@ -36,6 +38,7 @@ namespace E_prescription
 
             services.AddTransient<IDoctorRecService, DoctorRecService>();
             services.AddTransient<IMedicalPracticeRecService, MedicalPracticeRecService>();
+            services.AddTransient<ConditionDiagnosisRecService, ConditionDiagnosisRecService>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
 
             services.AddScoped<IViewRenderService, ViewRenderService>();

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using E_prescription.Models;
 
 namespace E_prescription
 {
@@ -19,11 +20,15 @@ namespace E_prescription
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public int? CityId { get; set; }
+        public int? SuburbId { get; set; }
+        public int? ProvinceId { get; set; }
         public string PracticeEmail { get; set; }
         public string PracticeContactNo { get; set; }
         public string PracticeNo { get; set; }
 
         public virtual City City { get; set; }
+        public virtual SuburbModel Suburb { get; set; }
+        public virtual ProvinceModel Province { get; set; }
         public virtual ICollection<Doctor> Doctor { get; set; }
     }
 }

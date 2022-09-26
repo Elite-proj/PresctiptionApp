@@ -11,7 +11,7 @@ namespace E_prescription.Models
         public virtual HighestQualification Qualification { get; set; }
         [Required(ErrorMessage = "Please select your Medical practice.")]
         public virtual MedicalPractice MedicalPractice { get; set; }
-       
+        [Required(ErrorMessage = "Please enter the following details.")]
         public virtual User User { get; set; }
     }
 }

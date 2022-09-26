@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "MedicationPracticeRecModel";
     Layout = null;
 }
@@ -33,7 +32,7 @@
                         <td>@medicalPractice.PracticeNo</td>
                         <td>@medicalPractice.PracticeContactNo</td>
                         <td>@medicalPractice.PracticeEmail</td>
-                        <td>@medicalPractice.AddressLine1 @medicalPractice.AddressLine2 , @*@medicalPractice.Suburb*@ , @*@medicalPractice.City *@, @*@medicalPractice.Province*@ </td>
+                        <td>@medicalPractice.AddressLine1 @medicalPractice.AddressLine2 , @medicalPractice.ProvinceID, @medicalPractice.SuburbID , medicalPractice.CityID, </td>
                         <td>
                             <a asp-controller="MedicalPracticeRec" asp-action="Update" asp-route-CenterID="@medicalPractice.MedicalPracticeId" class="material-icons">edit</a>
                             @*<a asp-controller="Report" asp-action="DownloadCenterReport" asp-route-BudgetID="@center.CenterID" class="text-primary"><i class="material-icons">description</i></a>*@

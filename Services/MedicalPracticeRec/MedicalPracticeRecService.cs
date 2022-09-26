@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
 namespace E_prescription.Services
@@ -29,9 +30,9 @@ namespace E_prescription.Services
                     PracticeEmail = model.PracticeEmail,
                     PracticeContactNo = model.PracticeContactNo,
                     PracticeNo = model.PracticeNo,
-                    //Province = model.Province,
-                    //Suburb = model.Suburb,
-                    //City = model.City,
+                    Province = model.Province,
+                    Suburb = model.Suburb,
+                    City = model.City,
                 });
 
                 return _context.SaveChanges() > 0;
@@ -54,7 +55,6 @@ namespace E_prescription.Services
         }
         public MedicalPracticeRecModel GetMedicalPractice(int MedicalPracticeId)
         {
-
             var medicalpractice = _context.MedicalPractice.Find(MedicalPracticeId);
 
             if (medicalpractice == null)
@@ -70,9 +70,9 @@ namespace E_prescription.Services
                 PracticeEmail = medicalpractice.PracticeEmail,
                 PracticeContactNo = medicalpractice.PracticeContactNo,
                 PracticeNo = medicalpractice.PracticeNo,
-                //Province = medicalpractice.Province,
-                //Suburb = medicalpractice.Suburb,
-                //City = medicalpractice.City,
+                Province = medicalpractice.Province,
+                Suburb = medicalpractice.Suburb,
+                City = medicalpractice.City,
             };
 
             return model;
@@ -88,9 +88,9 @@ namespace E_prescription.Services
                 PracticeEmail = b.PracticeEmail,
                 PracticeContactNo = b.PracticeContactNo,
                 PracticeNo = b.PracticeNo,
-                //Province = b.Province,
-                //Suburb = b.Suburb,
-                //City = b.City,
+                Province = b.Province,
+                Suburb = b.Suburb,
+                City = b.City,
 
             }).ToList();
 
@@ -100,7 +100,7 @@ namespace E_prescription.Services
             throw new NotImplementedException();
         }
 
-        public List<MedicalPracticeRecModel> ListByRegionalManger(int regionalID)
+        public List<MedicalPracticeRecModel> ListByProvince(int ProvinceId)
         {
             throw new NotImplementedException();
         }
@@ -109,7 +109,7 @@ namespace E_prescription.Services
             var medicalpractice = _context.MedicalPractice.Find(model.MedicalPracticeId);
 
             if (medicalpractice == null)
-                throw new KeyNotFoundException($"Center with ID: {model.MedicalPracticeId} was not found.");
+                throw new KeyNotFoundException($"Medical with ID: {model.MedicalPracticeId} was not found.");
 
             medicalpractice.MedicalPracticeId = model.MedicalPracticeId;
             medicalpractice.PracticeName = model.PracticeName;
@@ -124,5 +124,51 @@ namespace E_prescription.Services
 
             return _context.SaveChanges() > 0;
         }
+
+        //public bool GetAllProvinces(int Province)
+        //{
+        //    var medicalpractice = _context.MedicalPractice.Find(MedicalPracticeRecService.getAllProvinces);
+
+        //    if (medicalpractice == null)
+        //        throw new KeyNotFoundException($"Province with ID: {medicalpractice.Province} was not found.");
+
+
+        //    _context.MedicalPractice.GetAllProvinces(medicalpractice);
+        //    return _context.SaveChanges() > 0;
+
+
+        //}
+
+
+        //public MedicalPracticeRecModel GetCitiesByProvinceId(int getCitiesByProvinceId)
+        //{
+        //    var medicalpractice = _context.MedicalPractice.Find(getCitiesByProvinceId);
+
+        //    if (medicalpractice == null)
+        //        throw new KeyNotFoundException($"City with ID: {getCitiesByProvinceId} was not found.");
+        //    MedicalPracticeRecModel model = new MedicalPracticeRecModel
+        //    {
+        //        Province = medicalpractice.Province,
+        //        Suburb = medicalpractice.Suburb,
+        //        City = medicalpractice.City,
+        //    };
+
+        //    return model;
+        //}
+        ////public MedicalPracticeRecModel GetSuburbsByCityId(int getSuburbsByCityId)
+        ////{
+        ////    var medicalpractice = _context.MedicalPractice.Find(getSuburbsByCityId);
+
+        ////    if (medicalpractice == null)
+        ////        throw new KeyNotFoundException($"Suburb with ID: {getSuburbsByCityId} was not found.");
+        ////    MedicalPracticeRecModel model = new MedicalPracticeRecModel
+        ////    {
+        ////        Province = medicalpractice.Province,
+        ////        Suburb = medicalpractice.Suburb,
+        ////        City = medicalpractice.City,
+        ////    };
+
+        ////    return model;
+        //////}
     }
 }

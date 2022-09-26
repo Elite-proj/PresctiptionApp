@@ -1,6 +1,5 @@
 ﻿using E_prescription.Models;
 using E_prescription.Services.DoctorRec;
-using E_prescription.Services.MedicalPracticeRec;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,6 @@ namespace E_prescription.Controllers
         public IActionResult Doctors()
         {
             var doctors = _doctorService.List();
-
             return View(doctors);
         }
 

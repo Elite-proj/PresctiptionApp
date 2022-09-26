@@ -20,12 +20,14 @@ namespace E_prescription.Models
         public string PracticeContactNo { get; set; }
         [Required(ErrorMessage = "Please enter Practice number.")]
         public string PracticeNo { get; set; }
+
         [Required(ErrorMessage = "Please enter city.")]
         public virtual City City { get; set; }
         [Required(ErrorMessage = "Please enter Suburb.")]
-        public virtual Suburb Suburb {get; set; }
-        //[Required(ErrorMessage = "Please enter Province.")]
-        //public virtual Province Province {get; set; } 
+        public virtual SuburbModel Suburb {get; set; }
+        [Required(ErrorMessage = "Please enter Province.")]
+        public virtual ProvinceModel Province { get; set; }
+
         //public virtual ICollection<Doctor> Doctor { get; set; }
     }
 }

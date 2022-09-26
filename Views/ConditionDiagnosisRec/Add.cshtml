@@ -1,0 +1,81 @@
+﻿@model ConditionDiagnosisModel
+@{
+    Layout = null;
+}
+<body>
+    <div class="container" style="padding:30px;">
+        <div class="section-title">
+            <h2>Medication</h2>
+        </div>
+
+        <form method="post">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <div class="cold-6">
+                        <div>
+                            <label asp-for="ConditionId"> Condition ID</label>
+                        </div>
+                        <input asp-for="ConditionId" class="form-control" />
+                        <span asp-validation-for="ConditionId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <div class="cold-6">
+                            <div>
+                                <label asp-for="ConditionDecription">Condition Description</label>
+                            </div>
+                            <input asp-for="ConditionDecription" class="form-control" />
+                            <span asp-validation-for="ConditionDecription" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+              
+            <div class="row">
+                <div class="col-sm-2">
+                    <a asp-controller="ConditionDiagnosis" asp-action="Conditions" class="btn btn-success form-control">VIEW LIST</a>
+                </div>
+
+
+                <div class="col-sm-2 align-content-end">
+                    <button type="submit" class="btn btn-primary text-capitalize" form-control>
+                        ADD CONDITION DIAGNOSIS RECORD
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ProvinceList").change(function () {
+                $.getJSON("/Account/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+                    var row = "";
+                    $("#CityList").empty();
+                    $("#SuburbList").empty();
+                    $.each(d, function (i, v) {
+                        row += "<option value=" + v.value + ">" + v.text + "</option>";
+                    });
+                    $("#CityList").html(row);
+                })
+            })
+
+            $("#CityList").change(function () {
+                $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+                    var row = "";
+                    $("#SuburbList").empty();
+                    $.each(d, function (i, v) {
+                        row += "<option value=" + v.value + ">" + v.text + "</option>";
+                    });
+                    $("#SuburbList").html(row);
+                })
+            })
+        })
+    </script>
+
+</body>
+
+<partial name="_ValidationScriptsPartial" />
+

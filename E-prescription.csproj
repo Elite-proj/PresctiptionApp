@@ -6,9 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Pages\**" />
+    <Compile Remove="Views\PharmacistRec\**" />
     <Compile Remove="Views\PharmacyRec\**" />
+    <Content Remove="Views\Pages\**" />
+    <Content Remove="Views\PharmacistRec\**" />
     <Content Remove="Views\PharmacyRec\**" />
+    <EmbeddedResource Remove="Views\Pages\**" />
+    <EmbeddedResource Remove="Views\PharmacistRec\**" />
     <EmbeddedResource Remove="Views\PharmacyRec\**" />
+    <None Remove="Views\Pages\**" />
+    <None Remove="Views\PharmacistRec\**" />
     <None Remove="Views\PharmacyRec\**" />
   </ItemGroup>
 
@@ -31,13 +39,10 @@
     <Folder Include="Areas\Pharmacist\Models\" />
     <Folder Include="Views\ActiveIngredient\" />
     <Folder Include="Views\AdminReport\" />
-    <Folder Include="Views\ConditionDiagnosis\" />
     <Folder Include="Views\MedicationRec\" />
     <Folder Include="Views\MedicationInteraction\" />
     <Folder Include="Views\ContraIndication\" />
     <Folder Include="Views\Register\" />
-    <Folder Include="Views\Pages\" />
-    <Folder Include="Views\PharmacistRec\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
 
