@@ -38,7 +38,7 @@ namespace E_prescription
 
             services.AddTransient<IDoctorRecService, DoctorRecService>();
             services.AddTransient<IMedicalPracticeRecService, MedicalPracticeRecService>();
-            services.AddTransient<ConditionDiagnosisRecService, ConditionDiagnosisRecService>();
+            services.AddTransient<IConditionDiagnosisRecService, ConditionDiagnosisRecService>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
 
             services.AddScoped<IViewRenderService, ViewRenderService>();

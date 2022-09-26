@@ -22,7 +22,7 @@ namespace E_prescription.Models
         public string PracticeNo { get; set; }
 
         [Required(ErrorMessage = "Please enter city.")]
-        public virtual City City { get; set; }
+        public virtual CityModel City { get; set; }
         [Required(ErrorMessage = "Please enter Suburb.")]
         public virtual SuburbModel Suburb {get; set; }
         [Required(ErrorMessage = "Please enter Province.")]

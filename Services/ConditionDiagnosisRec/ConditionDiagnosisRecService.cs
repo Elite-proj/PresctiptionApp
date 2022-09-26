@@ -1,14 +1,16 @@
 ﻿using E_prescription.Models;
-using System.Collections.Generic;
 using E_prescription.Services.ConditionDiagnosisRec;
+using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 
-namespace E_prescription.Services.ConditionDiagnosisRec
+namespace E_prescription.Services
 {
-    public class ConditionDiagnosisRecService : IConditionDiagnosisRecService
+    public class ConditionDiagnosisRecService: IConditionDiagnosisRecService
     {
         private readonly EPrescriptiondbContext _context;
         public ConditionDiagnosisRecService(EPrescriptiondbContext context)

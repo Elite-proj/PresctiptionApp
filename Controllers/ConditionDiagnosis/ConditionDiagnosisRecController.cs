@@ -5,18 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace E_prescription.Controllers
 {
     public class ConditionDiagnosisRecController : Controller
     {
         private readonly IConditionDiagnosisRecService _conditionDiagnosisRecService;
-       
+
+
         public ConditionDiagnosisRecController(IConditionDiagnosisRecService conditionDiagnosisRecService)
         {
             _conditionDiagnosisRecService = conditionDiagnosisRecService;
         }
-       
+
         public IActionResult Conditions()
         {
             var conditions = _conditionDiagnosisRecService.List();
@@ -29,7 +31,6 @@ namespace E_prescription.Controllers
             return View(new ConditionDiagnosisModel());
         }
 
-      
         [HttpPost]
         public IActionResult Add(ConditionDiagnosisModel conditionDiagnosisRec)
         {
@@ -72,6 +73,5 @@ namespace E_prescription.Controllers
                 return BadRequest();
             }
         }
-
     }
 }

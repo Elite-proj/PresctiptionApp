@@ -9,15 +9,19 @@
     <Compile Remove="Views\Pages\**" />
     <Compile Remove="Views\PharmacistRec\**" />
     <Compile Remove="Views\PharmacyRec\**" />
+    <Compile Remove="Views\Register\**" />
     <Content Remove="Views\Pages\**" />
     <Content Remove="Views\PharmacistRec\**" />
     <Content Remove="Views\PharmacyRec\**" />
+    <Content Remove="Views\Register\**" />
     <EmbeddedResource Remove="Views\Pages\**" />
     <EmbeddedResource Remove="Views\PharmacistRec\**" />
     <EmbeddedResource Remove="Views\PharmacyRec\**" />
+    <EmbeddedResource Remove="Views\Register\**" />
     <None Remove="Views\Pages\**" />
     <None Remove="Views\PharmacistRec\**" />
     <None Remove="Views\PharmacyRec\**" />
+    <None Remove="Views\Register\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +46,6 @@
     <Folder Include="Views\MedicationRec\" />
     <Folder Include="Views\MedicationInteraction\" />
     <Folder Include="Views\ContraIndication\" />
-    <Folder Include="Views\Register\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
 

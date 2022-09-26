@@ -32,7 +32,7 @@ namespace E_prescription.Services
                     PracticeNo = model.PracticeNo,
                     Province = model.Province,
                     Suburb = model.Suburb,
-                    City = model.City,
+                    //City = model.City,
                 });
 
                 return _context.SaveChanges() > 0;
@@ -72,7 +72,7 @@ namespace E_prescription.Services
                 PracticeNo = medicalpractice.PracticeNo,
                 Province = medicalpractice.Province,
                 Suburb = medicalpractice.Suburb,
-                City = medicalpractice.City,
+                //City = medicalpractice.City,
             };
 
             return model;
@@ -90,7 +90,7 @@ namespace E_prescription.Services
                 PracticeNo = b.PracticeNo,
                 Province = b.Province,
                 Suburb = b.Suburb,
-                City = b.City,
+                //City = b.City,
 
             }).ToList();
 
@@ -120,7 +120,7 @@ namespace E_prescription.Services
             medicalpractice.PracticeNo = model.PracticeNo;
             medicalpractice.Province = model.Province;
             medicalpractice.Suburb = model.Suburb;
-            medicalpractice.City = model.City;
+            //medicalpractice.City = model.City;
 
             return _context.SaveChanges() > 0;
         }
