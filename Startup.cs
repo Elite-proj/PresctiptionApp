@@ -34,7 +34,7 @@ namespace E_prescription
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<EPrescriptiondbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connString")));
+            services.AddDbContext<GRP42EPrescriptionContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connString")));
 
             services.AddTransient<IDoctorRecService, DoctorRecService>();
             services.AddTransient<IMedicalPracticeRecService, MedicalPracticeRecService>();

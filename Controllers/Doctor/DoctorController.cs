@@ -26,11 +26,11 @@ namespace E_prescription.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View(new DoctorModel());
+            return View(new Doctor());
         }
 
         [HttpPost]
-        public IActionResult Add(DoctorModel doctor)
+        public IActionResult Add(Doctor doctor)
         {
             var isSuccess = _doctorService.Add(doctor);
 
@@ -48,7 +48,7 @@ namespace E_prescription.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(DoctorModel doctor)
+        public IActionResult Update(Doctor doctor)
         {
             var isSuccess = _doctorService.Update(doctor);
 

@@ -1,62 +1,61 @@
-﻿@model MedicalPracticeRecModel
+﻿@model MedicalPractice
 @{
     Layout = null;
 }
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
 <body>
-<div class="container" style="padding:30px;">
-    <div class="section-title">
-        <h2>Medication</h2>
-    </div>
-    
-    <form method="post">
-        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-        <div class="form-group row">
-            <div class="col-sm-6">
-                <div class="cold-6">
-                    <div>
-                        <label asp-for="PracticeName"> Medical Practice Name</label>
-                    </div>
-                    <input asp-for="PracticeName" class="form-control" />
-                    <span asp-validation-for="PracticeName" class="text-danger"></span>
-                </div>
-            </div>
-
-             <div class="form-group row">
-            <div class="col-sm-12">
-                <div class="cold-6">
-                    <div>
-                        <label asp-for="PracticeContactNo">Practice ContactNo</label>
-                    </div>
-                    <input asp-for="PracticeContactNo" class="form-control" />
-                    <span asp-validation-for="PracticeContactNo" class="text-danger"></span>
-                </div>
-            </div>
+    <div class="container" style="padding:30px;">
+        <div class="section-title">
+            <h2>Medication</h2>
         </div>
 
-        <div class="form-group row">
-            <div class="col-sm-12">
-                <div class="cold-6">
-                    <div>
-                        <label asp-for="PracticeNo">Practice No</label>
-                        </div>
-                    <input asp-for="PracticeNo" class="form-control" />
-                    <span asp-validation-for="PracticeNo" class="text-danger"></span>
-                    </div>
-                 </div>
-            </div>
-        </div>
-
+        <form method="post">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
             <div class="form-group row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <div class="cold-6">
                         <div>
-                            <label asp-for="PracticeContactNo">Practice Contact No</label>
+                            <label asp-for="PracticeName"> Medical Practice Name</label>
                         </div>
-                        <input asp-for="PracticeContactNo" class="form-control" />
-                        <span asp-validation-for="PracticeContactNo" class="text-danger"></span>
+                        <input asp-for="PracticeName" class="form-control" />
+                        <span asp-validation-for="PracticeName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <div class="cold-6">
+                            <div>
+                                <label asp-for="PracticeContactNo">Practice Contact No</label>
+                            </div>
+                            <input asp-for="PracticeContactNo" class="form-control" />
+                            <span asp-validation-for="PracticeContactNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <div class="cold-6">
+                            <div>
+                                <label asp-for="PracticeNo">Practice No</label>
+                            </div>
+                            <input asp-for="PracticeNo" class="form-control" />
+                            <span asp-validation-for="PracticeNo" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
             </div>
+
 
             <div class="col-sm-6">
                 <div class="cold-6">
@@ -67,7 +66,7 @@
                     <span asp-validation-for="PracticeEmail" class="text-danger"></span>
                 </div>
             </div>
-   
+
             <div class="form-group row">
                 <div class="col-sm-12">
                     <div class="cold-6">
@@ -93,51 +92,51 @@
             </div>
 
             <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="Province">Province</label>
-                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
-                            <option>-- Select Province --</option>
-                        </select>
-                        <div><span asp-validation-for="Province" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="City">City</label>
-                        <select id="CityList" asp-for="City" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
-                            <option>-- Select City --</option>
-                        </select>
-                        <div><span asp-validation-for="City" class="text-danger"></span></div>
-                    </div>
+                <div class="col-6 form-group">
+                    <label asp-for="Province">Province</label>
+                    <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
+                        <option>-- Select Province --</option>
+                    </select>
+                    <div><span asp-validation-for="Province" class="text-danger"></span></div>
                 </div>
-               
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="Suburb">Suburb</label>
-                        <select id="SuburbList" asp-for="Suburb" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
-                            <option>-- Select Suburb --</option>
-                        </select>
-                        <div><span asp-validation-for="Suburb" class="text-dark"></span></div>
-                    </div>
+                <div class="col-6 form-group">
+                    <label asp-for="City">City</label>
+                    <select id="CityList" asp-for="City" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                        <option>-- Select City --</option>
+                    </select>
+                    <div><span asp-validation-for="City" class="text-danger"></span></div>
                 </div>
-            
-        <div class="row">
-            <div class="col-sm-2">
-                <a asp-controller="MedicalPracticeRec" asp-action="MedicalPracticeRecs" class="btn btn-success form-control">VIEW LIST</a>
-        </div>
-
-
-            <div class="col-sm-2 align-content-end">
-                <button type="submit" class="btn btn-primary text-capitalize" form-control>
-                    ADD MEDICAL PRACTICE
-                </button>
             </div>
-        </div>
-      
-    </form>
+
+            <div class="input-group">
+                <div class="col-6 form-group">
+                    <label asp-for="Suburb">Suburb</label>
+                    <select id="SuburbList" asp-for="Suburb" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                        <option>-- Select Suburb --</option>
+                    </select>
+                    <div><span asp-validation-for="Suburb" class="text-dark"></span></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <a asp-controller="MedicalPracticeRec" asp-action="MedicalPracticeRecs" class="btn btn-success form-control">VIEW LIST</a>
+                </div>
+
+
+                <div class="col-sm-2 align-content-end">
+                    <button type="submit" class="btn btn-primary text-capitalize" form-control>
+                        ADD MEDICAL PRACTICE
+                    </button>
+                </div>
+            </div>
+
+        </form>
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#ProvinceList").change(function () {
-                $.getJSON("/Account/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+                $.getJSON("/MedicalPracticeRec/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
                     var row = "";
                     $("#CityList").empty();
                     $("#SuburbList").empty();
@@ -149,7 +148,7 @@
             })
 
             $("#CityList").change(function () {
-                $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+                $.getJSON("/MedicalPracticeRec/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
                     var row = "";
                     $("#SuburbList").empty();
                     $.each(d, function (i, v) {

@@ -8,17 +8,16 @@ namespace E_prescription.Services.MedicalPracticeRec
 {//interface classes
     public interface IMedicalPracticeRecService
     {
-        bool Add(MedicalPracticeRecModel model);
-        bool Update(MedicalPracticeRecModel model);
+        bool Add(MedicalPractice model);
+        bool Update(MedicalPractice model);
         bool Delete(int MedicalPracticeId);
-        MedicalPracticeRecModel GetMedicalPractice(int MedicalPracticeId);
+        MedicalPractice GetMedicalPractice(int MedicalPracticeId);
 
-        //bool GetAllProvinces(int Province);
-        //MedicalPracticeRecModel GetCitiesByProvinceId(int CityId);
-        //MedicalPracticeRecModel GetSuburbsByCityId(int SuburbId);
-
-        List<MedicalPracticeRecModel> List();
-        List<MedicalPracticeRecModel> ListByCity(int CityID);
-        List<MedicalPracticeRecModel> ListByProvince(int ProvinceID);
+        List<Province> GetProvinceList();
+        List<City> GetCities(int ProvinceId);
+        List<Suburb> GetSuburbs(int CityId);
+        List<MedicalPractice> List();
+        List<MedicalPractice> ListByCity(int CityID);
+        List<MedicalPractice> ListByProvince(int ProvinceID);
     }
 }

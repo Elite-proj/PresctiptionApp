@@ -10,10 +10,10 @@ using System.Text;
 
 namespace E_prescription.Services
 {
-    public class ConditionDiagnosisRecService: IConditionDiagnosisRecService
+    public class ConditionDiagnosisRecService : IConditionDiagnosisRecService
     {
-        private readonly EPrescriptiondbContext _context;
-        public ConditionDiagnosisRecService(EPrescriptiondbContext context)
+        private readonly GRP42EPrescriptionContext _context;
+        public ConditionDiagnosisRecService(GRP42EPrescriptionContext context)
         {
             _context = context;
         }
@@ -21,7 +21,9 @@ namespace E_prescription.Services
         {
             try
             {
-                _context.ConditionDiagnosis.Add(new ConditionDiagnosis
+
+
+                _context.ConditionDiagnoses.Add(new ConditionDiagnosis
                 {
                     ConditionId = model.ConditionId,
                     ConditionDecription = model.ConditionDecription,
@@ -37,18 +39,18 @@ namespace E_prescription.Services
         }
         public bool Delete(int ConditionId)
         {
-            var conditiondiagnosis = _context.ConditionDiagnosis.Find(ConditionId);
+            var conditiondiagnosis = _context.ConditionDiagnoses.Find(ConditionId);
 
             if (conditiondiagnosis == null)
                 throw new KeyNotFoundException($"Condition with ID: {ConditionId} was not found.");
 
-            _context.ConditionDiagnosis.Remove(conditiondiagnosis);
+            _context.ConditionDiagnoses.Remove(conditiondiagnosis);
             return _context.SaveChanges() > 0;
         }
 
         public ConditionDiagnosisModel GetCondition(int ConditionId)
         {
-            var conditiondiagnosis = _context.ConditionDiagnosis.Find(ConditionId);
+            var conditiondiagnosis = _context.ConditionDiagnoses.Find(ConditionId);
 
             if (conditiondiagnosis == null)
                 throw new KeyNotFoundException($"Condition with ID: {ConditionId} was not found.");
@@ -64,11 +66,11 @@ namespace E_prescription.Services
         }
         public List<ConditionDiagnosisModel> List()
         {
-            return _context.ConditionDiagnosis.Select(b => new ConditionDiagnosisModel
+            return _context.ConditionDiagnoses.Select(b => new ConditionDiagnosisModel
             {
                 ConditionId = b.ConditionId,
                 ConditionDecription = b.ConditionDecription,
-                
+
             }).ToList();
         }
         public List<ConditionDiagnosisModel> ListByDoctor(int DoctorID)
@@ -77,14 +79,14 @@ namespace E_prescription.Services
         }
         public bool Update(ConditionDiagnosisModel model)
         {
-            var conditiondiagnosis = _context.ConditionDiagnosis.Find(model.ConditionId);
+            var conditiondiagnosis = _context.ConditionDiagnoses.Find(model.ConditionId);
 
             if (conditiondiagnosis == null)
                 throw new KeyNotFoundException($"Conditon with ID: {model.ConditionId} was not found.");
 
             conditiondiagnosis.ConditionId = model.ConditionId;
             conditiondiagnosis.ConditionDecription = model.ConditionDecription;
-           
+
             return _context.SaveChanges() > 0;
         }
 

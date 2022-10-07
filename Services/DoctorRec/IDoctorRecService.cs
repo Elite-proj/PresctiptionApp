@@ -5,11 +5,11 @@ namespace E_prescription.Services.DoctorRec
 {
     public interface IDoctorRecService
     {
-        bool Add(DoctorModel model);
-        bool Update(DoctorModel model);
+        bool Add(Doctor model);
+        bool Update(Doctor model);
         bool Delete(int DoctorId);
-        DoctorModel GetDoctor(int DoctorId);
+        Doctor GetDoctor(int DoctorId);
 
-        List<DoctorModel> List();
+        List<Doctor> List();
     }
 }

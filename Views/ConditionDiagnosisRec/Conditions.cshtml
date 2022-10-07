@@ -20,16 +20,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var medicalPractice in Model)
+            @foreach (var condition in Model)
             {
                 <tr>
-                    <td>@medicalPractice.ConditiomId</td>
-                    <td>@medicalPractice.ConditionDescription</td>
+                    <td>@condition.ConditionId</td>
+                    <td>@condition.ConditionDecription</td>
                     <td>
-                        <a asp-controller="ConditionDiagnosisRec" asp-action="Update" asp-route-CenterID="@medicalPractice.ConditionId" class="material-icons">edit</a>
+                        <a asp-controller="ConditionDiagnosisRec" asp-action="Update" asp-route-CenterID="@condition.ConditionId" class="material-icons">edit</a>
                         @*<a asp-controller="Report" asp-action="DownloadCenterReport" asp-route-BudgetID="@center.CenterID" class="text-primary"><i class="material-icons">description</i></a>*@
                         @*<a asp-controller="Center" asp-action="Centers" class="text-primary"><i class="material-icons"></i></a>*@
-                        <a href="javascript:deleteCenter(@medicalPractice.ConditionId);" class="text-danger"> <i class="material-icons">delete</i></a>
+                        <a href="javascript:deleteCenter(@condition.ConditionId);" class="text-danger"> <i class="material-icons">delete</i></a>
                     </td>
 
                 </tr>

@@ -11,23 +11,21 @@ using Microsoft.Extensions.Configuration;
 using System.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using E_prescription.Services;
 
 namespace E_prescription.Controllers
 {
     public class MedicalPracticeRecController : Controller
     {
         private readonly IMedicalPracticeRecService _medicalPracticeRecService;
-        //private readonly IConfiguration configuration;
-        //DataAccess data;
+
+        private readonly GRP42EPrescriptionContext _context = new GRP42EPrescriptionContext();
 
         public MedicalPracticeRecController(IMedicalPracticeRecService medicalPracticeRecService)
         {
             _medicalPracticeRecService = medicalPracticeRecService;
         }
-        //public MedicalPracticeRecController(IConfiguration config)
-        //{
-        //    this.configuration = config;
-        //}
 
         public IActionResult MedicalPracticeRecs()
         {
@@ -38,34 +36,17 @@ namespace E_prescription.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View(new MedicalPracticeRecModel());
+            var provinces = _medicalPracticeRecService.GetProvinceList();
+
+            ViewBag.Provinces = new SelectList(provinces, "ProvinceId", "ProvinceName");
+
+
+            return View();
         }
 
-        //[HttpGet]
-
-        //public IActionResult  GetAllProvinces(int ProvinceID)
-        //{
-        //    DataTable dt = new DataTable();
-        //    dt = data.GetProvinces();
-
-        //    List<ProvinceModel> provinces = new List<ProvinceModel>();
-
-        //    for (int i = 0; i < dt.Rows.Count; i++)
-        //    {
-        //        ProvinceModel province = new ProvinceModel();
-        //        province.ProvinceID = Convert.ToInt32(dt.Rows[i]["ProvinceID"]);
-        //        province.ProvinceName = dt.Rows[i]["ProvinceName"].ToString();
-
-        //        provinces.Add(province);
-        //    }
-        //    var getProvinces = provinces.ToList();
-        //    ViewBag.Provinces = new SelectList(getProvinces, "ProvinceID", "ProvinceName");
-
-        //    return View(ViewBag);
-        //}
 
         [HttpPost]
-        public IActionResult Add(MedicalPracticeRecModel medicalPracticeRec)
+        public IActionResult Add(MedicalPractice medicalPracticeRec)
         {
             var isSuccess = _medicalPracticeRecService.Add(medicalPracticeRec);
 
@@ -83,7 +64,7 @@ namespace E_prescription.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(MedicalPracticeRecModel medicalpractice)
+        public IActionResult Update(MedicalPractice medicalpractice)
         {
             var isSuccess = _medicalPracticeRecService.Update(medicalpractice);
 
@@ -107,49 +88,36 @@ namespace E_prescription.Controllers
             }
         }
 
-        //[HttpGet]
-        //public JsonResult LoadCities(int id)
-        //{
-        //    data = new DataAccess(configuration);
+        [HttpGet]
+        public JsonResult LoadCities(int id)
+        {
 
-        //    //Get Cities
-        //    DataTable dtCities = new DataTable();
-        //    CityModel city = new CityModel();
-        //    city.ProvinceID = id;
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<City> Clist = new List<City>();
+            Clist = _medicalPracticeRecService.GetCities(id);
 
-        //    dtCities = data.GetCities(city);
+            for (int i = 0; i < Clist.Count; i++)
+            {
+                list.Add(new SelectListItem { Text = Clist[i].CityName.ToString(), Value = Clist[i].CityId.ToString() });
+            }
 
+            return Json(list);
+        }
+        [HttpGet]
+        public JsonResult LoadSuburbs(int id)
+        {
 
-        //    List<SelectListItem> list = new List<SelectListItem>();
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Suburb> Slist = new List<Suburb>();
+            Slist = _medicalPracticeRecService.GetSuburbs(id);
 
-        //    for (int i = 0; i < dtCities.Rows.Count; i++)
-        //    {
-        //        list.Add(new SelectListItem { Text = dtCities.Rows[i]["CityName"].ToString(), Value = Convert.ToInt32(dtCities.Rows[i]["CityID"]).ToString() });
-        //    }
+            for (int i = 0; i < Slist.Count; i++)
+            {
+                list.Add(new SelectListItem { Text = Slist[i].SuburbName.ToString(), Value = Slist[i].SuburbId.ToString() });
+            }
 
-        //    return Json(list);
-        //}
-        //[HttpGet]
-        //public JsonResult LoadSuburbs(int id)
-        //{
-        //    data = new DataAccess(configuration);
-
-        //    //Get Cities
-        //    DataTable dtSuburbs = new DataTable();
-        //    SuburbModel suburb = new SuburbModel();
-        //    suburb.CityID = id;
-
-        //    dtSuburbs = data.GetSuburbs(suburb);
-
-        //    List<SelectListItem> list = new List<SelectListItem>();
-
-        //    for (int i = 0; i < dtSuburbs.Rows.Count; i++)
-        //    {
-        //        list.Add(new SelectListItem { Text = dtSuburbs.Rows[i]["SuburbName"].ToString(), Value = Convert.ToInt32(dtSuburbs.Rows[i]["SuburbID"]).ToString() });
-        //    }
-
-        //    return Json(list);
-        //}
+            return Json(list);
+        }
 
     }
 }

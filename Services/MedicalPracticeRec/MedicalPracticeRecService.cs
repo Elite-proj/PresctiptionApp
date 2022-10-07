@@ -9,19 +9,19 @@ using System.Text;
 
 namespace E_prescription.Services
 {
-    public class MedicalPracticeRecService: IMedicalPracticeRecService
+    public class MedicalPracticeRecService : IMedicalPracticeRecService
     {
-        private readonly EPrescriptiondbContext _context;
-        public MedicalPracticeRecService(EPrescriptiondbContext context)
+        private readonly GRP42EPrescriptionContext _context;
+        public MedicalPracticeRecService(GRP42EPrescriptionContext context)
         {
             _context = context;
         }
-        //add
-        public bool Add(MedicalPracticeRecModel model)
+
+        public bool Add(MedicalPractice model)
         {
             try
             {
-                _context.MedicalPractice.Add(new MedicalPractice
+                _context.MedicalPractices.Add(new MedicalPractice
                 {
                     MedicalPracticeId = model.MedicalPracticeId,
                     PracticeName = model.PracticeName,
@@ -30,9 +30,9 @@ namespace E_prescription.Services
                     PracticeEmail = model.PracticeEmail,
                     PracticeContactNo = model.PracticeContactNo,
                     PracticeNo = model.PracticeNo,
-                    Province = model.Province,
-                    Suburb = model.Suburb,
-                    //City = model.City,
+                    ProvinceId = model.ProvinceId,
+                    SuburbId = model.SuburbId,
+                    CityId = model.CityId,
                 });
 
                 return _context.SaveChanges() > 0;
@@ -42,26 +42,26 @@ namespace E_prescription.Services
                 return false;
             }
         }
-        //delete
+
         public bool Delete(int MedicalPracticeId)
         {
-            var medicalpractice = _context.MedicalPractice.Find(MedicalPracticeId);
+            var medicalpractice = _context.MedicalPractices.Find(MedicalPracticeId);
 
             if (medicalpractice == null)
                 throw new KeyNotFoundException($"Center with ID: {MedicalPracticeId} was not found.");
 
-            _context.MedicalPractice.Remove(medicalpractice);
+            _context.MedicalPractices.Remove(medicalpractice);
             return _context.SaveChanges() > 0;
         }
-        public MedicalPracticeRecModel GetMedicalPractice(int MedicalPracticeId)
+        public MedicalPractice GetMedicalPractice(int MedicalPracticeId)
         {
-            var medicalpractice = _context.MedicalPractice.Find(MedicalPracticeId);
+            var medicalpractice = _context.MedicalPractices.Find(MedicalPracticeId);
 
             if (medicalpractice == null)
                 throw new KeyNotFoundException($"Medical with ID: {MedicalPracticeId} was not found.");
 
 
-            MedicalPracticeRecModel model = new MedicalPracticeRecModel
+            MedicalPractice model = new MedicalPractice
             {
                 MedicalPracticeId = medicalpractice.MedicalPracticeId,
                 PracticeName = medicalpractice.PracticeName,
@@ -72,14 +72,14 @@ namespace E_prescription.Services
                 PracticeNo = medicalpractice.PracticeNo,
                 Province = medicalpractice.Province,
                 Suburb = medicalpractice.Suburb,
-                //City = medicalpractice.City,
+                City = medicalpractice.City,
             };
 
             return model;
         }
-        public List<MedicalPracticeRecModel> List()
+        public List<MedicalPractice> List()
         {
-            return _context.MedicalPractice.Select(b => new MedicalPracticeRecModel
+            return _context.MedicalPractices.Select(b => new MedicalPractice
             {
                 MedicalPracticeId = b.MedicalPracticeId,
                 PracticeName = b.PracticeName,
@@ -90,23 +90,23 @@ namespace E_prescription.Services
                 PracticeNo = b.PracticeNo,
                 Province = b.Province,
                 Suburb = b.Suburb,
-                //City = b.City,
+                City = b.City,
 
             }).ToList();
 
         }
-        public List<MedicalPracticeRecModel> ListByCity(int cityID)
+        public List<MedicalPractice> ListByCity(int cityID)
         {
             throw new NotImplementedException();
         }
 
-        public List<MedicalPracticeRecModel> ListByProvince(int ProvinceId)
+        public List<MedicalPractice> ListByProvince(int ProvinceId)
         {
             throw new NotImplementedException();
         }
-        public bool Update(MedicalPracticeRecModel model)
+        public bool Update(MedicalPractice model)
         {
-            var medicalpractice = _context.MedicalPractice.Find(model.MedicalPracticeId);
+            var medicalpractice = _context.MedicalPractices.Find(model.MedicalPracticeId);
 
             if (medicalpractice == null)
                 throw new KeyNotFoundException($"Medical with ID: {model.MedicalPracticeId} was not found.");
@@ -120,55 +120,32 @@ namespace E_prescription.Services
             medicalpractice.PracticeNo = model.PracticeNo;
             medicalpractice.Province = model.Province;
             medicalpractice.Suburb = model.Suburb;
-            //medicalpractice.City = model.City;
+            medicalpractice.City = model.City;
 
             return _context.SaveChanges() > 0;
         }
 
-        //public bool GetAllProvinces(int Province)
-        //{
-        //    var medicalpractice = _context.MedicalPractice.Find(MedicalPracticeRecService.getAllProvinces);
+        public List<Province> GetProvinceList()
+        {
 
-        //    if (medicalpractice == null)
-        //        throw new KeyNotFoundException($"Province with ID: {medicalpractice.Province} was not found.");
+            return _context.Provinces.Select(b => new Province
+            {
+                ProvinceId = b.ProvinceId,
+                ProvinceName = b.ProvinceName,
 
-
-        //    _context.MedicalPractice.GetAllProvinces(medicalpractice);
-        //    return _context.SaveChanges() > 0;
-
-
-        //}
+            }).ToList();
+        }
 
 
-        //public MedicalPracticeRecModel GetCitiesByProvinceId(int getCitiesByProvinceId)
-        //{
-        //    var medicalpractice = _context.MedicalPractice.Find(getCitiesByProvinceId);
-
-        //    if (medicalpractice == null)
-        //        throw new KeyNotFoundException($"City with ID: {getCitiesByProvinceId} was not found.");
-        //    MedicalPracticeRecModel model = new MedicalPracticeRecModel
-        //    {
-        //        Province = medicalpractice.Province,
-        //        Suburb = medicalpractice.Suburb,
-        //        City = medicalpractice.City,
-        //    };
-
-        //    return model;
-        //}
-        ////public MedicalPracticeRecModel GetSuburbsByCityId(int getSuburbsByCityId)
-        ////{
-        ////    var medicalpractice = _context.MedicalPractice.Find(getSuburbsByCityId);
-
-        ////    if (medicalpractice == null)
-        ////        throw new KeyNotFoundException($"Suburb with ID: {getSuburbsByCityId} was not found.");
-        ////    MedicalPracticeRecModel model = new MedicalPracticeRecModel
-        ////    {
-        ////        Province = medicalpractice.Province,
-        ////        Suburb = medicalpractice.Suburb,
-        ////        City = medicalpractice.City,
-        ////    };
-
-        ////    return model;
-        //////}
+        public List<City> GetCities(int ProvinceId)
+        {
+            var Cities = _context.Cities.Where(c => c.ProvinceId == ProvinceId).ToList();
+            return Cities;
+        }
+        public List<Suburb> GetSuburbs(int CityId)
+        {
+            var Suburbs = _context.Suburbs.Where(c => c.CityId == CityId).ToList();
+            return Suburbs;
+        }
     }
 }
