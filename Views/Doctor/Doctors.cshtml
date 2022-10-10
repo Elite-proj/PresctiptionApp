@@ -9,42 +9,36 @@
     </div>
 </div>
 
-@*
+
 <div class="col-12 border p-3">
     <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>Doctor ID</th>
                 <th>Doctor Name</th>
                 <th>Doctor Surname</th>
                 <th>Doctor Contact Number</th>
                 <th>Doctor Email</th>
-                <th>Doctor Highest Qualification</th>
-                <th>Practice Number</th>
                 <th>HCRN</th>
                 <th>Address</th>
                 <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var doctor in Model)
+            @foreach (DoctorAccount doctor in ViewBag.Doctors)
             {
                 <tr>
-                    <td>@doctor.DoctorId</td>
-                    <td>@doctor.DoctorName</td>
-                    <td>@doctor.DoctorSurname</td>
-                    <td>@doctor.DoctoreContactNo</td>
+                    <td>@doctor.FirstName</td>
+                    <td>@doctor.Surname</td>
+                    <td>@doctor.ContactNo</td>
                     <td>@doctor.Email</td>
-                    <td>@doctor.Qualification</td>
-                    <td>@doctor.PracticeNo</td>
-                    <td>@doctor.Hrcn</td>
-                    <td>@doctor.AddressLine1 @doctor.AddressLine2 , @doctor.Suburb, @doctor.Province , @doctor.City </td>
-                    <td>*@
-                       @* <a asp-controller="MedicalPracticeRec" asp-action="Update" asp-route-CenterID="@medicalPractice.MedicalPracticeId" class="material-icons">edit</a>*@
-                        @*<a asp-controller="Report" asp-action="DownloadCenterReport" asp-route-BudgetID="@center.CenterID" class="text-primary"><i class="material-icons">description</i></a>*@
-                        @*<a asp-controller="Center" asp-action="Centers" class="text-primary"><i class="material-icons"></i></a>*@
-                        @*<a href="javascript:deleteCenter(@medicalPractice.MedicalPracticeId);" class="text-danger"> <i class="material-icons">delete</i></a>*@
-         @*           </td>
+                    <td>@doctor.HCRN</td>
+                    <td>@doctor.AddressLine1 @doctor.AddressLine2 </td>
+                    <td>
+                        @*<a asp-controller="MedicalPracticeRec" asp-action="Update" asp-route-CenterID="@medicalPractice.MedicalPracticeId" class="material-icons">edit</a>
+                        <a asp-controller="Report" asp-action="DownloadCenterReport" asp-route-BudgetID="@center.CenterID" class="text-primary"><i class="material-icons">description</i></a>
+                        <a asp-controller="Center" asp-action="Centers" class="text-primary"><i class="material-icons"></i></a>
+                        <a href="javascript:deleteCenter(@medicalPractice.MedicalPracticeId);" class="text-danger"> <i class="material-icons">delete</i></a>*@
+                    </td>
 
                 </tr>
 
@@ -54,4 +48,3 @@
     </table>
 
 </div>
-*@

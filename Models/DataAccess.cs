@@ -89,7 +89,6 @@ namespace E_prescription.Models
 
             dbComm.Parameters.AddWithValue("@Name", doctor.FirstName);
             dbComm.Parameters.AddWithValue("@Surname", doctor.Surname);
-            dbComm.Parameters.AddWithValue("@Password", doctor.Password);
             dbComm.Parameters.AddWithValue("@Contacts", doctor.ContactNo.ToString());
             dbComm.Parameters.AddWithValue("@Email", doctor.Email);
             dbComm.Parameters.AddWithValue("@AddressLine1", doctor.AddressLine1);
@@ -147,7 +146,31 @@ namespace E_prescription.Models
             return x;
         }
 
-        
+        public DataTable GetDoctors()
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetDoctor", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
         //Get addresses
 
         public DataTable GetProvinces()
@@ -1004,6 +1027,91 @@ namespace E_prescription.Models
             return dt;
         }
 
+
+        //Contra-indications Records
+
+        public int AddContraIndication(ContraIndication indication)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_AddContraIndication", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+           
+
+            dbComm.Parameters.AddWithValue("@IngredientID", indication.IngredientId);
+            dbComm.Parameters.AddWithValue("@ConditionID", indication.ConditionId);
+            dbComm.Parameters.AddWithValue("@ContraIndicationName", indication.ContraIndicationName);
+
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+
+        public DataTable GetContraIndication()
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetContraIndication", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable GetConditionDiagnosis()
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetConditionDiagnosis", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
 
     }
 }
