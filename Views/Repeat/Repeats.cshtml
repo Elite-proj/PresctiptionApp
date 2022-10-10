@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Repeat";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-sm-2">
+        <a asp-controller="Repeat" asp-action="Add" class="btn btn-primary">Add Repeat Record</a>
+    </div>
+</div>
+
+
+<div class="col-12 border p-3">
+    <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Repeat ID</th>
+                <th>Repeat Description</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var repeat in Model)
+            {
+                <tr>
+                    <td>@repeat.RepeatId</td>
+                    <td>@repeat.RepeatDescription</td>
+                    <td>
+                        <a asp-controller="Repeat" asp-action="Update" asp-route-CenterID="@repeat.RepeatId" class="material-icons">edit</a>
+                        @*<a asp-controller="Report" asp-action="DownloadCenterReport" asp-route-BudgetID="@center.CenterID" class="text-primary"><i class="material-icons">description</i></a>*@
+                        @*<a asp-controller="Center" asp-action="Centers" class="text-primary"><i class="material-icons"></i></a>*@
+                        <a href="javascript:deleteCenter(@repeat.RepeatId);" class="text-danger"> <i class="material-icons">delete</i></a>
+                    </td>
+
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+
+</div>

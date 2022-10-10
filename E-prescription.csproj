@@ -6,22 +6,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\ConditionDiagnosis\**" />
+    <Compile Remove="Views\MedicationRec\**" />
     <Compile Remove="Views\Pages\**" />
     <Compile Remove="Views\PharmacistRec\**" />
     <Compile Remove="Views\PharmacyRec\**" />
     <Compile Remove="Views\Register\**" />
+    <Compile Remove="Views\Users\**" />
+    <Content Remove="Views\ConditionDiagnosis\**" />
+    <Content Remove="Views\MedicationRec\**" />
     <Content Remove="Views\Pages\**" />
     <Content Remove="Views\PharmacistRec\**" />
     <Content Remove="Views\PharmacyRec\**" />
     <Content Remove="Views\Register\**" />
+    <Content Remove="Views\Users\**" />
+    <EmbeddedResource Remove="Views\ConditionDiagnosis\**" />
+    <EmbeddedResource Remove="Views\MedicationRec\**" />
     <EmbeddedResource Remove="Views\Pages\**" />
     <EmbeddedResource Remove="Views\PharmacistRec\**" />
     <EmbeddedResource Remove="Views\PharmacyRec\**" />
     <EmbeddedResource Remove="Views\Register\**" />
+    <EmbeddedResource Remove="Views\Users\**" />
+    <None Remove="Views\ConditionDiagnosis\**" />
+    <None Remove="Views\MedicationRec\**" />
     <None Remove="Views\Pages\**" />
     <None Remove="Views\PharmacistRec\**" />
     <None Remove="Views\PharmacyRec\**" />
     <None Remove="Views\Register\**" />
+    <None Remove="Views\Users\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,14 +53,8 @@
     <Folder Include="Areas\Doctor\Views\Patient\" />
     <Folder Include="Areas\Patient\Models\" />
     <Folder Include="Views\AdminReport\" />
-    <Folder Include="Views\MedicationRec\" />
-    <Folder Include="Views\ConditionDiagnosis\" />
-    <Folder Include="Views\MedicationRec\" />
-    <Folder Include="Views\MedicationRec\" />
-    <Folder Include="Views\MedicationRec\" />
     <Folder Include="Views\MedicationInteraction\" />
     <Folder Include="Views\ContraIndication\" />
-    <Folder Include="Views\Users\" />
   </ItemGroup>
 
 </Project>

@@ -14,8 +14,7 @@ using E_prescription.Services;
 using E_prescription.Services.MedicalPracticeRec;
 using E_prescription.Services.DoctorRec;
 using E_prescription.Services.ConditionDiagnosisRec;
-
-
+using E_prescription.Services.Repeat;
 
 namespace E_prescription
 {
@@ -39,7 +38,9 @@ namespace E_prescription
             services.AddTransient<IDoctorRecService, DoctorRecService>();
             services.AddTransient<IMedicalPracticeRecService, MedicalPracticeRecService>();
             services.AddTransient<IConditionDiagnosisRecService, ConditionDiagnosisRecService>();
+            services.AddScoped<IRepeatRecService, RepeatRecService>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
+            
 
             services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddControllersWithViews();

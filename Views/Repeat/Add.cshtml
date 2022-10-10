@@ -1,0 +1,56 @@
+﻿@model Repeat
+@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container" style="padding:30px;">
+        <div class="section-title">
+            <h2>REPEAT RECORD</h2>
+        </div>
+
+        <form method="post">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <div class="cold-6">
+                                <div>
+                                    <label asp-for="RepeatDescription">Repeat Description</label>
+                                </div>
+                                <input asp-for="RepeatDescription" class="form-control" />
+                                <span asp-validation-for="RepeatDescription" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a asp-controller="Repeat" asp-action="Repeats" class="btn btn-success form-control">VIEW LIST</a>
+                        </div>
+
+
+                        <div class="col-sm-2 align-content-end">
+                            <button type="submit" class="btn btn-primary text-capitalize" form-control>
+                                ADD REPEAT RECORD
+                            </button>
+                        </div>
+                    </div>
+
+        </form>
+    </div>
+
+</body>
+
+<partial name="_ValidationScriptsPartial" />
+
