@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model MedicationVM
+@{
+    //MedicationVM medication = new MedicationVM();
+    ViewBag.Title = "Medication Details";
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+</head>
+<script type="text/javascript">
+
+    // for adding selected ingredient
+    function AddIngredient() {
+        var index = $('input[name^="listOfmedicationDetails"]').length;
+        var ingredients = "<tr><td hidden >" + "<input type=" + '"text"' + "name=" + '"listOfmedicationDetails[' + index + '].IngredientID"' + " value=" + $("#cmbIngredient").val() + ">" + "</td><td>" + $("#cmbIngredient").find(":selected").text() + "</td><td><input onclick=" + '"Remove(this)"' +" id=" + '"delete"' + " type=" + '"button"' + " value=" + '"Remove"' + " class=" + '"btn btnDelete btn-danger"' + "/></td></tr>";
+        $("#tblIngredients").last().append(ingredients);
+    }
+
+    function Remove(button) {
+        var row = $(button).closest("TR");
+        var table = $("#tblIngredients")[0];
+
+        table.deleteRow(row[0].rowIndex);
+    };
+
+
+    // for searchable dropdown
+
+    $(function () {
+        $("#cmbIngredient").select2();
+    });
+</script>
+
+<body>
+    <div class="container">
+        <main>
+            
+
+            <form asp-controller="Medication" asp-action="Details" method="post">
+                <div class="text-center">
+                    <p2>
+                        Add details active ingredients for @Model.MedicationName 
+                    </p2>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <input type="text" asp-for="MedicationID" id="txtMedicationID" class="hide" hidden/>
+                        <label>Active Ingredient</label>
+                        <select asp-items="@ViewBag.Ingredients" id="cmbIngredient" class="form-control">
+                        </select>
+                        <div><span class="text-danger"></span></div>
+                    </div>
+
+                </div>
+                <input type="button" id="btnAdd" value="add ingredient" class="btn btn-primary" onclick="AddIngredient();"  />
+
+                <table class="table-condensed" style="width:100%" id="tblIngredients">
+                    <thead>
+                        <tr>
+                            <th>Active Ingredient</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+
+                <button type="submit"class="btn btn-primary">Save medication</button>
+            </form>
+
+        </main>
+    </div>
+</body>

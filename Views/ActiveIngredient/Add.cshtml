@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ActiveIngredientVM
+@{
+    ViewBag.Title = "Active ingredients";
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<div class="text-center">
+    <form asp-action="Add" asp-controller="ActiveIngredient" method="post">
+        <h1 class="display-4">Add Active Ingredients</h1>
+        <label asp-for="IngredientDescription" class="col-6">Ingredient Name</label>
+        <input type="text" asp-for="IngredientDescription" class="col-6 form-control" />
+        <label asp-for="StrengthID" class="col-6">Strength</label>
+        <select asp-for="StrengthID" class="col-6 form-control" asp-items="@ViewBag.Strengths"></select>
+        <div class="d-grid gap-2 d-md-block">
+
+        </div>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+    
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

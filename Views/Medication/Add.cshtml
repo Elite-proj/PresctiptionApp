@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model MedicationVM
+@{
+    ViewBag.Title = "Medication Records";
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <main>
+            <div class="text-center">
+                <p2>
+                    You are required to fill all fields in this form.<br />
+                    If City/suburb you reside in is not listed, choose the nearest one.
+                </p2>
+            </div>
+
+            <br /><br />
+                  <form asp-controller="Medication" asp-action="Add" method="post">
+                      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="MedicationName">First Name</label>
+                              <input asp-for="MedicationName" class="form-control" />
+                              <div><span asp-validation-for="MedicationName" class="text-danger"></span></div>
+                          </div>
+                      </div>
+
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="DosageID">Dosage Form</label>
+                              <select asp-for="DosageID" asp-items="@ViewBag.Dosages" class="form-control">
+                                  <option>-- Select Dosage Form --</option>
+                              </select>
+                              <div><span asp-validation-for="DosageID" class="text-danger"></span></div>
+                          </div>
+                          
+                      </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="ScheduleID">Medication Schedule</label>
+                              <select asp-for="ScheduleID" asp-items="@ViewBag.Schedules" class="form-control">
+                                  <option>-- Select schedule --</option>
+                              </select>
+                              <div><span asp-validation-for="ScheduleID" class="text-danger"></span></div>
+                          </div>
+                      </div>
+
+
+                      <button type="submit" class="btn btn-primary">Add Medication</button>
+
+                  </form>
+
+        </main>
+    </div>
+</body>

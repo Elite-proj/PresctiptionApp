@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-6 form-group">
                         <label asp-for="ContactNo">Contact number</label>
-                        <input class="form-control" asp-for="ContactNo" type="number" />
+                        <input class="form-control" asp-for="ContactNo" type="tel" />
                         <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
                     </div>
                 </div>
@@ -90,9 +90,9 @@
                         <div><span asp-validation-for="RegNumber" class="text-danger"></span></div>
                     </div>
                     <div class="col-6 form-group">
-                        <label asp-for="PharmacyID">Date of Birth</label>
-                        <select asp-for="PharmacyID" asp-items="@ViewBag.Pharmacies" class="form-control">
-                            <option>-- Select Suburb --</option>
+                        <label asp-for="PharmacyID">Pharmacy Name</label>
+                        <select asp-for="PharmacyID" asp-items="@ViewBag.Pharmacies" class="form-control" disabled>
+                            <option>-- Pharmacy Name --</option>
                         </select>
                         <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
                     </div>
@@ -106,7 +106,7 @@
                     
                 </div>
 
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary">Update pharmacist records</button>
 
             </form>
 
@@ -116,32 +116,40 @@
         $(document).ready(function () {
             $.getJSON("/PharmacistRecords/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
                 var row = "";
-                $("#CityList").empty();
-                $("#SuburbList").empty();
+               
+                
                 $.each(d, function (i, v) {
                     row += "<option value=" + v.value + ">" + v.text + "</option>";
                 });
                 $("#CityList").html(row);
-            })
-            $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
-                var row = "";
-                $("#SuburbList").empty();
-                $.each(d, function (i, v) {
-                    row += "<option value=" + v.value + ">" + v.text + "</option>";
-                });
-                $("#SuburbList").html(row);
-            })
-            $("#ProvinceList").change(function () {
-                $.getJSON("/Account/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+                $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
                     var row = "";
-                    $("#CityList").empty();
                     $("#SuburbList").empty();
                     $.each(d, function (i, v) {
                         row += "<option value=" + v.value + ">" + v.text + "</option>";
                     });
-                    $("#CityList").html(row);
+                    $("#SuburbList").html(row);
                 })
             })
+            //$.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+            //    var row = "";
+            //    $("#SuburbList").empty();
+            //    $.each(d, function (i, v) {
+            //        row += "<option value=" + v.value + ">" + v.text + "</option>";
+            //    });
+            //    $("#SuburbList").html(row);
+            //})
+            //$("#ProvinceList").change(function () {
+            //    $.getJSON("/Account/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+            //        var row = "";
+            //        $("#CityList").empty();
+            //        $("#SuburbList").empty();
+            //        $.each(d, function (i, v) {
+            //            row += "<option value=" + v.value + ">" + v.text + "</option>";
+            //        });
+            //        $("#CityList").html(row);
+            //    })
+            //})
 
             $("#CityList").change(function () {
                 $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
@@ -153,6 +161,18 @@
                     $("#SuburbList").html(row);
                 })
             })
+        })
+
+        $(document).ready(function () {
+            $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+                var row = "";
+                $("#SuburbList").empty();
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                });
+                $("#SuburbList").html(row);
+            })
+            
         })
     </script>
 </body>

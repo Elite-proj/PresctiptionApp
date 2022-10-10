@@ -42,6 +42,8 @@ namespace E_prescription.Models.Account
         public string UserType { get; set; }
         public string UserStatus { get; set; }
 
+        public string PhamacyName { get; set; }
+
         public int PharmacistId { get; set; }
         [Required(ErrorMessage ="Please enter registration number.")]
         public int RegNumber { get; set; }

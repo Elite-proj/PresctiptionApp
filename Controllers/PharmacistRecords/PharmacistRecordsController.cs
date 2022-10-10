@@ -108,6 +108,7 @@ namespace E_prescription.Controllers.PharmacistRecords
             DataTable suburb = new DataTable();
             DataTable province = new DataTable();
             DataTable getProv = new DataTable();
+            DataTable pharmacyDt = new DataTable();
 
             getProv = data.GetProvinces();
 
@@ -143,6 +144,23 @@ namespace E_prescription.Controllers.PharmacistRecords
             pharmacist.RegNumber = int.Parse(dt.Rows[0]["RegNumber"].ToString());
             pharmacist.PharmacyID = int.Parse(dt.Rows[0]["PharmacyID"].ToString());
 
+            LoadSuburbs(pharmacist.CityID);
+            //Get pharmacy By ID
+            pharmacyDt = data.GetPharmacyById(int.Parse(pharmacist.PharmacyID.ToString()));
+
+            List<PharmacyRecordsVM> pharmacies = new List<PharmacyRecordsVM>();
+
+            for(int j = 0; j < pharmacyDt.Rows.Count; j++)
+            {
+                PharmacyRecordsVM pharmacy = new PharmacyRecordsVM();
+
+                pharmacy.PharmacyId= int.Parse(pharmacyDt.Rows[j]["PharmacyID"].ToString());
+                pharmacy.PharmacyName = pharmacyDt.Rows[j]["PharmacyName"].ToString();
+
+                pharmacies.Add(pharmacy);
+            }
+
+            ViewBag.Pharmacies = new SelectList(pharmacies.ToList(), "PharmacyId", "PharmacyName");
             return View(pharmacist);
         }
         public JsonResult LoadCities(int id)
