@@ -7,6 +7,7 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using E_prescription.Models.Account;
 using E_prescription.Areas.Pharmacist.Models;
+using E_prescription.Areas.Doctor.Models;
 
 namespace E_prescription.Models
 {
@@ -875,7 +876,7 @@ namespace E_prescription.Models
 
             }
 
-            dbComm = new SqlCommand("sp_GetMedication", dbconn);
+            dbComm = new SqlCommand("sp_GetMedications", dbconn);
             dbComm.CommandType = CommandType.StoredProcedure;
 
             dt = new DataTable();
@@ -1111,6 +1112,95 @@ namespace E_prescription.Models
             dbconn.Close();
 
             return dt;
+        }
+
+
+        //Patient Records
+        public int AddPatientMedication(HistoryViewModel model)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_AddChronicMedication", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@MedicationID", model.MedicationID);
+            dbComm.Parameters.AddWithValue("@PatientID", model.PatientID);
+            dbComm.Parameters.AddWithValue("@DoctorID", model.DoctorID);
+            dbComm.Parameters.AddWithValue("@Date", model.date);
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+
+        }
+
+        public int AddPatientAllergy(HistoryViewModel model)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_AddPatientAllergy", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@IngredientID", model.IngredientID);
+            dbComm.Parameters.AddWithValue("@PatientID", model.PatientID);
+            dbComm.Parameters.AddWithValue("@DoctorID", model.DoctorID);
+            dbComm.Parameters.AddWithValue("@Date", model.date);
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+
+        }
+
+        public int AddPatientCondition(HistoryViewModel model)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_AddChronicHistory", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@ConditionID", model.ConditionID);
+            dbComm.Parameters.AddWithValue("@PatientID", model.PatientID);
+            dbComm.Parameters.AddWithValue("@DoctorID", model.DoctorID);
+            dbComm.Parameters.AddWithValue("@Date", model.date);
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+
         }
 
     }

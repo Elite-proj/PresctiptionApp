@@ -47,7 +47,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Doctor\Models\" />
     <Folder Include="Areas\Doctor\Views\Dosage\" />
     <Folder Include="Areas\Doctor\Views\Instruction\" />
     <Folder Include="Areas\Doctor\Views\Patient\" />

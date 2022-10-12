@@ -1,0 +1,223 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Multi Step Form | CodingNepal</title>
+    <link rel="stylesheet" href="~/css/Doctor.css">
+    @*<link rel="stylesheet" href="style.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <header>Patient Medical History</header>
+        <div class="progress-bar">
+            <div class="step">
+                <p>
+                    Verify Patient Details
+                </p>
+                <div class="bullet">
+                    <span>1</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+                <p>
+                    Chronic Disease
+                </p>
+                <div class="bullet">
+                    <span>2</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+                <p>
+                   Patient Allergies
+                </p>
+                <div class="bullet">
+                    <span>3</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+                <p>
+                    Patient Medication
+                </p>
+                <div class="bullet">
+                    <span>4</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
+        </div>
+        <div class="form-outer">
+            <form asp-action="FirstTime" asp-area="Doctor" asp-controller="Home">
+                <div class="page slide-page">
+                    <div class="title">
+                        Patient Details:
+                    </div>
+                    <div class="field">
+                        <div class="label">
+                            Username
+                        </div>
+                        <input type="text">
+                    </div>
+                    <div class="field">
+                        <div class="label">
+                            Password
+                        </div>
+                        <input type="password">
+                    </div>
+                    <div class="field">
+                        <button class="firstNext next">Next</button>
+                    </div>
+
+                </div>
+                <div class="page">
+                    <div class="title">
+                        Medical History:
+                    </div>
+                    <div class="field">
+                        <div class="label">
+                            Condition Name
+                        </div>
+                        <select asp-items="@ViewBag.Conditions" id="cmbCondition"></select>
+                    </div>
+                    <div class="field">
+                        <button type="button" id="btnAddCondition" class="btn btn-primary" onclick="AddConditions();" value="Add Condition">Add Condition</button>
+                    </div>
+                    <div class="table">
+                        <table class="table-condensed" style="width:50%" id="tblConditions">
+                            <thead>
+                                <tr>
+                                    <th>Conditions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-1 prev">Previous</button>
+                        <button class="next-1 next">Next</button>
+                    </div>
+                </div>
+                <div class="page">
+                    <div class="title">
+                        Allergies
+                    </div>
+                    <div class="field">
+                        <div class="label">
+                            Allergy Name:
+                        </div>
+                        <select asp-items="@ViewBag.Ingredients" id="cmbAllergy"></select>
+                    </div>
+                    <div class="field">
+                        <button type="button" id="btnAddAllergy" class="btn btn-primary" onclick="AddAllergy();" value="Add Allergy">Add Allergy</button>
+                    </div>
+                    <div class="table">
+                        <table class="table-condensed" style="width:50%" id="tblAllergies">
+                            <thead>
+                                <tr>
+                                    <th>Allergies</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-2 prev">Previous</button>
+                        <button class="next-2 next">Next</button>
+                    </div>
+                </div>
+                <div class="page">
+                    <div class="title">
+                        Medication:
+                    </div>
+                    <div class="field">
+                        <select asp-items="@ViewBag.Medications" id="cmbMedication"></select>
+                    </div>
+                    <div class="field">
+                        <button type="button" id="btnAddMedication" class="btn btn-primary" onclick="AddMedication();" value="Add Medication">Add Medication</button>
+                    </div>
+                    <div class="table">
+                        <table class="table-condensed" style="width:50%" id="tblMedications">
+                            <thead>
+                                <tr>
+                                    <th>Medications</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="field btns">
+                        <button class="prev-3 prev">Previous</button>
+                        <button class="submit">Submit</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/Doctor.js"></script>
+    <script type="text/javascript">
+
+        // for adding selected ingredient
+        function AddConditions() {
+            var index = $('input[name^="listOfMedicalHistory"]').length;
+            var conditions = "<tr><td hidden >" + "<input type=" + '"text"' + "name=" + '"listOfMedicalHistory[' + index + '].ConditionID"' + " value=" + $("#cmbCondition").val() + ">" + "</td><td>" + $("#cmbCondition").find(":selected").text() + "</td><td><input onclick=" + '"RemoveCondition(this)"' + " id=" + '"delete"' + " type=" + '"button"' + " value=" + '"Remove"' + " class=" + '"btn btnDelete btn-danger"' + "/></td></tr>";
+            $("#tblConditions").last().append(conditions);
+        }
+        // Add allergies
+        function AddAllergy() {
+            var index = $('input[name^="listOfMedicalHistory"]').length;
+            var allergies = "<tr><td hidden >" + "<input type=" + '"text"' + "name=" + '"listOfMedicalHistory[' + index + '].IngredientID"' + " value=" + $("#cmbAllergy").val() + ">" + "</td><td>" + $("#cmbAllergy").find(":selected").text() + "</td><td><input onclick=" + '"RemoveAllergy(this)"' + " id=" + '"delete"' + " type=" + '"button"' + " value=" + '"Remove"' + " class=" + '"btn btnDelete btn-danger"' + "/></td></tr>";
+            $("#tblAllergies").last().append(allergies);
+        }
+
+        function AddMedication() {
+            var index = $('input[name^="listOfMedicalHistory"]').length;
+            var Medications = "<tr><td hidden >" + "<input type=" + '"text"' + "name=" + '"listOfMedicalHistory[' + index + '].MedicationID"' + " value=" + $("#cmbMedication").val() + ">" + "</td><td>" + $("#cmbMedication").find(":selected").text() + "</td><td><input onclick=" + '"RemoveMedication(this)"' + " id=" + '"delete"' + " type=" + '"button"' + " value=" + '"Remove"' + " class=" + '"btn btnDelete btn-danger"' + "/></td></tr>";
+            $("#tblMedications").last().append(Medications);
+        }
+        //Remove Allergies
+        function RemoveAllergy(button) {
+            var row = $(button).closest("TR");
+            var table = $("#tblAllergies")[0];
+
+            table.deleteRow(row[0].rowIndex);
+        };
+
+        function RemoveMedication(button) {
+            var row = $(button).closest("TR");
+            var table = $("#tblMedications")[0];
+
+            table.deleteRow(row[0].rowIndex);
+        };
+
+        function RemoveCondition(button) {
+            var row = $(button).closest("TR");
+            var table = $("#tblConditions")[0];
+
+            table.deleteRow(row[0].rowIndex);
+        };
+
+
+        // for searchable dropdown
+
+        //$(function () {
+        //    $("#cmbIngredient").select2();
+        //});
+    </script>
+</body>
+</html>
