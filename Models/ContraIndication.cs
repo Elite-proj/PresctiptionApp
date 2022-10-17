@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -15,11 +14,8 @@ namespace E_prescription.Models
         }
 
         public int ContraIndicationId { get; set; }
-        [Required(ErrorMessage ="Please select Ingredient.")]
-        public int IngredientId { get; set; }
-        [Required(ErrorMessage = "Please select Condition.")]
-        public int ConditionId { get; set; }
-        [Required(ErrorMessage = "Enter description")]
+        public int? IngredientId { get; set; }
+        public int? ConditionId { get; set; }
         public string ContraIndicationName { get; set; }
 
         public virtual ConditionDiagnosis Condition { get; set; }

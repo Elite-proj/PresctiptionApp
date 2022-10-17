@@ -32,6 +32,9 @@ namespace E_prescription
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddSession();
+
             services.AddControllersWithViews();
             services.AddDbContext<GRP42EPrescriptionContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connString")));
 
@@ -68,6 +71,8 @@ namespace E_prescription
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

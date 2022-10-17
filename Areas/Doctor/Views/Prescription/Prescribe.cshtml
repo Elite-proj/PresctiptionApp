@@ -1,0 +1,118 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model PrescribeMedication
+@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
+</head>
+<script>
+    $(function () {
+        $('#btnContra').click(function () {
+
+            $('#divCont').append('<div class="col-6 form-group"><label asp-for="ContraIgnoreReason">Reason for ignoring contra-indication alert</label><textarea asp-for="ContraIgnoreReason" name="ContraIgnoreReason" class="form-control" rows="3"></textarea></div>');
+        })
+    })
+
+    $(function () {
+        $('#btnInteraction').click(function () {
+
+            $('#divCont').append('<div class="col-6 form-group"><label asp-for="WarningIgnoreReason">Reason for ignoring Medication Interaction alert</label><textarea asp-for="WarningIgnoreReason" name="WarningIgnoreReason" class="form-control" rows="3"></textarea></div>');
+        })
+    })
+
+    $(function () {
+        $('#btnAllergy').click(function () {
+
+            $('#divCont').append('<div class="col-6 form-group"><label asp-for="AllergyIgnoreReason">Reason for ignoring patient drug allergy alert</label><textarea asp-for="AllergyIgnoreReason" name="AllergyIgnoreReason" class="form-control" rows="3"></textarea></div>');
+        })
+    })
+</script>
+
+<body>
+    <div class="container">
+        <main>
+
+            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["ContraIndication"].Errors.Count > 0)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData.ModelState["ContraIndication"].Errors.First().ErrorMessage
+                    <a asp-action="Prescribe" asp-area="Doctor" asp-controller="Prescription">OK</a>
+                    <input type="button" value="Ignore" class="close" data-dismiss="alert" id="btnContra" onclick="AddContraIndicationField();" />
+                </div>
+            }
+            else if (!ViewData.ModelState.IsValid && ViewData.ModelState["MedInteraction"].Errors.Count > 0)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData.ModelState["MedInteraction"].Errors.First().ErrorMessage
+                    <a asp-action="Prescribe" asp-area="Doctor" asp-controller="Prescription">OK</a>
+                    <input type="button" value="Ignore" class="close" data-dismiss="alert" id="btnInteraction"  />
+                </div>
+            }
+            else if (!ViewData.ModelState.IsValid && ViewData.ModelState["Allergy"].Errors.Count > 0)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData.ModelState["Allergy"].Errors.First().ErrorMessage
+                    <a asp-action="Prescribe" asp-area="Doctor" asp-controller="Prescription">OK</a>
+                    <input type="button" value="Ignore" class="close" data-dismiss="alert" id="btnAllergy"  />
+                </div>
+            }
+
+            <br /><br />
+                  <form asp-controller="Prescription" asp-action="Prescribe" method="post">
+                      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="MedicationID">Medication Name</label>
+                              <select asp-for="MedicationID" asp-items="@ViewBag.Medications" class="form-control">
+                              </select>
+                              <div><span asp-validation-for="MedicationID" class="text-danger"></span></div>
+
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="Quantity">Quantity</label>
+                              <input class="form-control" asp-for="Quantity" type="number" />
+                              <div><span asp-validation-for="Quantity" class="text-danger"></span></div>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="RepeatID">Repeat</label>
+                              <select asp-for="RepeatID" asp-items="@ViewBag.Repeats" class="form-control">
+                              </select>
+                              <div><span asp-validation-for="RepeatID" class="text-danger"></span></div>
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="Instruction">Instruction</label>
+                              <input class="form-control" asp-for="Instruction" type="text" />
+                              <div><span asp-validation-for="Instruction" class="text-danger"></span></div>
+                          </div>
+                      </div>
+                      <div id="divCont" class="input-group">
+
+                      </div>
+
+                      <input asp-for="ContraIndicationID" hidden value="@ViewBag.ContraError.ContraIndicationID" />
+                      <input asp-for="ContraIndicationID" hidden />
+                      <input asp-for="MedInteractionID" hidden value="@ViewBag.ContraError.MedInteractionID" />
+                      <input asp-for="MedInteractionID" hidden />
+                      <input asp-for="AllergyID" hidden value="@ViewBag.ContraError.AllergyID" />
+                      <input asp-for="AllergyID" hidden />
+                      <input asp-for="PrescriptionID" hidden />
+                      <button type="submit" class="btn btn-primary" asp-page-handler="Submit">Prescribe Medication</button>
+
+                  </form>
+
+        </main>
+    </div>
+
+</body>

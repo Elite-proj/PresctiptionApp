@@ -13,7 +13,6 @@ namespace E_prescription.Models
             DispensedMedications = new HashSet<DispensedMedication>();
             MedicationActiveIngredients = new HashSet<MedicationActiveIngredient>();
             PrescriptionMedications = new HashSet<PrescriptionMedication>();
-            Prescriptions = new HashSet<Prescription>();
         }
 
         public int MedicationId { get; set; }
@@ -27,6 +26,5 @@ namespace E_prescription.Models
         public virtual ICollection<DispensedMedication> DispensedMedications { get; set; }
         public virtual ICollection<MedicationActiveIngredient> MedicationActiveIngredients { get; set; }
         public virtual ICollection<PrescriptionMedication> PrescriptionMedications { get; set; }
-        public virtual ICollection<Prescription> Prescriptions { get; set; }
     }
 }

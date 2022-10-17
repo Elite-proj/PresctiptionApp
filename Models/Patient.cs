@@ -14,6 +14,7 @@ namespace E_prescription.Models
             DispensedMedications = new HashSet<DispensedMedication>();
             PatientAllergies = new HashSet<PatientAllergy>();
             PatientDoctorVisits = new HashSet<PatientDoctorVisit>();
+            Prescriptions = new HashSet<Prescription>();
         }
 
         public int PatientId { get; set; }
@@ -26,5 +27,6 @@ namespace E_prescription.Models
         public virtual ICollection<DispensedMedication> DispensedMedications { get; set; }
         public virtual ICollection<PatientAllergy> PatientAllergies { get; set; }
         public virtual ICollection<PatientDoctorVisit> PatientDoctorVisits { get; set; }
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
     }
 }

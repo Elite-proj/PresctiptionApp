@@ -11,7 +11,7 @@ namespace E_prescription.Models
         public int? MedicationId { get; set; }
         public int? PatientId { get; set; }
         public int? DoctorId { get; set; }
-        public DateTime? Date { get; set; }
+        public string Date { get; set; }
 
         public virtual Doctor Doctor { get; set; }
         public virtual MedicationRecord Medication { get; set; }

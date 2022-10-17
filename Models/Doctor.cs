@@ -13,6 +13,7 @@ namespace E_prescription.Models
             ChronicMedications = new HashSet<ChronicMedication>();
             PatientAllergies = new HashSet<PatientAllergy>();
             PatientDoctorVisits = new HashSet<PatientDoctorVisit>();
+            Prescriptions = new HashSet<Prescription>();
         }
 
         public int DoctorId { get; set; }
@@ -27,5 +28,6 @@ namespace E_prescription.Models
         public virtual ICollection<ChronicMedication> ChronicMedications { get; set; }
         public virtual ICollection<PatientAllergy> PatientAllergies { get; set; }
         public virtual ICollection<PatientDoctorVisit> PatientDoctorVisits { get; set; }
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
     }
 }

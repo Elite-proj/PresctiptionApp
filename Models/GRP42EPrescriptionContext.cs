@@ -54,7 +54,7 @@ namespace E_prescription.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=SICT-SQL.mandela.ac.za;Database=GRP-4-2-EPrescription;User ID=GRP-4-02;Password=grp-4-02-soit2022");
+                optionsBuilder.UseSqlServer("Server=SICT-SQL.mandela.ac.za;Database=GRP-4-2-EPrescription;User ID=GRP-4-02;Password=grp-4-02-soit2022;");
             }
         }
 
@@ -120,7 +120,7 @@ namespace E_prescription.Models
 
                 entity.Property(e => e.ConditionId).HasColumnName("ConditionID");
 
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                entity.Property(e => e.Date).HasMaxLength(50);
 
                 entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
 
@@ -148,7 +148,7 @@ namespace E_prescription.Models
 
                 entity.Property(e => e.ChronicMedicationId).HasColumnName("ChronicMedicationID");
 
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                entity.Property(e => e.Date).HasMaxLength(50);
 
                 entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
 
@@ -520,7 +520,7 @@ namespace E_prescription.Models
 
                 entity.Property(e => e.AllergyId).HasColumnName("AllergyID");
 
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                entity.Property(e => e.Date).HasMaxLength(50);
 
                 entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
 
@@ -649,26 +649,26 @@ namespace E_prescription.Models
 
                 entity.Property(e => e.ConditionId).HasColumnName("ConditionID");
 
-                entity.Property(e => e.DosageId).HasColumnName("DosageID");
+                entity.Property(e => e.Date).HasColumnType("datetime");
 
-                entity.Property(e => e.Instruction).HasMaxLength(50);
+                entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
 
-                entity.Property(e => e.MedicationId).HasColumnName("MedicationID");
+                entity.Property(e => e.PatientId).HasColumnName("PatientID");
 
                 entity.HasOne(d => d.Condition)
                     .WithMany(p => p.Prescriptions)
                     .HasForeignKey(d => d.ConditionId)
                     .HasConstraintName("FK_Prescription_ConditionDiagnosis");
 
-                entity.HasOne(d => d.Dosage)
+                entity.HasOne(d => d.Doctor)
                     .WithMany(p => p.Prescriptions)
-                    .HasForeignKey(d => d.DosageId)
-                    .HasConstraintName("FK_Prescription_DosageForm");
+                    .HasForeignKey(d => d.DoctorId)
+                    .HasConstraintName("FK_Prescription_Doctor");
 
-                entity.HasOne(d => d.Medication)
+                entity.HasOne(d => d.Patient)
                     .WithMany(p => p.Prescriptions)
-                    .HasForeignKey(d => d.MedicationId)
-                    .HasConstraintName("FK_Prescription_MedicationRecord");
+                    .HasForeignKey(d => d.PatientId)
+                    .HasConstraintName("FK_Prescription_Patient");
             });
 
             modelBuilder.Entity<PrescriptionMedication>(entity =>
@@ -677,19 +677,15 @@ namespace E_prescription.Models
 
                 entity.Property(e => e.PrescriptionMedicationId).HasColumnName("PrescriptionMedicationID");
 
+                entity.Property(e => e.AllergyId).HasColumnName("AllergyID");
+
                 entity.Property(e => e.ContraIndicationId).HasColumnName("ContraIndicationID");
 
-                entity.Property(e => e.DosageId).HasColumnName("DosageID");
-
-                entity.Property(e => e.Instruction).HasMaxLength(50);
+                entity.Property(e => e.DispensedStatus).HasMaxLength(50);
 
                 entity.Property(e => e.MedInteractionId).HasColumnName("MedInteractionID");
 
                 entity.Property(e => e.MedicationId).HasColumnName("MedicationID");
-
-                entity.Property(e => e.PatientDoctorVisitId).HasColumnName("PatientDoctorVisitID");
-
-                entity.Property(e => e.PrescriptionDate).HasColumnType("datetime");
 
                 entity.Property(e => e.PrescriptionId).HasColumnName("PrescriptionID");
 
@@ -699,17 +695,15 @@ namespace E_prescription.Models
 
                 entity.Property(e => e.Status).HasMaxLength(50);
 
-                entity.Property(e => e.WarningIgnoreReason).HasMaxLength(50);
+                entity.HasOne(d => d.Allergy)
+                    .WithMany(p => p.PrescriptionMedications)
+                    .HasForeignKey(d => d.AllergyId)
+                    .HasConstraintName("FK_Prescription_Medication_PatientAllergy");
 
                 entity.HasOne(d => d.ContraIndication)
                     .WithMany(p => p.PrescriptionMedications)
                     .HasForeignKey(d => d.ContraIndicationId)
                     .HasConstraintName("FK_Prescription_Medication_ContraIndication");
-
-                entity.HasOne(d => d.Dosage)
-                    .WithMany(p => p.PrescriptionMedications)
-                    .HasForeignKey(d => d.DosageId)
-                    .HasConstraintName("FK_Prescription_Medication_DosageForm");
 
                 entity.HasOne(d => d.MedInteraction)
                     .WithMany(p => p.PrescriptionMedications)
@@ -720,11 +714,6 @@ namespace E_prescription.Models
                     .WithMany(p => p.PrescriptionMedications)
                     .HasForeignKey(d => d.MedicationId)
                     .HasConstraintName("FK_Prescription_Medication_MedicationRecord");
-
-                entity.HasOne(d => d.PatientDoctorVisit)
-                    .WithMany(p => p.PrescriptionMedications)
-                    .HasForeignKey(d => d.PatientDoctorVisitId)
-                    .HasConstraintName("FK_Prescription_Medication_PatientDoctorVisit");
 
                 entity.HasOne(d => d.Repeat)
                     .WithMany(p => p.PrescriptionMedications)
