@@ -4,14 +4,16 @@ using E_prescription.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_prescription.Migrations
 {
     [DbContext(typeof(GRP42EPrescriptionContext))]
-    partial class GRP42EPrescriptionContextModelSnapshot : ModelSnapshot
+    [Migration("20221018003735_third")]
+    partial class third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
