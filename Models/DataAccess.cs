@@ -1457,6 +1457,34 @@ namespace E_prescription.Models
             return dt;
         }
 
+        public DataTable GetPrescriptionMedications(int PrescriptionID)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPrescriptionMedications ", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionID", PrescriptionID);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
         public DataTable GetPatientAllergies(int id)
         {
             string connString = configuration.GetConnectionString("connString");
@@ -1534,6 +1562,208 @@ namespace E_prescription.Models
 
             dbComm.Parameters.AddWithValue("@MedicationID", medication.MedicationID);
             
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+        public DataTable GetActiveIngredientsByDispensedMed(DispenseMedication medication)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetActiveIngredientByMedicationID", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@MedicationID", medication.MedicationID);
+
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        //Pharmacy and pharmacist methods
+
+        public DataTable GetPatientPrescriptions(int patientId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPatientPrescriptions", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PatientID",patientId);
+            
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable GetPrescriptionDetails(int PrescriptionId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_PrescriptionDetails", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionID", PrescriptionId);
+
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public int DispenseMedication(DispenseMedication medication)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_DispenseMedication", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            if (medication.ContraIndicationID == 0)
+            {
+                //Represents null
+               medication.ContraIndicationID = 3;
+            }
+
+            if (medication.MedInteractionID == 0)
+            {
+                //represents null
+                medication.MedInteractionID = 1;
+            }
+
+            if (medication.AllergyID == 0)
+            {
+                //Represents Null
+                medication.AllergyID = 4;
+            }
+
+            dbComm.Parameters.AddWithValue("@MedicationID", medication.MedicationID);
+            dbComm.Parameters.AddWithValue("@PrescriptionID", medication.PrescriptionID);
+            dbComm.Parameters.AddWithValue("@ContraIndicationID", medication.ContraIndicationID);
+            dbComm.Parameters.AddWithValue("@MedInteractionID", medication.MedInteractionID);
+            dbComm.Parameters.AddWithValue("@AllergyID", medication.AllergyID);
+            dbComm.Parameters.AddWithValue("@Quantity", medication.Quantity.ToString());
+            dbComm.Parameters.AddWithValue("@ContraIgnoreReason", medication.ContraIgnoreReason);
+            dbComm.Parameters.AddWithValue("@WarningIgnoreReason", medication.WarningIgnoreReason);
+            dbComm.Parameters.AddWithValue("@AllergyIgnoreReason", medication.AllergyIgnoreReason);
+            dbComm.Parameters.AddWithValue("@PharmacistID", medication.PharmacistID);
+            dbComm.Parameters.AddWithValue("@RepeatID", int.Parse(medication.RepeatID));
+            dbComm.Parameters.AddWithValue("@Date", medication.Date);
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+        }
+
+        public DataTable GetMedicationToDispense(int prescriptionID, int medicationID)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetMedicationToDispense", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionID", prescriptionID);
+            dbComm.Parameters.AddWithValue("@MedicationID", medicationID);
+
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable GetDispensedMedication(int prescriptionId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetDispensedMedication", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionID", prescriptionId);
+
 
             dt = new DataTable();
             dbAdapter = new SqlDataAdapter(dbComm);

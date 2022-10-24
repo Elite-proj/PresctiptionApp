@@ -102,6 +102,32 @@ namespace E_prescription.Areas.Doctor.Controllers
             return View(prescribe);
         }
 
+        [HttpGet]
+        public IActionResult ListMedications(int id)
+        {
+            data = new DataAccess(configuration);
+            dt = new DataTable();
+
+            dt = data.GetPrescriptionMedications(id);
+
+            List<MedicationListVm> medications = new List<MedicationListVm>();
+
+            for(int i=0;i<dt.Rows.Count;i++)
+            {
+                MedicationListVm medication = new MedicationListVm();
+                medication.MedicationID = int.Parse(dt.Rows[i]["MedicationID"].ToString());
+                medication.DosageID = int.Parse(dt.Rows[i]["MedicationID"].ToString());
+                medication.MedicationName = dt.Rows[i]["MedicationName"].ToString();
+                medication.DosageDescription = dt.Rows[i]["DosageDescription"].ToString();
+
+                medications.Add(medication);
+            }
+            dt.Clear();
+            ViewBag.Medications = medications.ToList();
+
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Prescribe(PrescribeMedication prescribe)
         {
@@ -316,7 +342,7 @@ namespace E_prescription.Areas.Doctor.Controllers
             {
                 
                 data.AddMedicationPrescription(prescribe);
-                return RedirectToAction("PatientDiagnosis", "Prescription");
+                return RedirectToAction("ListMedications", "Prescription", new { id=prescribe.PrescriptionID});
             }
             else
             {

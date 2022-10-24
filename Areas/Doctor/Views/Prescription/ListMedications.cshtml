@@ -2,7 +2,8 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "View Prescriptions";
+    Layout = null;
+    ViewBag.Title = "List prescribed medications";
 }
 
 <head>
@@ -15,37 +16,34 @@
 </head>
 
 <div class="form-group">
-    @if (ViewBag.Prescriptions.Count > 0)
+    @if (ViewBag.Medications.Count > 0)
     {
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Condition Name</th>
-                    <th>Prescribing Doctor</th>
-                    <th>Prescription Date</th>
+                    <th>Medication Name</th>
+                    <th>Dosage Form</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (PatientPrescriptionVM patient in ViewBag.Prescriptions)
+                @foreach (MedicationListVm medication in ViewBag.Medications)
                 {
                     <tr>
 
-                        <td>@patient.ConditionDescription</td>
-                        <td>@patient.DoctorName @patient.DoctorSurname</td>
-                        <td>@patient.Date</td>
-                        <td>
-                           <a asp-action="Details" asp-area="Pharmacist" asp-controller="Prescriptions" asp-route-id="@patient.PrescriptionID">View details</a>
-                        </td>
+                        <td>@medication.MedicationName</td>
+                        <td>@medication.DosageDescription</td>
+                        
                     </tr>
                 }
 
             </tbody>
         </table>
+        <a asp-action="Prescribe" asp-controller="Prescription" asp-area="Doctor">Add another medication</a>
     }
-    else if (ViewBag.Prescriptions.Count == 0)
+    else if (ViewBag.Medications.Count == 0)
     {
-        <h4 class="bg-warning text-center text-white p-2">No precritpion Records found</h4>
+        <h4 class="bg-warning text-center text-white p-2">No medications Records</h4>
     }
 
 </div>
