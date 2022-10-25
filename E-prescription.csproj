@@ -50,7 +50,6 @@
     <Folder Include="Areas\Doctor\Views\Dosage\" />
     <Folder Include="Areas\Doctor\Views\Instruction\" />
     <Folder Include="Areas\Doctor\Views\Patient\" />
-    <Folder Include="Areas\Patient\Models\" />
     <Folder Include="Views\AdminReport\" />
     <Folder Include="Views\MedicationInteraction\" />
     <Folder Include="Views\ContraIndication\" />
