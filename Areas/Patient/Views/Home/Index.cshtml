@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "PrescriptionListModel";
+    ViewData["Title"] = "PatientPrescriptionDetailsModel";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -38,24 +38,18 @@
                 Patient
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Prescriptions</span>
+            <hr class="sidebar-divider">
+
+            <li class="@(ViewBag.Title == "MedicalPracRec" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="MedicalPracticeRec" asp-action="MedicalPracticeRec">
+                    <span>Medical Practice</span>
                 </a>
             </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                   aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Profile</span>
+            <li class="@(ViewBag.Title == "DoctorRec" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="DoctorRec" asp-action="MedicalPracticeRec">
+                    <span>Doctor Records</span>
                 </a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -393,7 +387,7 @@
 
                     <div class="row">
 
-                        <!-- Area Chart -->
+                        <!-- Area Table-->
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
@@ -401,33 +395,41 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Prescriptions</h6>   
                                 </div>
                                 <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="col-9 border py-3">
-                                        <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
-                                            <thead>
+                                <div class="card-body">    
+                                  <div class="col-9 border p-3">
+                                            <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+                                                <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Prescription Date</th>
+                                                    <th>ID Number</th>
+                                                    <th>Date</th>
+                                                   @* <th>ID</th>*@
                                                     <th>Doctor Name</th>
                                                     <th>View More Details</th>
                                                 </tr>
-                                            </thead>
-                                            @*<tbody>
-                                            @foreach (var PrescriptionListModel in Model)
-                                            {
-                                            <tr>
-                                            <td>@prescriptionListModel.Id</td>
-                                            <td>@prescriptionListModel.DateTime</td>
-                                            <td>@prescriptionListModel.DoctorName</td>
-                                            <td></td>
+                                                </thead>
+                                            <tbody>
+                                                @{
+                                                    if (Model != null)
+                                                    {
 
-                                            </tr>
+                                                        foreach (var PatientPrescriptionDetailsModel in Model)
+                                                        {
+                                                                <tr>
+                                                                    <td>@PatientPrescriptionDetailsModel.PatientId</td>
+                                                                    <td>@PatientPrescriptionDetailsModel.Idnumber</td>
+                                                                    <td>@PatientPrescriptionDetailsModel.Date</td>
+                                                                    @*<td>@patientPrescriptionDetail.DoctorId</td>*@
+                                                                    <td>@PatientPrescriptionDetailsModel.DoctorName @PatientPrescriptionDetailsModel.DoctorSurname </td>
+                                                                </tr>
 
-                                            }
-                                            </tbody>*@
-
-                                        </table>
-                                    </div>
+                                                        }                                                 
+                                                        } 
+}
+                                                                                           
+                                            </tbody>>
+                                            </table>>
+                                  </div>
                                 </div>
                             </div>
                         </div>

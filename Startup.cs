@@ -16,6 +16,7 @@ using E_prescription.Services.DoctorRec;
 using E_prescription.Services.ConditionDiagnosisRec;
 using E_prescription.Services.Repeat;
 
+
 namespace E_prescription
 {
     public class Startup
@@ -44,8 +45,6 @@ namespace E_prescription
             services.AddScoped<IRepeatRecService, RepeatRecService>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
             
-
-            services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddMvc(options => options.EnableEndpointRouting = false);
