@@ -23,7 +23,7 @@
         <h3>E<span>Presciption</span></h3>
       </div>
       <div class="right_area">
-        <a href="#" class="logout_btn">Logout</a>
+          <a asp-area="Pharmacist" asp-controller="Home" asp-action="SearchPatient" class="logout_btn btn btn-primary">Exit</a>
       </div>
     </header>
     <!--header area end-->
@@ -34,20 +34,21 @@
         <i class="fa fa-bars nav_btn"></i>
       </div>
       <div class="mobile_nav_items">
-        <a asp-area="Pharmacist" asp-controller="Aprescriptions" asp-action="Display"><i class="fas fa-list"></i><span>Active prescriptions</span></a>
-      <a asp-area="Pharmacist" asp-controller="History" asp-action="Display"><i class="fas fa-history"></i><span>History</span></a>
-      <a asp-area="Pharmacist" asp-controller="Rejected" asp-action="Display"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
+          <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-list"></i><span>Active prescriptions</span></a>
+          <a asp-area="Pharmacist" asp-controller="History" asp-action="Display"><i class="fas fa-history"></i><span>History</span></a>
+          <a asp-area="Pharmacist" asp-controller="Rejected" asp-action="Display"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
+          
       </div>
     </div>
     <!--mobile navigation bar end-->
     <!--sidebar start-->
     <div class="sidebar">
-      <div class="profile_info">
-        <h4>Pharmacy name</h4>
-      </div>
-      <a asp-area="Pharmacist" asp-controller="Aprescriptions" asp-action="Display"><i class="fas fa-list"></i><span>Active prescriptions</span></a>
-      <a asp-area="Pharmacist" asp-controller="History" asp-action="Display"><i class="fas fa-history"></i><span>History</span></a>
-      <a asp-area="Pharmacist" asp-controller="Rejected" asp-action="Display"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
+        <div class="profile_info">
+            <h4>Pharmacy name</h4>
+        </div>
+        <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-list"></i><span>Active prescriptions</span></a>
+        <a asp-area="Pharmacist" asp-controller="History" asp-action="Display"><i class="fas fa-history"></i><span>History</span></a>
+        <a asp-area="Pharmacist" asp-controller="Rejected" asp-action="Display"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
 
     </div>
     <!--sidebar end-->

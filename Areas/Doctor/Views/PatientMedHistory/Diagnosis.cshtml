@@ -2,10 +2,9 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = "_DocSecondLayout";
-    ViewBag.Title = "List prescribed medications";
+    ViewBag.Title = "Patient Diagnosis";
+    Layout = "_MedicalHistory";
 }
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,34 +15,36 @@
 </head>
 
 <div class="form-group">
-    @if (ViewBag.Medications.Count > 0)
+    @if (ViewBag.Conditions.Count > 0)
     {
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Medication Name</th>
-                    <th>Dosage Form</th>
+                    <th>Condition Name</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (MedicationListVm medication in ViewBag.Medications)
+                @foreach (PatientCondition patient in ViewBag.Conditions)
                 {
                     <tr>
 
-                        <td>@medication.MedicationName</td>
-                        <td>@medication.DosageDescription</td>
-                        
+                        <td>@patient.ConditionName</td>
+                        <td>
+                            <form asp-action="Add" asp-controller="Prescription" method="post" asp-route-id="@patient.ConditionID">
+                                <button type="submit" class="btn btn-primary">Prescribe medication</button>
+                            </form>
+                        </td>
                     </tr>
                 }
 
             </tbody>
         </table>
-        <a asp-action="Prescribe" asp-controller="Prescription" asp-area="Doctor">Add another medication</a>
     }
-    else if (ViewBag.Medications.Count == 0)
+    else if (ViewBag.Conditions.Count == 0)
     {
-        <h4 class="bg-warning text-center text-white p-2">No medications Records</h4>
+        <h4 class="bg-warning text-center text-white p-2">No conditions Records</h4>
     }
 
 </div>
+

@@ -1202,6 +1202,85 @@ namespace E_prescription.Models
             return x;
 
         }
+        public DataTable SearchPatientByIdNumber(SearchPatientVM search)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPatientByIdNumber", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+            dbComm.Parameters.AddWithValue("@IDNumber", search.IDNumber.ToString());
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+        public DataTable GetPatientMedications(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPatientMedications", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+            dbComm.Parameters.AddWithValue("@PatientID", id);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable GetPatientById(int patientId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPatientById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+            dbComm.Parameters.AddWithValue("@PatientID", patientId);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
 
         //Get Patient diagnosis
 

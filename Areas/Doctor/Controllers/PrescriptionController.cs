@@ -24,16 +24,20 @@ namespace E_prescription.Areas.Doctor.Controllers
             this.configuration = config;
         }
 
-        public IActionResult PatientDiagnosis()
+        public IActionResult PatientDiagnosis(int id)
         {
             data = new DataAccess(configuration);
             dt = new DataTable();
 
+           
             //Get Medications
-            dt = data.GetPatientDiagnosis(4);
+            dt = data.GetPatientDiagnosis(id);
 
             List<PatientCondition> patients = new List<PatientCondition>();
-
+            if(dt.Rows.Count>0)
+            {
+                HttpContext.Session.SetInt32("PatientID", id);
+            }
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 PatientCondition patient = new PatientCondition();
@@ -45,7 +49,7 @@ namespace E_prescription.Areas.Doctor.Controllers
 
                 patients.Add(patient);
             }
-            dt.Clear();
+            //dt.Clear();
 
             ViewBag.Conditions = patients.ToList();
 
@@ -107,7 +111,6 @@ namespace E_prescription.Areas.Doctor.Controllers
         {
             data = new DataAccess(configuration);
             dt = new DataTable();
-
             dt = data.GetPrescriptionMedications(id);
 
             List<MedicationListVm> medications = new List<MedicationListVm>();
@@ -131,7 +134,7 @@ namespace E_prescription.Areas.Doctor.Controllers
         [HttpPost]
         public IActionResult Prescribe(PrescribeMedication prescribe)
         {
-            int id = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
+            int id = Convert.ToInt32(HttpContext.Session.GetInt32("ConditionID"));
             prescribe.ConditionID = id;
 
             data = new DataAccess(configuration);
@@ -395,13 +398,13 @@ namespace E_prescription.Areas.Doctor.Controllers
 
             patient.ConditionID = id;
 
+            HttpContext.Session.SetInt32("ConditionID", id);
 
-
-            patient.DoctorID = 7;
-            patient.PatientID = 4;
+            patient.DoctorID = Convert.ToInt32( HttpContext.Session.GetInt32("DoctorID"));
+            patient.PatientID = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
             patient.Date = DateTime.Now;
 
-            HttpContext.Session.SetInt32("id", patient.ConditionID);
+            
 
             data.AddPrescription(patient);
             return RedirectToAction("Prescribe", "Prescription");

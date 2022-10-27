@@ -3,7 +3,8 @@
 *@
 @{
     ViewBag.Title = "Patient Conditions";
-    Layout = null;
+
+    Layout = "_DocSecondLayout";
 }
 <head>
     <meta charset="utf-8" />
@@ -21,7 +22,6 @@
             <thead>
                 <tr>
                     <th>Condition Name</th>
-                    <th>Patient Name</th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,7 +31,6 @@
                     <tr>
 
                         <td>@patient.ConditionName</td>
-                        <td>@patient.PatientID</td>
                         <td>
                             <form asp-action="Add" asp-controller="Prescription" method="post" asp-route-id="@patient.ConditionID">
                                 <button type="submit" class="btn btn-primary">Prescribe medication</button>

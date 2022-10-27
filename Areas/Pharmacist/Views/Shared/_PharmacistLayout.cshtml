@@ -34,7 +34,7 @@
         <i class="fa fa-bars nav_btn"></i>
       </div>
       <div class="mobile_nav_items">
-        <a asp-area="Pharmacist" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i><span>Home</span></a>
+        <a asp-area="Pharmacist" asp-controller="Home" asp-action="SearchPatient"><i class="fas fa-search"></i><span>Search Patient</span></a>
         <a asp-area="Pharmacist" asp-controller="Profile" asp-action="Display"><i class="fas fa-user"></i><span>View profile</span></a>
         <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Display"><i class="fas fa-list"></i><span>view all prescriptions</span></a>
       </div>
@@ -42,13 +42,12 @@
     <!--mobile navigation bar end-->
     <!--sidebar start-->
     <div class="sidebar">
-      <div class="profile_info">
-        <h4>Pharmacy name</h4>
-      </div>
-      <a asp-area="Pharmacist" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i><span>Home</span></a>
-      <a asp-area="Pharmacist" asp-controller="Profile" asp-action="Display"><i class="fas fa-user"></i><span>View profile</span></a>
-      <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Display"><i class="fas fa-list"></i><span>View all prescriptions</span></a>
-
+        <div class="profile_info">
+            <h4>Pharmacy name</h4>
+        </div>
+        <a asp-area="Pharmacist" asp-controller="Home" asp-action="SearchPatient"><i class="fas fa-search"></i><span>Search Patient</span></a>
+        <a asp-area="Pharmacist" asp-controller="Profile" asp-action="Display"><i class="fas fa-user"></i><span>View profile</span></a>
+        <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Display"><i class="fas fa-list"></i><span>view all prescriptions</span></a>
     </div>
     <!--sidebar end-->
 

@@ -8,6 +8,7 @@ namespace E_prescription.Models.Account
 {
     public class UserAccount
     {
+        public int UserID { get; set; }
         [Required(ErrorMessage ="Please enter your first name.")]
         public string FirstName { get; set; }
 

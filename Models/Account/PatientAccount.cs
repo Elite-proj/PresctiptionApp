@@ -9,9 +9,9 @@ namespace E_prescription.Models.Account
     public class PatientAccount:UserAccount
     {
         [Required(ErrorMessage ="Please enter ID number.")]
-        public double IDnumber { get; set; }
+        public string IDnumber { get; set; }
 
-        [Required(ErrorMessage ="Please eneter date of birth")]
+        [Required(ErrorMessage ="Please enter date of birth")]
         public string DateOfBith { get; set; }
         
     }

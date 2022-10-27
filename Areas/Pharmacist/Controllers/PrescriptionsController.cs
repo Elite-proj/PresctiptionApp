@@ -1,6 +1,7 @@
 ﻿using E_prescription.Areas.Doctor.Models;
 using E_prescription.Areas.Pharmacist.Models;
 using E_prescription.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
@@ -24,13 +25,18 @@ namespace E_prescription.Areas.Pharmacist.Controllers
             this.configuration = config;
         }
 
-        public IActionResult Display()
+        public IActionResult Display(int id)
         {
             data = new DataAccess(configuration);
             dt = new DataTable();
 
-            dt = data.GetPatientPrescriptions(4);
+            
 
+            dt = data.GetPatientPrescriptions(id);
+            if(dt.Rows.Count>0)
+            {
+                HttpContext.Session.SetInt32("PatientID", id);
+            }
             List<PatientPrescriptionVM> patientPrescriptions = new List<PatientPrescriptionVM>();
 
             for(int i=0;i<dt.Rows.Count;i++)
@@ -341,7 +347,7 @@ namespace E_prescription.Areas.Pharmacist.Controllers
 
                     medication.RepeatID = Repeat.ToString();
                 }
-                medication.PharmacistID = 5;
+                medication.PharmacistID = Convert.ToInt32(HttpContext.Session.GetInt32("PharmacistID"));
                 medication.Date = DateTime.Now;
                 data.DispenseMedication(medication);
 

@@ -9,6 +9,7 @@ using E_prescription.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 
 namespace E_prescription.Controllers.Account
 {
@@ -152,11 +153,13 @@ namespace E_prescription.Controllers.Account
                 {
                     if (dt.Rows[0]["UserType"].ToString() == "Doctor")
                     {
-                        return RedirectToAction("Index", "Home", new { area = "Doctor" });
+                        HttpContext.Session.SetInt32("DoctorID", int.Parse(dt.Rows[0]["UserID"].ToString()));
+                        return RedirectToAction("SearchPatient", "Home", new { area = "Doctor" });
                     }
                     else if (dt.Rows[0]["UserType"].ToString() == "Pharmacist")
                     {
-                        return RedirectToAction("Index", "Home", new { area = "Pharmacist" });
+                        HttpContext.Session.SetInt32("PharmacistID", int.Parse(dt.Rows[0]["UserID"].ToString()));
+                        return RedirectToAction("SearchPatient", "Home", new { area = "Pharmacist" });
                     }
                     else if (dt.Rows[0]["UserType"].ToString() == "Patient")
                     {
@@ -164,7 +167,7 @@ namespace E_prescription.Controllers.Account
                     }
                     else if(dt.Rows[0]["UserType"].ToString() == "Admin")
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Welcome", "Home");
                     }
                     else
                         return Invalid();
