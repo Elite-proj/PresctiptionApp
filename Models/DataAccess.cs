@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using E_prescription.Models.Account;
 using E_prescription.Areas.Pharmacist.Models;
 using E_prescription.Areas.Doctor.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace E_prescription.Models
 {
@@ -46,6 +47,7 @@ namespace E_prescription.Models
 
             patient.UserStatus = "Active";
             patient.UserType = "Patient";
+            patient.FirstVisit = "Yes";
 
             dbComm.Parameters.AddWithValue("@Name", patient.FirstName);
             dbComm.Parameters.AddWithValue("@Surname", patient.Surname);
@@ -59,12 +61,40 @@ namespace E_prescription.Models
             dbComm.Parameters.AddWithValue("@UserStatus", patient.UserStatus);
             dbComm.Parameters.AddWithValue("@IdNumber", patient.IDnumber.ToString());
             dbComm.Parameters.AddWithValue("@DOB", patient.DateOfBith);
+            dbComm.Parameters.AddWithValue("@FirstVisit", patient.FirstVisit);
+            dbComm.Parameters.AddWithValue("@GenderID", patient.GenderID);
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
 
             return x;
 
+        }
+
+        public int UpdateFirstVisit(HistoryViewModel model)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_UpdateFirstVisit", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PatientID", model.PatientID);
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
         }
 
         public int RegisterDoctor(DoctorAccount doctor)
@@ -163,6 +193,32 @@ namespace E_prescription.Models
             }
 
             dbComm = new SqlCommand("sp_GetDoctor", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable GetGender()
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetGender", dbconn);
             dbComm.CommandType = CommandType.StoredProcedure;
 
             dt = new DataTable();
@@ -1133,11 +1189,12 @@ namespace E_prescription.Models
 
             dbComm = new SqlCommand("sp_AddChronicMedication", dbconn);
             dbComm.CommandType = CommandType.StoredProcedure;
-
+            model.Status = "Active";
             dbComm.Parameters.AddWithValue("@MedicationID", model.MedicationID);
             dbComm.Parameters.AddWithValue("@PatientID", model.PatientID);
             dbComm.Parameters.AddWithValue("@DoctorID", model.DoctorID);
             dbComm.Parameters.AddWithValue("@Date", model.date);
+            dbComm.Parameters.AddWithValue("@Status", model.Status);
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
@@ -1162,11 +1219,12 @@ namespace E_prescription.Models
 
             dbComm = new SqlCommand("sp_AddPatientAllergy", dbconn);
             dbComm.CommandType = CommandType.StoredProcedure;
-
+            model.Status = "Active";
             dbComm.Parameters.AddWithValue("@IngredientID", model.IngredientID);
             dbComm.Parameters.AddWithValue("@PatientID", model.PatientID);
             dbComm.Parameters.AddWithValue("@DoctorID", model.DoctorID);
             dbComm.Parameters.AddWithValue("@Date", model.date);
+            dbComm.Parameters.AddWithValue("@Status", model.Status);
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
@@ -1191,11 +1249,12 @@ namespace E_prescription.Models
 
             dbComm = new SqlCommand("sp_AddChronicHistory", dbconn);
             dbComm.CommandType = CommandType.StoredProcedure;
-
+            model.Status = "Active";
             dbComm.Parameters.AddWithValue("@ConditionID", model.ConditionID);
             dbComm.Parameters.AddWithValue("@PatientID", model.PatientID);
             dbComm.Parameters.AddWithValue("@DoctorID", model.DoctorID);
             dbComm.Parameters.AddWithValue("@Date", model.date);
+            dbComm.Parameters.AddWithValue("@Status", model.Status);
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
@@ -1338,6 +1397,59 @@ namespace E_prescription.Models
             dbconn.Close();
             return x;
         }
+        public int UpdatePrescription(UpdatePrescriptionVM prescribe)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_UpdatePrescription", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionID", prescribe.PrescriptionID);
+            dbComm.Parameters.AddWithValue("@MedicationID", prescribe.MedicationID);
+            dbComm.Parameters.AddWithValue("@Instruction", prescribe.Instruction);
+            dbComm.Parameters.AddWithValue("@Quantity", prescribe.Quantity.ToString());
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+        }
+
+        public int DeletePrescription(int prescriptionID,int medicationID)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_DeletePrecription", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionID", prescriptionID);
+            dbComm.Parameters.AddWithValue("@MedicationID", medicationID);
+            
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+        }
 
         public DataTable GetMaximumPrescription(int id)
         {
@@ -1412,6 +1524,8 @@ namespace E_prescription.Models
             dbComm.CommandType = CommandType.StoredProcedure;
             prescribe.Status = "Active";
             prescribe.DispensedStatus = "Not Dispensed";
+            prescribe.Date = DateTime.Now.ToString();
+            
 
             if (prescribe.ContraIndicationID == 0)
             {
@@ -1444,6 +1558,9 @@ namespace E_prescription.Models
             dbComm.Parameters.AddWithValue("@AllergyIgnoreReason", prescribe.AllergyIgnoreReason);
             dbComm.Parameters.AddWithValue("@Status", prescribe.Status);
             dbComm.Parameters.AddWithValue("@DispensedStatus", prescribe.DispensedStatus);
+            dbComm.Parameters.AddWithValue("@DoctorID", prescribe.DoctorID);
+            dbComm.Parameters.AddWithValue("@PatientID", prescribe.PatientID);
+            dbComm.Parameters.AddWithValue("@Date", prescribe.Date);
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
@@ -1677,6 +1794,7 @@ namespace E_prescription.Models
 
             return dt;
         }
+
 
         //Pharmacy and pharmacist methods
 

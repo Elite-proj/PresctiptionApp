@@ -1,6 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model PatientViewModel
 @{
     Layout = null;
 }
@@ -12,7 +13,9 @@
     <title>Multi Step Form | CodingNepal</title>
     <link rel="stylesheet" href="~/css/Doctor.css">
     @*<link rel="stylesheet" href="style.css">*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    
 </head>
 
 <body>
@@ -39,7 +42,7 @@
             </div>
             <div class="step">
                 <p>
-                   Patient Allergies
+                    Patient Allergies
                 </p>
                 <div class="bullet">
                     <span>3</span>
@@ -64,15 +67,21 @@
                     </div>
                     <div class="field">
                         <div class="label">
-                            Username
+                            Name
                         </div>
-                        <input type="text">
+                        <input value="@Model.FirstName" class="form-control" readonly />
                     </div>
                     <div class="field">
                         <div class="label">
-                            Password
+                            Surname
                         </div>
-                        <input type="password">
+                        <input value="@Model.Surname" class="form-control" readonly />
+                    </div>
+                    <div class="field">
+                        <div class="label">
+                            Address
+                        </div>
+                        <input value="@Model.AddressLine1 @Model.AddressLine2" class="form-control" readonly />
                     </div>
                     <div class="field">
                         <button class="firstNext next">Next</button>
@@ -164,12 +173,14 @@
                         <button class="submit">Submit</button>
                     </div>
                 </div>
-                
+
             </form>
         </div>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/Doctor.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script type="text/javascript">
 
         // for adding selected ingredient
@@ -213,11 +224,20 @@
         };
 
 
-        // for searchable dropdown
 
-        //$(function () {
-        //    $("#cmbIngredient").select2();
-        //});
+            // for searchable dropdown
+
+        $(function () {
+            $("#cmbAllergy").select2();
+        });
+
+        $(function () {
+            $("#cmbCondition").select2();
+        });
+
+        $(function () {
+            $("#cmbMedication").select2();
+        });
     </script>
 </body>
 </html>

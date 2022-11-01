@@ -9,6 +9,6 @@ namespace E_prescription.Areas.Doctor.Models
     public class SearchPatientVM
     {
         [Required(ErrorMessage ="Please enter Patient ID number.")]
-        public long IDNumber { get; set; }
+        public string IDNumber { get; set; }
     }
 }

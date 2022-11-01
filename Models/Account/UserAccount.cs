@@ -26,7 +26,7 @@ namespace E_prescription.Models.Account
         public string ConfirmEmail { get; set; }
 
         [Required(ErrorMessage ="Please enter contact number.")]
-        public int ContactNo { get; set; }
+        public string ContactNo { get; set; }
 
         [Required(ErrorMessage ="Please enter password.")]
         [Compare("ConfirmPassword")]
@@ -41,6 +41,8 @@ namespace E_prescription.Models.Account
 
         [Required(ErrorMessage = "Please select city.")]
         public int CityID { get; set; }
+        [Required(ErrorMessage ="Select Gender")]
+        public int GenderID { get; set; }
 
         [Required(ErrorMessage = "Please select province.")]
         public int ProvinceID { get; set; }

@@ -13,6 +13,8 @@ namespace E_prescription.Models.Account
 
         [Required(ErrorMessage ="Please enter date of birth")]
         public string DateOfBith { get; set; }
+
+        public string FirstVisit { get; set; } 
         
     }
 }

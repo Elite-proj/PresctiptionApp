@@ -51,8 +51,24 @@ namespace E_prescription.Controllers.Account
 
                 provinces.Add(province);
             }
+            dt.Clear();
             var getProvinces= provinces.ToList();
             ViewBag.Provinces = new SelectList(getProvinces,"ProvinceID","ProvinceName");
+
+            dt = data.GetGender();
+
+            List<GenderVM> genders = new List<GenderVM>();
+
+            for(int i=0;i<dt.Rows.Count;i++)
+            {
+                GenderVM gender = new GenderVM();
+                gender.GenderID = int.Parse(dt.Rows[i]["GenderID"].ToString());
+                gender.GenderName = dt.Rows[i]["GenderName"].ToString();
+
+                genders.Add(gender);
+            }
+            dt.Clear();
+            ViewBag.Genders = new SelectList(genders.ToList(), "GenderID", "GenderName");
 
            return View();
         }

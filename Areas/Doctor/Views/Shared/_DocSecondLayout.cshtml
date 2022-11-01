@@ -45,7 +45,8 @@
             <h4>Doctor name</h4>
         </div>
         <a asp-controller="PatientMedHistory" asp-area="Doctor" asp-action="Diagnosis"><i class="fas fa-heartbeat"></i><span>Medical History</span></a>
-        <a asp-controller="Prescription" asp-area="Doctor" asp-action="PatientDiagnosis"><i class="fas fa-list"></i><span>Patient Diagnosis</span></a>
+        <a asp-controller="Prescription" asp-area="Doctor" asp-action="PatientDiagnosis" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-list"></i><span>Patient Diagnosis</span></a>
+        <a asp-controller="Prescription" asp-area="Doctor" asp-action="PrescriptionList"><i class="fas fa-list"></i><span>Active Prescriptions</span></a>
 
     </div>
     <!--sidebar end-->

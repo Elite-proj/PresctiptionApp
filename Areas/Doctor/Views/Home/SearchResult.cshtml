@@ -25,7 +25,15 @@
                             <i class="fas fa-user fa-7x mt-5"></i>
                             <h2 class="font-weight-bold mt-4">@Model.FirstName</h2>
                             <p>Patient</p>
-                            <a asp-action="PatientDiagnosis" asp-controller="Prescription" asp-area="Doctor" asp-route-id="@Model.UserID" class="btn btn-primary">Continue</a>
+
+                            @if (@Model.FirstVisit == "Yes")
+                            {
+                                <a asp-action="FirstTime" asp-controller="Home" asp-area="Doctor" asp-route-id="@Model.UserID" class="btn btn-primary">Continue</a>
+                            }
+                            else
+                            {
+                                <a asp-action="PatientDiagnosis" asp-controller="Prescription" asp-area="Doctor" asp-route-id="@Model.UserID" class="btn btn-primary">Continue</a>
+                            }
                             <a asp-action="SearchPatient" asp-controller="Home" asp-area="Doctor" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>

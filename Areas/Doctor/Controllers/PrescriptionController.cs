@@ -1,4 +1,5 @@
 ﻿using E_prescription.Areas.Doctor.Models;
+using E_prescription.Areas.Pharmacist.Models;
 using E_prescription.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -343,7 +344,9 @@ namespace E_prescription.Areas.Doctor.Controllers
 
             if (ModelState.IsValid)
             {
-                
+                prescribe.DoctorID = Convert.ToInt32(HttpContext.Session.GetInt32("DoctorID"));
+                prescribe.PatientID = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
+
                 data.AddMedicationPrescription(prescribe);
                 return RedirectToAction("ListMedications", "Prescription", new { id=prescribe.PrescriptionID});
             }
@@ -409,6 +412,135 @@ namespace E_prescription.Areas.Doctor.Controllers
             data.AddPrescription(patient);
             return RedirectToAction("Prescribe", "Prescription");
 
+        }
+
+        [HttpGet]
+        public IActionResult PrescriptionList()
+        {
+            data = new DataAccess(configuration);
+            int id = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
+            dt = data.GetPatientPrescriptions(id);
+            
+            List<PatientPrescriptionVM> patientPrescriptions = new List<PatientPrescriptionVM>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PatientPrescriptionVM patientPrescription = new PatientPrescriptionVM();
+
+                patientPrescription.PrescriptionID = int.Parse(dt.Rows[i]["PrescriptionID"].ToString());
+                patientPrescription.ConditionDescription = dt.Rows[i]["ConditionDecription"].ToString();
+                patientPrescription.Date = dt.Rows[i]["Date"].ToString();
+                patientPrescription.DoctorName = dt.Rows[i]["Name"].ToString();
+                patientPrescription.DoctorSurname = dt.Rows[i]["Surname"].ToString();
+
+                patientPrescriptions.Add(patientPrescription);
+            }
+
+            ViewBag.Prescriptions = patientPrescriptions.ToList();
+            dt.Clear();
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            data = new DataAccess(configuration);
+            dt = new DataTable();
+
+            dt = data.GetPrescriptionDetails(id);
+
+            List<PatientPrescriptionVM> patients = new List<PatientPrescriptionVM>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PatientPrescriptionVM patient = new PatientPrescriptionVM();
+                patient.PrescriptionID = int.Parse(dt.Rows[i]["PrescriptionID"].ToString());
+                patient.MedicationID = int.Parse(dt.Rows[i]["MedicationID"].ToString());
+                patient.MedicationName = dt.Rows[i]["MedicationName"].ToString();
+                patient.DosageDescription = dt.Rows[i]["DosageDescription"].ToString();
+                patient.Quantity = dt.Rows[i]["Quantity"].ToString();
+                patient.Instruction = dt.Rows[i]["Instruction"].ToString();
+                patient.RepeatDescription = dt.Rows[i]["RepeatDescription"].ToString();
+                patient.DespensedStatus = dt.Rows[i]["DispensedStatus"].ToString();
+                patient.DoctorName = dt.Rows[i]["Name"].ToString();
+                patient.DoctorSurname = dt.Rows[i]["Surname"].ToString();
+                patient.Date = dt.Rows[i]["Date"].ToString();
+                patient.DoctorID = int.Parse(dt.Rows[i]["UserID"].ToString());
+
+                patients.Add(patient);
+            }
+            dt.Clear();
+            ViewBag.Details = patients.ToList();
+
+            dt = data.GetDispensedMedication(id);
+
+            List<DispensedMedsVM> medsVMs = new List<DispensedMedsVM>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DispensedMedsVM medsVM = new DispensedMedsVM();
+                medsVM.MedicationID = int.Parse(dt.Rows[i]["PrescriptionID"].ToString());
+                //medsVM.DosageID = int.Parse(dt.Rows[i]["DosageID"].ToString());
+                medsVM.Quantity = int.Parse(dt.Rows[i]["Quantity"].ToString());
+                medsVM.MedicationName = dt.Rows[i]["MedicationName"].ToString();
+                medsVM.DosageDescription = dt.Rows[i]["DosageDescription"].ToString();
+                medsVM.Date = dt.Rows[i]["Date"].ToString();
+
+                medsVMs.Add(medsVM);
+            }
+
+            ViewBag.DispensedMeds = medsVMs.ToList();
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdatePrescription(int prescription,int medication)
+        {
+            data = new DataAccess(configuration);
+            dt = new DataTable();
+
+            //DispenseMedication medication1 = new DispenseMedication();
+            dt = data.GetMedicationToDispense(prescription, medication);
+
+
+            UpdatePrescriptionVM medications = new UpdatePrescriptionVM();
+            medications.MedicationID = int.Parse(dt.Rows[0]["MedicationID"].ToString());
+            medications.PrescriptionID = int.Parse(dt.Rows[0]["PrescriptionID"].ToString());
+            medications.Quantity = int.Parse(dt.Rows[0]["Quantity"].ToString());
+            medications.MedicationName = dt.Rows[0]["MedicationName"].ToString();
+            medications.Instruction = dt.Rows[0]["Instruction"].ToString();
+
+           
+            //ViewBag.ContraError = dispense;
+            return View(medications);
+        }
+
+        [HttpPost]
+        public IActionResult UpdatePrescription(UpdatePrescriptionVM prescribe)
+        {
+            if (ModelState.IsValid)
+            {
+                data = new DataAccess(configuration);
+
+                data.UpdatePrescription(prescribe);
+
+                return RedirectToAction("Details", "Prescription", new { area = "Doctor", id = prescribe.PrescriptionID });
+            }
+            else
+            {
+                return View(prescribe);
+            }
+        }
+
+
+        [HttpPost]
+        public IActionResult DeletePrescription(int prescrption,int medication)
+        {
+            data = new DataAccess(configuration);
+
+            data.DeletePrescription(prescrption, medication);
+
+            return RedirectToAction("Details", "Prescription", new { area = "Doctor", id = prescrption });
         }
     }
 }

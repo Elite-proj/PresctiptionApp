@@ -80,7 +80,7 @@
             }
 
             <br /><br />
-            <form asp-controller="Prescription" asp-action="Prescribe" method="post">
+            <form asp-controller="Prescription" asp-action="Prescribe" asp-area="Doctor" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="input-group">
                     <div class="col-6 form-group">
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-6 form-group">
                         <label asp-for="Instruction">Instruction</label>
-                        <input class="form-control" asp-for="Instruction" type="text" />
+                        <textarea asp-for="Instruction" class="form-control" rows="3" required></textarea>
                         <div><span asp-validation-for="Instruction" class="text-danger"></span></div>
                     </div>
                 </div>

@@ -1,0 +1,112 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Microsoft.AspNetCore.Http
+@{
+    ViewBag.Title = "Prescription Details";
+    Layout = "_DocSecondLayout";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<div class="form-group">
+    @if (ViewBag.Details.Count > 0)
+    {
+        @foreach (PatientPrescriptionVM patient in ViewBag.Details)
+        {
+            <span>Prescribing Doctor: @patient.DoctorName @patient.DoctorSurname</span><br />
+            <span>Prescription Date: @patient.Date</span>
+
+            break;
+        }
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Medication Name</th>
+                    <th>Dosage Form</th>
+                    <th>Quantity</th>
+                    <th>Instructions</th>
+                    <th>Repeat(s) Left</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PatientPrescriptionVM patient in ViewBag.Details)
+                {
+                    <tr>
+
+                        <td>@patient.MedicationName</td>
+                        <td>@patient.DosageDescription</td>
+                        <td>@patient.Quantity</td>
+                        <td>@patient.Instruction</td>
+                        <td>@patient.RepeatDescription</td>
+                        <td>@patient.DespensedStatus</td>
+                        @if(patient.DoctorID==Convert.ToInt32(Context.Session.GetInt32("DoctorID")))
+                        { 
+                            <td>
+                                <a asp-action="UpdatePrescription" asp-area="Doctor" asp-controller="Prescription" asp-route-prescription="@patient.PrescriptionID" asp-route-medication="@patient.MedicationID" class="btn btn-primary">Edit</a>
+                            </td>
+                            <td>
+                                <a asp-action="DeletePrescription" asp-area="Doctor" asp-controller="Prescription" asp-route-prescription="@patient.PrescriptionID" asp-route-medication="@patient.MedicationID" class="btn btn-danger">Delete</a>
+                            </td>
+                        }
+                        
+                        
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else if (ViewBag.Details.Count == 0)
+    {
+        <h4 class="bg-warning text-center text-white p-2">No precritpion details Records found</h4>
+    }
+    <br /><br />
+    <hr />
+    <h2>Dispensed Medications</h2>
+    @if (ViewBag.DispensedMeds.Count > 0)
+    {
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Medication Name</th>
+                    <th>Dosage Form</th>
+                    <th>Quantity</th>
+                    <th>Dispensed Date</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DispensedMedsVM patient in ViewBag.DispensedMeds)
+                {
+                    <tr>
+
+                        <td>@patient.MedicationName</td>
+                        <td>@patient.DosageDescription</td>
+                        <td>@patient.Quantity</td>
+                        <td>@patient.Date</td>
+                        <td>
+                            <a asp-action="Reject" asp-area="Pharmacist" asp-controller="Prescriptions" asp-route-id="@patient.MedicationID">View Details</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else if (ViewBag.DispensedMeds.Count == 0)
+    {
+        <h4 class="bg-warning text-center text-white p-2">No Dispensed Records found</h4>
+    }
+</div>
+

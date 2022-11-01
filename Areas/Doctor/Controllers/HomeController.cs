@@ -31,7 +31,7 @@ namespace E_prescription.Areas.Doctor.Controllers
         }
 
         [HttpGet]
-        public IActionResult FirstTime()
+        public IActionResult FirstTime(int id)
         {
             data = new DataAccess(configuration);
             dt = new DataTable();
@@ -85,11 +85,23 @@ namespace E_prescription.Areas.Doctor.Controllers
 
                 conditions.Add(condition);
             }
-
+            dt.Clear();
             ViewBag.Conditions = new SelectList(conditions.ToList(), "ConditionId", "ConditionDecription");
 
+            dt = data.GetPatientById(id);
 
-            return View();
+            PatientViewModel patient = new PatientViewModel();
+            patient.PatientID = int.Parse(dt.Rows[0]["PatientID"].ToString());
+            patient.FirstName = dt.Rows[0]["Name"].ToString();
+            patient.Surname = dt.Rows[0]["Surname"].ToString();
+            patient.IDNumber = dt.Rows[0]["IDNumber"].ToString();
+            patient.AddressLine1 = dt.Rows[0]["AddressLine1"].ToString();
+            patient.AddressLine2 = dt.Rows[0]["AddressLine2"].ToString();
+            patient.Email = dt.Rows[0]["Email"].ToString();
+
+            HttpContext.Session.SetInt32("PatientID", id);
+
+            return View(patient);
         }
 
         [HttpPost]
@@ -100,8 +112,8 @@ namespace E_prescription.Areas.Doctor.Controllers
                 data = new DataAccess(configuration);
                 dt = new DataTable();
 
-                model.DoctorID = Convert.ToInt32(HttpContext.Session.GetInt32("DoctorID")); ;
-                model.PatientID = 4;
+                model.DoctorID = Convert.ToInt32(HttpContext.Session.GetInt32("DoctorID")); 
+                model.PatientID = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
                 model.date = DateTime.Now.ToString();
                 List<HistoryViewModel> histories = new List<HistoryViewModel>();
 
@@ -116,7 +128,7 @@ namespace E_prescription.Areas.Doctor.Controllers
                     {
                         historyViewModel.ConditionID = history.ConditionID;
                         historyViewModel.DoctorID = Convert.ToInt32(HttpContext.Session.GetInt32("DoctorID"));
-                        historyViewModel.PatientID = 4;
+                        historyViewModel.PatientID = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
                         historyViewModel.date = DateTime.Now.ToString();
 
                         data.AddPatientCondition(historyViewModel);   
@@ -125,7 +137,7 @@ namespace E_prescription.Areas.Doctor.Controllers
                     {
                         historyViewModel.IngredientID = history.IngredientID;
                         historyViewModel.DoctorID = Convert.ToInt32(HttpContext.Session.GetInt32("DoctorID"));
-                        historyViewModel.PatientID = 4;
+                        historyViewModel.PatientID = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
                         historyViewModel.date = DateTime.Now.ToString();
 
                         data.AddPatientAllergy(historyViewModel);
@@ -134,16 +146,22 @@ namespace E_prescription.Areas.Doctor.Controllers
                     {
                         historyViewModel.MedicationID = history.MedicationID;
                         historyViewModel.DoctorID = Convert.ToInt32(HttpContext.Session.GetInt32("DoctorID"));
-                        historyViewModel.PatientID = 4;
+                        historyViewModel.PatientID = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
                         historyViewModel.date = DateTime.Now.ToString();
 
                         data.AddPatientMedication(historyViewModel);
+                    }
+                    else
+                    {
+                        data.UpdateFirstVisit(model);
                     }
                     
 
                 }
 
-                return RedirectToAction("Index", "Home", new { area = "Doctor" });
+                data.UpdateFirstVisit(model);
+
+                return RedirectToAction("PatientDiagnosis", "Prescription", new { area = "Doctor", id=model.PatientID });
             }
             else
                 return View(model);
@@ -176,6 +194,7 @@ namespace E_prescription.Areas.Doctor.Controllers
             patient.AddressLine1 = dt.Rows[0]["AddressLine1"].ToString();
             patient.AddressLine2 = dt.Rows[0]["AddressLine2"].ToString();
             patient.Email = dt.Rows[0]["Email"].ToString();
+            patient.FirstVisit = dt.Rows[0]["FirstVisit"].ToString();
 
 
             return View(patient);

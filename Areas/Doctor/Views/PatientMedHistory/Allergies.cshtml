@@ -37,7 +37,8 @@
 
             </tbody>
         </table>
-        <a asp-action="Add" >Add new allergy</a>
+        <a asp-action="AddAllergy" asp-controller="PatientMedHistory" asp-area="Doctor" class="btn btn-primary">Add new allergy</a>
+
     }
     else if (ViewBag.Allergies.Count == 0)
     {

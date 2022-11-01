@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model UpdatePrescriptionVM
+@{
+    ViewBag.Title = "Prescribe medication";
+    Layout = "_DocSecondLayout";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <main>
+            <form asp-controller="Prescription" asp-action="UpdatePrescription" asp-area="Doctor" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="MedicationID">Medication Name</label>
+                        <input class="form-control" value="@Model.MedicationName" readonly />
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="Quantity">Quantity</label>
+                        <input class="form-control" asp-for="Quantity" type="number" />
+                        <div><span asp-validation-for="Quantity" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="Instruction">Instruction</label>
+                       <textarea asp-for="Instruction" name="Instruction"  class="form-control" rows="1"></textarea>
+                        <div><span asp-validation-for="Instruction" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <input asp-for="PrescriptionID" hidden />
+                <input asp-for="MedicationID" hidden/>
+                <button type="submit" class="btn btn-primary" >Update Medication</button>
+
+            </form>
+
+        </main>
+    </div>
+
+</body>

@@ -13,6 +13,7 @@ namespace E_prescription.Areas.Doctor.Models
         public int PatientID { get; set; }
         public int DoctorID { get; set; }
         public string date { get; set; }
+        public string Status { get; set; }
 
         public List<HistoryViewModel> listOfMedicalHistory { get; set; }
     }

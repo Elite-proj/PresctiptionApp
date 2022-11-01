@@ -15,7 +15,44 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 </head>
+
+<script type="text/javascript">
+
+    $(function () {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+
+        if (month < 0)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+
+        $('#date').attr('max', maxDate);
+    })
+
+    $(function () {
+        $("#cmbGender").select2();
+    });
+
+    $(function () {
+        $("#ProvinceList").select2();
+    });
+
+    $(function () {
+        $("#CityList").select2();
+    });
+
+    $(function () {
+        $("#SuburbList").select2();
+    });
+</script>
 
 <body>
     <div class="container">
@@ -28,102 +65,111 @@
             </div>
 
             <br /><br />
-            <form asp-controller="Account" asp-action="Register" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                  <form asp-controller="Account" asp-action="Register" method="post">
+                      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="FirstName">First Name</label>
-                        <input asp-for="FirstName" class="form-control" />
-                        <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="Surname">Surname</label>
-                        <input class="form-control" asp-for="Surname" />
-                        <div><span asp-validation-for="Surname" class="text-danger"></span></div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="IDnumber">ID Number</label>
-                        <input class="form-control" asp-for="IDnumber" type="number" />
-                        <div><span asp-validation-for="IDnumber" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="DateOfBith">Date of Birth</label>
-                        <input class="form-control" asp-for="DateOfBith" type="date" />
-                        <div><span asp-validation-for="DateOfBith" class="text-danger"></span></div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="AddressLine1">AddressLine1</label>
-                        <textarea asp-for="AddressLine1" class="form-control" rows="5"></textarea>
-                        <div><span asp-validation-for="AddressLine1" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="AddressLine2">AddressLine2</label>
-                        <textarea asp-for="AddressLine2" class="form-control" rows="5"></textarea>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="ProvinceID">Province</label>
-                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
-                            <option>-- Select Province --</option>
-                        </select>
-                        <div><span asp-validation-for="ProvinceID" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="CityID">City</label>
-                        <select id="CityList" asp-for="CityID" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
-                            <option>-- Select City --</option>
-                        </select>
-                        <div><span asp-validation-for="CityID" class="text-danger"></span></div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="SuburbID">Suburb</label>
-                        <select id="SuburbList" asp-for="SuburbID" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
-                            <option>-- Select Suburb --</option>
-                        </select>
-                        <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="ContactNo">Contact number</label>
-                        <input class="form-control" asp-for="ContactNo" type="number" />
-                        <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="Email">Email Address</label>
-                        <input class="form-control" asp-for="Email" type="email" />
-                        <div><span asp-validation-for="Email" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="ConfirmEmail">Confirm Email Address</label>
-                        <input class="form-control" asp-for="ConfirmEmail" type="email" />
-                        <div><span asp-validation-for="ConfirmEmail" class="text-danger"></span></div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="col-6 form-group">
-                        <label asp-for="Password">Password</label>
-                        <input class="form-control" asp-for="Password" type="password" />
-                        <div><span asp-validation-for="Password" class="text-danger"></span></div>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label asp-for="ConfirmPassword">Confirm Password</label>
-                        <input class="form-control" asp-for="ConfirmPassword" type="password" />
-                        <div><span asp-validation-for="ConfirmPassword" class="text-danger"></span></div>
-                    </div>
-                </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="FirstName">First Name</label>
+                              <input asp-for="FirstName" class="form-control" />
+                              <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="Surname">Surname</label>
+                              <input class="form-control" asp-for="Surname" />
+                              <div><span asp-validation-for="Surname" class="text-danger"></span></div>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="GenderID">Gender</label>
+                              <select id="cmbGender" asp-for="GenderID" asp-items="@ViewBag.Genders" class="form-control"></select>
+                              <div><span asp-validation-for="GenderID" class="text-danger"></span></div>
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="IDnumber">ID Number</label>
+                              <input class="form-control" asp-for="IDnumber" maxlength="13" type="number" />
+                              <div><span asp-validation-for="IDnumber" class="text-danger"></span></div>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <div class="col-12 form-group">
+                              <label asp-for="DateOfBith">Date of Birth</label>
+                              <input class="form-control" asp-for="DateOfBith" type="date" id="date" />
+                              <div><span asp-validation-for="DateOfBith" class="text-danger"></span></div>
 
-                <button type="submit" class="btn btn-primary">Register</button>
+                          </div>
+                          
+                      </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="AddressLine1">AddressLine1</label>
+                              <textarea asp-for="AddressLine1" class="form-control" rows="5"></textarea>
+                              <div><span asp-validation-for="AddressLine1" class="text-danger"></span></div>
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="AddressLine2">AddressLine2</label>
+                              <textarea asp-for="AddressLine2" class="form-control" rows="5"></textarea>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="ProvinceID">Province</label>
+                              <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
+                                  
+                              </select>
+                              <div><span asp-validation-for="ProvinceID" class="text-danger"></span></div>
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="CityID">City</label>
+                              <select id="CityList" asp-for="CityID" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                                  
+                              </select>
+                              <div><span asp-validation-for="CityID" class="text-danger"></span></div>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="SuburbID">Suburb</label>
+                              <select id="SuburbList" asp-for="SuburbID" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                                  
+                              </select>
+                              <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="ContactNo">Contact number</label>
+                              <input class="form-control" asp-for="ContactNo" maxlength="10" type="tel" />
+                              <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="Email">Email Address</label>
+                              <input class="form-control" asp-for="Email" type="email" />
+                              <div><span asp-validation-for="Email" class="text-danger"></span></div>
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="ConfirmEmail">Confirm Email Address</label>
+                              <input class="form-control" asp-for="ConfirmEmail" type="email" />
+                              <div><span asp-validation-for="ConfirmEmail" class="text-danger"></span></div>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <div class="col-6 form-group">
+                              <label asp-for="Password">Password</label>
+                              <input class="form-control" asp-for="Password" type="password" />
+                              <div><span asp-validation-for="Password" class="text-danger"></span></div>
+                          </div>
+                          <div class="col-6 form-group">
+                              <label asp-for="ConfirmPassword">Confirm Password</label>
+                              <input class="form-control" asp-for="ConfirmPassword" type="password" />
+                              <div><span asp-validation-for="ConfirmPassword" class="text-danger"></span></div>
+                          </div>
+                      </div>
 
-            </form>
+                      <button type="submit" class="btn btn-primary">Register</button>
+
+                  </form>
 
         </main>
     </div>

@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model HistoryViewModel
+@{
+    ViewBag.Title = "Patient Medication";
+    Layout = "_MedicalHistory";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+</head>
+<script type="text/javascript">
+
+    
+    // for searchable dropdown
+
+    $(function () {
+        $("#cmbMedication").select2();
+    });
+</script>
+
+<body>
+    <div class="container">
+        <main>
+
+
+            <form asp-controller="PatientMedHistory" asp-action="AddMedication" asp-area="Doctor" method="post">
+
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label>Medication Name</label>
+                        <select asp-items="@ViewBag.Medications" id="cmbMedication" asp-for="MedicationID" class="form-control">
+                        </select>
+                        <div><span class="text-danger"></span></div>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save medication</button>
+            </form>
+            <script type="text/javascript">
+
+
+                // for searchable dropdown
+
+                $(function () {
+                    $("#cmbMedication").select2();
+                });
+            </script>
+        </main>
+    </div>
+</body>
+
+
