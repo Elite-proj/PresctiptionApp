@@ -11,6 +11,7 @@ namespace E_prescription.Areas.Patient.Controllers
     [Area("Patient")]
     public class PrescriptionListController : Controller
     {
+
         private readonly IConfiguration configuration;
         DataAccess data;
         DataTable dt;

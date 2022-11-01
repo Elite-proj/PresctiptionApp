@@ -32,6 +32,10 @@ namespace E_prescription.Controllers
         {
             return View();
         }
+        public IActionResult Dashboard()
+        {
+            return View("Dashboard");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

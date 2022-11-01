@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html>
 
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,25 +13,151 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
-<body>
-    <div>
-       @* @RenderBody()*@
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Technites</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Technites E-Prescription</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Admin
+            </div>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <li class="@(ViewBag.Title == "ActiveIngredient" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="ActiveIngredient" asp-action="List">
+                    <span>Active Ingredient</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "DosageForm" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="DosageForm" asp-action="List">
+                    <span>Dosage Form</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "Medication" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="Medication" asp-action="List">
+                    <span>Medication</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "ContraIndications" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="ContraIndications" asp-action="List">
+                    <span>Contra Indications</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "MedicationInteraction" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="MedicationInteraction" asp-action="List">
+                    <span>Medication Interaction</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "ConditionDiagnosisRec" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="ConditionDiagnosisRec" asp-action="Conditions">
+                    <span>Condition Diagnosis</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "MedicalPracRec" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="MedicalPracticeRec" asp-action="MedicalPracticeRecs">
+                    <span>Medical Practice</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "Doctor" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="Doctor" asp-action="Doctors">
+                    <span>Doctor Records</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "PharmacyRecords" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="PharmacyRecords" asp-action="List">
+                    <span>Pharmacy Records</span>
+                </a>
+            </li>
+            <li class="@(ViewBag.Title == "PharmacistRecords" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="PharmacistRecords" asp-action="List">
+                    <span>Pharmacist Records</span>
+                </a>
+            </li>
+
+
+
+
+
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Logout -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>LOGOUT</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+
+            <div class="">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Technites E-Prescription Solution 2022</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
     </div>
+    <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-
-     <!-- Bootstrap core JavaScript-->
+    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
