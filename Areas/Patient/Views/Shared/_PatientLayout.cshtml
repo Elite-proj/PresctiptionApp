@@ -27,10 +27,12 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        
+        <div class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -59,8 +61,10 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <li class="@(ViewBag.Title == "PrescriptionList" ? "nav-item active" : "nav-item")">
-                <a class="nav-link" asp-area="Patient" asp-controller="PrescriptionList" asp-action="PrescriptionLists">
+          <div class="sidebar-wrapper">
+              <ul>
+            <li class="@(ViewBag.Title == "Home" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="Patient" asp-controller="Home" asp-action="Index">
                     <span>Pescriptions</span>
                 </a>
             </li>
@@ -80,34 +84,23 @@
                     <span>LOGOUT</span>
                 </a>
             </li>
-
+            </ul>
             <!-- Divider -->
+        </div>
             <hr class="sidebar-divider d-none d-md-block">
+            </div>
 
-
-
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-
-    <div class="">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Technites E-Prescription Solution 2022</span>
+    
+        <div id="content">
+            <div class="content">
+               
             </div>
         </div>
-    </footer>
-    <!-- End of Footer -->
+        @RenderBody()
+       
+    </div>
+
+   
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -130,6 +123,6 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+   @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

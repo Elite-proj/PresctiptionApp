@@ -179,7 +179,8 @@ namespace E_prescription.Controllers.Account
                     }
                     else if (dt.Rows[0]["UserType"].ToString() == "Patient")
                     {
-                        return RedirectToAction("Index", "Home", new { area = "Pharmacist" });
+                        HttpContext.Session.SetInt32("PatientID", int.Parse(dt.Rows[0]["UserID"].ToString()));
+                        return RedirectToAction("Index", "Home", new { area = "Patient" });
                     }
                     else if(dt.Rows[0]["UserType"].ToString() == "Admin")
                     {

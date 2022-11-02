@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Remove="Areas\Doctor\Views\Instruction\**" />
     <Compile Remove="Areas\Doctor\Views\Patient\**" />
+    <Compile Remove="Areas\Patient\Views\NewFolder\**" />
     <Compile Remove="Views\ConditionDiagnosis\**" />
     <Compile Remove="Views\MedicationRec\**" />
     <Compile Remove="Views\Pages\**" />
@@ -17,6 +18,7 @@
     <Compile Remove="Views\Users\**" />
     <Content Remove="Areas\Doctor\Views\Instruction\**" />
     <Content Remove="Areas\Doctor\Views\Patient\**" />
+    <Content Remove="Areas\Patient\Views\NewFolder\**" />
     <Content Remove="Views\ConditionDiagnosis\**" />
     <Content Remove="Views\MedicationRec\**" />
     <Content Remove="Views\Pages\**" />
@@ -26,6 +28,7 @@
     <Content Remove="Views\Users\**" />
     <EmbeddedResource Remove="Areas\Doctor\Views\Instruction\**" />
     <EmbeddedResource Remove="Areas\Doctor\Views\Patient\**" />
+    <EmbeddedResource Remove="Areas\Patient\Views\NewFolder\**" />
     <EmbeddedResource Remove="Views\ConditionDiagnosis\**" />
     <EmbeddedResource Remove="Views\MedicationRec\**" />
     <EmbeddedResource Remove="Views\Pages\**" />
@@ -35,6 +38,7 @@
     <EmbeddedResource Remove="Views\Users\**" />
     <None Remove="Areas\Doctor\Views\Instruction\**" />
     <None Remove="Areas\Doctor\Views\Patient\**" />
+    <None Remove="Areas\Patient\Views\NewFolder\**" />
     <None Remove="Views\ConditionDiagnosis\**" />
     <None Remove="Views\MedicationRec\**" />
     <None Remove="Views\Pages\**" />
@@ -56,7 +60,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Doctor\Views\Dosage\" />
-    <Folder Include="Areas\Patient\Views\NewFolder\" />
     <Folder Include="Views\AdminReport\" />
     <Folder Include="Views\MedicationInteraction\" />
     <Folder Include="Views\ContraIndication\" />
