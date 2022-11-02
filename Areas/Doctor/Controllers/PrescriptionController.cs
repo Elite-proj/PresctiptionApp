@@ -120,7 +120,7 @@ namespace E_prescription.Areas.Doctor.Controllers
             {
                 MedicationListVm medication = new MedicationListVm();
                 medication.MedicationID = int.Parse(dt.Rows[i]["MedicationID"].ToString());
-                medication.DosageID = int.Parse(dt.Rows[i]["MedicationID"].ToString());
+                medication.DosageID = int.Parse(dt.Rows[i]["DosageID"].ToString());
                 medication.MedicationName = dt.Rows[i]["MedicationName"].ToString();
                 medication.DosageDescription = dt.Rows[i]["DosageDescription"].ToString();
 
