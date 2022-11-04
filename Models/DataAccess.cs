@@ -1970,5 +1970,185 @@ namespace E_prescription.Models
             return dt;
         }
 
+
+        public DataTable GetPrescriptionById(int prescriptionId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPrescriptionById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionID", prescriptionId);
+
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable GetPrescriptionItemById(int medicationId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetPrescriptionItemById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@MedicationID",medicationId);
+
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public int RejectEntirePrescription(RejectPrescriptionVM reject)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_RejectEntirePrescription", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@RejectionReason", reject.RejectionReason);
+            dbComm.Parameters.AddWithValue("@PharmacistID", reject.PharmacistID);
+            dbComm.Parameters.AddWithValue("@PrescriptionID", reject.PrescriptionID);
+            
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+        }
+
+        public int RejectPrescriptionItems(RejectPrescriptionItemVM item)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_RejectPrescriptionItems", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionID", item.PrescriptionID);
+            dbComm.Parameters.AddWithValue("@PharmacistID", item.PharmacistID);
+            dbComm.Parameters.AddWithValue("@MedicationID", item.MedicationID);
+            dbComm.Parameters.AddWithValue("@RejectionReason", item.RejectionReason);
+
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+        }
+
+        public DataSet GetRejectedPrescriptions(int patientID)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetRejectedPrescription", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PatientID", patientID);
+
+
+            dt = new DataTable();
+            DataSet data = new DataSet();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(data);
+            dbconn.Close();
+
+            return data;
+        }
+
+        public DataSet GetRejectedPrescriptionDetails(int prescriptionId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetRejectedPrescriptionDetails", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PrescriptionId", prescriptionId);
+
+
+            dt = new DataTable();
+            DataSet dtse = new DataSet();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dtse);
+            dbconn.Close();
+
+            return dtse;
+        }
+
+        
+
     }
 }

@@ -16,6 +16,9 @@ namespace E_prescription.Areas.Pharmacist.Models
 
         public int PatientID { get; set; }
         public string MedicationName { get; set; }
+        public string PharmacistName { get; set; }
+        public string PharmacistSurname { get; set; }
+        public string RejectReason { get; set; }
         public string DosageDescription { get; set; }
         public string RepeatDescription { get; set; }
         public string Quantity { get; set; }

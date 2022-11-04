@@ -393,5 +393,82 @@ namespace E_prescription.Areas.Pharmacist.Controllers
                 return View(medication);
             }
         }
+
+
+        [HttpGet]
+        public IActionResult RejectPrescription(int id)
+        {   
+            data = new DataAccess(configuration);
+            dt = new DataTable();
+
+            dt = data.GetPrescriptionById(id);
+            RejectPrescriptionVM reject = new RejectPrescriptionVM();
+            if (dt.Rows.Count > 0)
+            {
+                
+                reject.DoctorName = dt.Rows[0]["Name"].ToString();
+                reject.DoctorSurname = dt.Rows[0]["Surname"].ToString();
+                reject.ConditionName = dt.Rows[0]["ConditionDecription"].ToString();
+                reject.PrescriptionID = int.Parse(dt.Rows[0]["PrescriptionID"].ToString());
+
+
+                return View(reject);
+            }
+            else
+                return View();
+            
+        }
+
+        [HttpGet]
+        public IActionResult RejectPrescriptionItem(int prescription,int medication)
+        {
+            data = new DataAccess(configuration);
+            dt = new DataTable();
+
+            dt = data.GetPrescriptionItemById(medication);
+
+            RejectPrescriptionItemVM item = new RejectPrescriptionItemVM();
+
+            item.MedicationID = int.Parse(dt.Rows[0]["MedicationID"].ToString());
+            item.MedicationName = dt.Rows[0]["MedicationName"].ToString();
+            item.PrescriptionID = prescription;
+
+
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult RejectPrescriptionItem(RejectPrescriptionItemVM item)
+        {
+            if (ModelState.IsValid)
+            {
+                data = new DataAccess(configuration);
+                item.PharmacistID = Convert.ToInt32(HttpContext.Session.GetInt32("PharmacistID"));
+                data.RejectPrescriptionItems(item);
+
+                return RedirectToAction("Details", "Prescriptions", new { area = "Pharmacist", id = item.PrescriptionID });
+            }
+            else
+                return View(item);
+        }
+
+
+        [HttpPost]
+        public IActionResult RejectPrescription(RejectPrescriptionVM reject)
+        {
+            if (ModelState.IsValid)
+            {
+                data = new DataAccess(configuration);
+                reject.PharmacistID = Convert.ToInt32(HttpContext.Session.GetInt32("PharmacistID"));
+
+                data.RejectEntirePrescription(reject);
+
+                return RedirectToAction("Display", "Prescriptions", new { area = "Pharmacist", id = HttpContext.Session.GetInt32("PatientID") });
+            }
+            else
+            {
+                return View(reject);
+            }
+        }
     }
 }
