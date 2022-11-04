@@ -18,6 +18,7 @@ namespace E_prescription.Areas.Patient.Models
         public int MedicationId { get; set; }
         public int DosageId { get; set; }
         public int RepeatId { get; set; }
+        public int StrengthId { get; set; }
 
 
         public string MedicationName { get; set; }
@@ -29,6 +30,7 @@ namespace E_prescription.Areas.Patient.Models
         public string DoctorName { get; set; }
         public string DoctorSurname { get; set; }
         public string ConditionDescription { get; set; }
+        public string StrengthDescription { get; set; }  
 
 
 

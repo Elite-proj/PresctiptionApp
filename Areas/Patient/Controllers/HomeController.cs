@@ -42,6 +42,7 @@ namespace E_prescription.Areas.Patient.Controllers
                 patientPrescriptionDetail.ConditionDescription = dt.Rows[i]["ConditionDecription"].ToString();
 
 
+
                 patientPrescriptionDetails.Add(patientPrescriptionDetail);
             }
 
@@ -67,6 +68,15 @@ namespace E_prescription.Areas.Patient.Controllers
                 patientPrescriptionDetail.Date = dt.Rows[i]["Date"].ToString();
                 patientPrescriptionDetail.DoctorId = int.Parse(dt.Rows[i]["DoctorID"].ToString());
                 patientPrescriptionDetail.DoctorName = dt.Rows[i]["Name"].ToString();
+
+                //on second page (view more details)
+                patientPrescriptionDetail.MedicationName = dt.Rows[i]["MedicationName"].ToString();
+                patientPrescriptionDetail.DosageDescription = dt.Rows[i]["DosageDescription"].ToString();
+                //patientPrescriptionDetail.StrengthDescription = dt.Rows[i]["StrengthDescription"].ToString();
+                patientPrescriptionDetail.Quantity = dt.Rows[i]["Quantity"].ToString();
+                patientPrescriptionDetail.Instruction = dt.Rows[i]["Instruction"].ToString();
+                patientPrescriptionDetail.RepeatDescription = dt.Rows[i]["RepeatDescription"].ToString();
+                patientPrescriptionDetail.DespensedStatus = dt.Rows[i]["DispensedStatus"].ToString();
 
                 patientPrescriptionDetails.Add(patientPrescriptionDetail);
             }
@@ -102,5 +112,12 @@ namespace E_prescription.Areas.Patient.Controllers
             return View();
 
         }
+        //[HttpGet]
+        public IActionResult Profile()
+        {
+
+            return View();
+        }
+
     }
 }

@@ -1,6 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Prescriptions";
+﻿@using E_prescription.Areas.Patient.Models
+@{
+ 
+    ViewData["Title"] = "Patient Page";
     Layout = "_PatientLayout";
+
 }
 
 <div class="container-fluid">
@@ -8,10 +11,47 @@
         <h2 class="text-info">Prescriptions</h2>
     </div>
     <div class="col-3 offset-3">
-        <a asp-area="Patient" asp-action="Home" asp-controller="Index" class="btn btn-info form-control text-white">Cancel</a>
+        <a asp-area="Patient" asp-action="Index" asp-controller="Home" class="btn btn-info form-control text-white">Cancel</a>
     </div>
 
-  </div>
+    <br />
+    <br />
+<!-- Content Row -->
+<div class="row">
+    <div class="col-xl-8 col-lg-7">
+     <div class="col-9 border p-4">
+            <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+         <thead>
+            <tr>
+                <th>Medication Name</th>
+                <th>Dosage Form</th>
+               @* <th>Strength</th>*@
+                <th>Quantity</th>
+                <th>Instruction</th>
+                <th>Repeats</th>
+                <th>Status</th>
+             </tr>
+          </thead>
+        <tbody>
+            @{
+                    foreach (PatientPrescriptionDetailsModel patientPrescriptionDetail in ViewBag.Details)
+                {
+                    <tr>
+                            <td>@patientPrescriptionDetail.MedicationName</td>
+                            <td>@patientPrescriptionDetail.DosageDescription</td>
+                           
+                            <td>@patientPrescriptionDetail.Quantity</td>
+                            <td>@patientPrescriptionDetail.Instruction</td>
+                            <td>@patientPrescriptionDetail.RepeatDescription</td>
+                            <td>@patientPrescriptionDetail.DespensedStatus</td>
+                    </tr>
+                }
+            }
+        </tbody>
+     </table>
+    </div>
+    
+         
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
@@ -21,11 +61,7 @@
         </div>
     </div>
 </footer>
-<!-- End of Footer -->
+
 </div>
-<!-- End of Content Wrapper -->
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+</div>
+</div>

@@ -16,7 +16,7 @@
           rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="~/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -68,8 +68,8 @@
                     <span>Pescriptions</span>
                 </a>
             </li>
-            <li class="@(ViewBag.Title == "DoctorRec" ? "nav-item active" : "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="DoctorRec" asp-action="MedicalPracticeRec">
+            <li class="@(ViewBag.Title == "Home" ? "nav-item active" : "nav-item")">
+                <a class="nav-link" asp-area="Patient" asp-controller="Home" asp-action="Profile">
                     <span>Profile</span>
                 </a>
 
