@@ -121,7 +121,7 @@ namespace E_prescription.Areas.Pharmacist.Controllers
                 dt.Clear();
                 patientPrescriptions.Add(patientPrescription);
             }
-
+            
             ViewBag.Details = patientPrescriptions.ToList();
 
             return View();

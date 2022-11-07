@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Prescriptions History";
+    ViewData["Title"] = "Search Results";
     Layout = "_SecondLayout";
 }
 
@@ -22,8 +22,8 @@
             <thead>
                 <tr>
                     <th>Condition Name</th>
-                    <th>Dispensing Pharmacist</th>
-                    <th>Dispensed Date</th>
+                    <th>Prescribing Doctor</th>
+                    <th>Prescription Date</th>
                     <th></th>
                 </tr>
             </thead>
@@ -33,10 +33,10 @@
                     <tr>
 
                         <td>@patient.ConditionDescription</td>
-                        <td>@patient.PharmacistName @patient.PharmacistSurname</td>
+                        <td>@patient.DoctorName @patient.DoctorSurname</td>
                         <td>@patient.Date</td>
                         <td>
-                            <a asp-action="Details" asp-area="Pharmacist" asp-controller="History" asp-route-id="@patient.PrescriptionID">View details</a>
+                            <a asp-action="Details" asp-area="Pharmacist" asp-controller="Prescriptions" asp-route-id="@patient.PrescriptionID">View details</a>
                         </td>
                     </tr>
                 }
@@ -50,4 +50,3 @@
     }
 
 </div>
-
