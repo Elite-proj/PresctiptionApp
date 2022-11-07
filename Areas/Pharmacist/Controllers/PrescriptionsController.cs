@@ -497,8 +497,26 @@ namespace E_prescription.Areas.Pharmacist.Controllers
                 for (int i = 0; i < set.Tables.Count; i++)
                 {
                     dt = set.Tables[i];
+                    
                     PatientPrescriptionVM patientPrescription = new PatientPrescriptionVM();
-                    if (dt.Rows.Count > 0)
+
+                    if(set.Tables[i].Rows.Count>1)
+                    {
+                        for(int j=0;j<set.Tables[i].Rows.Count;j++)
+                        {
+                            dt = set.Tables[i].Rows[j].Table;
+
+                            patientPrescription.DoctorName = dt.Rows[0]["Name"].ToString();
+                            patientPrescription.DoctorSurname = dt.Rows[0]["Surname"].ToString();
+                            patientPrescription.ConditionDescription = dt.Rows[0]["ConditionDecription"].ToString();
+                            patientPrescription.Date = dt.Rows[0]["Date"].ToString();
+                            patientPrescription.PrescriptionID = int.Parse(dt.Rows[0]["PrescriptionID"].ToString());
+
+                            dt.Clear();
+                            patientPrescriptions.Add(patientPrescription);
+                        }
+                    }
+                    else if (dt.Rows.Count > 0)
                     {
                         patientPrescription.DoctorName = dt.Rows[0]["Name"].ToString();
                         patientPrescription.DoctorSurname = dt.Rows[0]["Surname"].ToString();

@@ -2210,7 +2210,144 @@ namespace E_prescription.Models
             return dtset;
         }
 
+        public int AddMedicationInteraction(MedinteractionVM medinteraction)
+        {
+            string connString = configuration.GetConnectionString("connString");
 
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_AddMedicationInteraction", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@Ingredient1", medinteraction.Ingredient1);
+            dbComm.Parameters.AddWithValue("@Ingredient2", medinteraction.Ingredient2);
+            
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+            return x;
+        }
+
+        public DataTable GetMedicationInteractions()
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetMedicationInteractions", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dt = new DataTable();
+
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+        public DataTable CountPatientPrescriptions(int patientId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_CountPatientPrescriptions", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PatientID", patientId);
+
+            dt = new DataTable();
+
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public  DataTable CountRejectedPrescriptions(int patientId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_CountRejectedPrescriptions", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PatientID", patientId);
+
+            dt = new DataTable();
+
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable CountDispensedPrescriptions(int patientId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_CountDispensedPrescriptions", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@PatientID", patientId);
+
+            dt = new DataTable();
+
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
 
     }
 }

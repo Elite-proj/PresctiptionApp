@@ -48,7 +48,43 @@ namespace E_prescription.Areas.Patient.Controllers
 
             ViewBag.Patients = patientPrescriptionDetails.ToList();
             dt.Clear();
-            return View();
+
+            PatientPrescriptionDetailsModel patientPres = new PatientPrescriptionDetailsModel();
+            dt = data.CountPatientPrescriptions(patientId);
+
+            if (dt.Rows.Count > 0)
+            {
+                patientPres.PrescriptionCount = double.Parse(dt.Rows[0]["NumberOfPrescriptions"].ToString());
+            }
+            else
+                patientPres.PrescriptionCount = 0;
+
+            dt.Clear();
+
+            dt = data.CountRejectedPrescriptions(patientId);
+
+            if (dt.Rows.Count > 0)
+            {
+                patientPres.RejectedCount = double.Parse(dt.Rows[0]["RejectedPrescriptions"].ToString());
+            }
+            else
+                patientPres.RejectedCount = 0;
+
+            dt.Clear();
+
+            dt = data.CountDispensedPrescriptions(patientId);
+
+            if (dt.Rows.Count > 0)
+            {
+                patientPres.DispensedCount = double.Parse(dt.Rows[0]["DispensedPrescriptions"].ToString());
+            }
+            else
+                patientPres.DispensedCount = 0;
+
+            patientPres.DispensedPercentage = Math.Round((patientPres.DispensedCount / patientPres.PrescriptionCount) * 100,1);
+            
+
+            return View(patientPres);
         }
         [HttpGet]
         public IActionResult Details(int id)
