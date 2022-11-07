@@ -35,9 +35,10 @@
       </div>
       <div class="mobile_nav_items">
           <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-list"></i><span>Active prescriptions</span></a>
-          <a asp-area="Pharmacist" asp-controller="History" asp-action="Display"><i class="fas fa-history"></i><span>History</span></a>
-          <a asp-area="Pharmacist" asp-controller="Rejected" asp-action="Display"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
-          
+          <a asp-area="Pharmacist" asp-controller="History" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-history"></i><span>History</span></a>
+          <a asp-area="Pharmacist" asp-controller="Rejected" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
+          <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Search"><i class="fas fa-search"></i><span>Search Prescriptions</span></a>
+
       </div>
     </div>
     <!--mobile navigation bar end-->
@@ -47,8 +48,9 @@
             <h4>Pharmacy name</h4>
         </div>
         <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-list"></i><span>Active prescriptions</span></a>
-        <a asp-area="Pharmacist" asp-controller="History" asp-action="Display"><i class="fas fa-history"></i><span>History</span></a>
+        <a asp-area="Pharmacist" asp-controller="History" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-history"></i><span>History</span></a>
         <a asp-area="Pharmacist" asp-controller="Rejected" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
+        <a asp-area="Pharmacist" asp-controller="Prescriptions" asp-action="Search"><i class="fas fa-search"></i><span>Search Prescriptions</span></a>
 
     </div>
     <!--sidebar end-->

@@ -349,6 +349,7 @@ namespace E_prescription.Areas.Pharmacist.Controllers
                 }
                 medication.PharmacistID = Convert.ToInt32(HttpContext.Session.GetInt32("PharmacistID"));
                 medication.Date = DateTime.Now;
+                medication.PatientID= Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
                 data.DispenseMedication(medication);
 
                 return RedirectToAction("Details", "Prescriptions", new { id = medication.PrescriptionID });
@@ -469,6 +470,95 @@ namespace E_prescription.Areas.Pharmacist.Controllers
             {
                 return View(reject);
             }
+        }
+
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SearchResults(SearchPrescriptionVM searchPrescription)
+        {
+            if(ModelState.IsValid)
+            {
+                data = new DataAccess(configuration);
+                DataSet set = new DataSet();
+                dt = new DataTable();
+
+                searchPrescription.PatientID = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
+
+                set = data.SearchPrescription(searchPrescription);
+
+                List<PatientPrescriptionVM> patientPrescriptions = new List<PatientPrescriptionVM>();
+
+                
+                for (int i = 0; i < set.Tables.Count; i++)
+                {
+                    dt = set.Tables[i];
+                    
+                    PatientPrescriptionVM patientPrescription = new PatientPrescriptionVM();
+
+                    if(set.Tables[i].Rows.Count>1)
+                    {
+                        for(int j=0;j<set.Tables[i].Rows.Count;j++)
+                        {
+                            dt = set.Tables[i].Rows[j].Table;
+
+                            patientPrescription.DoctorName = dt.Rows[0]["Name"].ToString();
+                            patientPrescription.DoctorSurname = dt.Rows[0]["Surname"].ToString();
+                            patientPrescription.ConditionDescription = dt.Rows[0]["ConditionDecription"].ToString();
+                            patientPrescription.Date = dt.Rows[0]["Date"].ToString();
+                            patientPrescription.PrescriptionID = int.Parse(dt.Rows[0]["PrescriptionID"].ToString());
+
+                            dt.Clear();
+                            patientPrescriptions.Add(patientPrescription);
+                        }
+                    }
+                    else if (dt.Rows.Count > 0)
+                    {
+                        patientPrescription.DoctorName = dt.Rows[0]["Name"].ToString();
+                        patientPrescription.DoctorSurname = dt.Rows[0]["Surname"].ToString();
+                        patientPrescription.ConditionDescription = dt.Rows[0]["ConditionDecription"].ToString();
+                        patientPrescription.Date = dt.Rows[0]["Date"].ToString();
+                        patientPrescription.PrescriptionID = int.Parse(dt.Rows[0]["PrescriptionID"].ToString());
+
+                        dt.Clear();
+                        patientPrescriptions.Add(patientPrescription);
+                    }
+
+                }
+
+                dt.Clear();
+                ViewBag.Prescriptions = patientPrescriptions.ToList();
+                set.Clear();
+
+                if(ViewBag.Prescriptions.Count==0)
+                {
+                    ModelState.AddModelError("", "No results found");
+                    return View("Search", searchPrescription);
+                }
+
+                return View("SearchResults",new { area="Pharmacist"});
+            }
+            else
+            {
+                
+                return View("Search", searchPrescription);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult SearchResults()
+        {
+            return View();
+        }
+
+        private ActionResult Invalid()
+        {
+            ModelState.AddModelError("", "Invalid username/password");
+            return View("Login");
         }
     }
 }

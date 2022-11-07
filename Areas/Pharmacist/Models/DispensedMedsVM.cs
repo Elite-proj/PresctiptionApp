@@ -12,7 +12,8 @@ namespace E_prescription.Areas.Pharmacist.Models
         public string MedicationName { get; set; }
 
         public int DosageID { get; set; }
-
+        public string PharmacistName { get; set; }
+        public string PharmacistSurname { get; set; }
         public string DosageDescription { get; set; }
         public int Quantity { get; set; }
         public string Date { get; set; }

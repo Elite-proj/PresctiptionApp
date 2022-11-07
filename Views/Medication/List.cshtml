@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Medication List";
     Layout = "_AdminLayout";
+    string holder = "";
 }
 
 <head>
@@ -39,11 +40,25 @@
                 @foreach (MedicationIngredientModel list in ViewBag.Medications)
                 {
                     <tr>
+                       
+                        @if(holder==list.MedicationName)
+                        { 
+                            <td></td>
+                            <td></td>
+                            <td>@list.IngredientDecription</td>
+                            <td>@list.StrengthDescription</td>
+                        }
+                        else
+                        { 
+                            <td>@list.MedicationName</td>
+                            <td>@list.DosageDescription</td>
+                            <td>@list.IngredientDecription</td>
+                            <td>@list.StrengthDescription</td>
+                        }
 
-                        <td>@list.MedicationName</td>
-                        <td>@list.DosageDescription</td>
-                        <td>@list.IngredientDecription</td>
-                        <td>@list.StrengthDescription</td>
+                        @{
+                           holder = @list.MedicationName;
+                        }
 
                     </tr>
                 }
@@ -57,5 +72,5 @@
     }
 
 
-    <a asp-action="Add" asp-controller="PharmacistRecords" class="btn btn-primary">Register new pharmacist</a>
+    <a asp-action="Add" asp-controller="Medication" class="btn btn-primary">Add new medication</a>
 </div>

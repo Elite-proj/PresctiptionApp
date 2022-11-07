@@ -33,6 +33,11 @@ namespace E_prescription.Areas.Patient.Models
         public string StrengthDescription { get; set; }  
 
 
+        public double PrescriptionCount { get; set; }
+        public double DispensedCount { get; set; }
+        public double DispensedPercentage { get; set; }
+        public double RejectedCount { get; set; }
+
 
     }
 }

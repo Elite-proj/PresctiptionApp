@@ -16,6 +16,7 @@ namespace E_prescription.Areas.Pharmacist.Models
 
         public int PatientID { get; set; }
         public string MedicationName { get; set; }
+        public int DispensedMedicationID { get; set; }
         public string PharmacistName { get; set; }
         public string PharmacistSurname { get; set; }
         public string RejectReason { get; set; }

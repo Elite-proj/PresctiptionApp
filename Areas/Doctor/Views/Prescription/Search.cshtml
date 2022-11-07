@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model SearchPrescriptionVM
+@{
+    ViewBag.Title = "Seach Prescription";
+    Layout = "_DocSecondLayout";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<div class="text-center">
+
+    <form asp-controller="Prescription" asp-area="Doctor" asp-action="SearchResults" method="post">
+        <div class="row text-center">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <label asp-for="Search">Search prescription by condition name, practice name or pharmacy name</label>
+        <input type="search" asp-for="Search" class="form-control" />
+        <span asp-validation-for="Search" class="text-danger"></span>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+
+</div>
+
+
+
