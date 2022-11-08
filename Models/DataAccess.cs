@@ -1769,22 +1769,37 @@ namespace E_prescription.Models
             prescribe.Date = DateTime.Now.ToString();
             
 
-            if (prescribe.ContraIndicationID == 0)
+            //if (prescribe.ContraIndicationID == 0)
+            //{
+            //    //Represents null
+            //    prescribe.ContraIndicationID = 3;
+            //}
+
+            //if (prescribe.MedInteractionID == 0)
+            //{
+            //    //represents null
+            //    prescribe.MedInteractionID = 1;
+            //}
+
+            //if (prescribe.AllergyID == 0)
+            //{
+            //    //Represents Null
+            //    prescribe.AllergyID = 4;
+            //}
+
+            if(prescribe.ContraIndicationID=="")
             {
-                //Represents null
-                prescribe.ContraIndicationID = 3;
+                prescribe.ContraIndicationID = null;
+            }
+            
+            if(prescribe.MedInteractionID=="")
+            {
+                prescribe.MedInteractionID = null;
             }
 
-            if (prescribe.MedInteractionID == 0)
+            if(prescribe.AllergyID=="")
             {
-                //represents null
-                prescribe.MedInteractionID = 1;
-            }
-
-            if (prescribe.AllergyID == 0)
-            {
-                //Represents Null
-                prescribe.AllergyID = 4;
+                prescribe.AllergyID = null;
             }
 
             dbComm.Parameters.AddWithValue("@MedicationID", prescribe.MedicationID);
@@ -2116,22 +2131,37 @@ namespace E_prescription.Models
             dbComm = new SqlCommand("sp_DispenseMedication", dbconn);
             dbComm.CommandType = CommandType.StoredProcedure;
 
-            if (medication.ContraIndicationID == 0)
+            //if (medication.ContraIndicationID == 0)
+            //{
+            //    //Represents null
+            //   medication.ContraIndicationID = 3;
+            //}
+
+            //if (medication.MedInteractionID == 0)
+            //{
+            //    //represents null
+            //    medication.MedInteractionID = 1;
+            //}
+
+            //if (medication.AllergyID == 0)
+            //{
+            //    //Represents Null
+            //    medication.AllergyID = 4;
+            //}
+
+            if(medication.ContraIndicationID=="")
             {
-                //Represents null
-               medication.ContraIndicationID = 3;
+                medication.ContraIndicationID = null;
             }
 
-            if (medication.MedInteractionID == 0)
+            if(medication.AllergyID=="")
             {
-                //represents null
-                medication.MedInteractionID = 1;
+                medication.AllergyID = null;
             }
 
-            if (medication.AllergyID == 0)
+            if(medication.MedInteractionID=="")
             {
-                //Represents Null
-                medication.AllergyID = 4;
+                medication.MedInteractionID = null;
             }
 
             dbComm.Parameters.AddWithValue("@MedicationID", medication.MedicationID);

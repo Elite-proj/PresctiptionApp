@@ -62,8 +62,8 @@ namespace E_prescription.Areas.Doctor.Controllers
         {
             data = new DataAccess(configuration);
             dt = new DataTable();
-
-            dt = data.GetMaximumPrescription(7);
+            int id= Convert.ToInt32(HttpContext.Session.GetInt32("DoctorID"));
+            dt = data.GetMaximumPrescription(id);
 
             PrescribeMedication prescribe = new PrescribeMedication();
             prescribe.PrescriptionID = int.Parse(dt.Rows[0]["PrescriptionID"].ToString());
@@ -141,12 +141,12 @@ namespace E_prescription.Areas.Doctor.Controllers
             data = new DataAccess(configuration);
             dt = new DataTable();
 
-            if (prescribe.ContraIndicationID == 0)
+            if (prescribe.ContraIndicationID == null)
             {
                 DataTable conditionDt = new DataTable();
                 DataTable IngredientDt = new DataTable();
                 IngredientDt = data.GetActiveIngredientsByMedicationID(prescribe);
-                conditionDt = data.GetPatientDiagnosis(4);
+                conditionDt = data.GetPatientDiagnosis(Convert.ToInt32(HttpContext.Session.GetInt32("PatientID")));
 
                 for(int i=0;i<IngredientDt.Rows.Count;i++)
                 {
@@ -160,7 +160,7 @@ namespace E_prescription.Areas.Doctor.Controllers
                         if (dt.Rows.Count > 0)
                         {
                             ModelState.AddModelError("ContraIndication", "Contra indication found");
-                            prescribe.ContraIndicationID = int.Parse(dt.Rows[0]["ContraIndicationID"].ToString());
+                            prescribe.ContraIndicationID = dt.Rows[0]["ContraIndicationID"].ToString();
 
                             //break;
                             //*********************************************
@@ -206,13 +206,13 @@ namespace E_prescription.Areas.Doctor.Controllers
             }  
             
 
-            if(prescribe.MedInteractionID==0)
+            if(prescribe.MedInteractionID==null)
             {
                 DataTable patientDt = new DataTable();
                 DataTable IngredientDt = new DataTable();
 
                 IngredientDt = data.GetActiveIngredientsByMedicationID(prescribe);
-                patientDt = data.GetMedicationsByPatientID(4);
+                patientDt = data.GetMedicationsByPatientID(Convert.ToInt32(HttpContext.Session.GetInt32("PatientID")));
 
                 for(int i=0;i<IngredientDt.Rows.Count;i++)
                 {
@@ -228,7 +228,7 @@ namespace E_prescription.Areas.Doctor.Controllers
                             ModelState.AddModelError("MedInteraction", "Medication Interaction found.");
                             ModelState.AddModelError("ContraIndication", "Contra indication found");
                             ModelState["ContraIndication"].Errors.Clear();
-                            prescribe.MedInteractionID = int.Parse(dt.Rows[0]["MedInteractionID"].ToString());
+                            prescribe.MedInteractionID = dt.Rows[0]["MedInteractionID"].ToString();
 
                             //break;
                             //*******************************************
@@ -274,7 +274,7 @@ namespace E_prescription.Areas.Doctor.Controllers
             }
 
 
-            if(prescribe.AllergyID==0)
+            if(prescribe.AllergyID==null)
             {
                 DataTable IngredientDt = new DataTable();
                 DataTable Allergies = new DataTable();
@@ -285,7 +285,7 @@ namespace E_prescription.Areas.Doctor.Controllers
                 for(int i=0;i<IngredientDt.Rows.Count;i++)
                 {
                     int IngredientID = int.Parse(IngredientDt.Rows[i]["IngredientID"].ToString());
-                    int PatientID = 4;
+                    int PatientID = Convert.ToInt32(HttpContext.Session.GetInt32("PatientID"));
                     dt = data.CheckDrugAllergy(IngredientID,PatientID);
 
                     if(dt.Rows.Count>0)
@@ -297,7 +297,7 @@ namespace E_prescription.Areas.Doctor.Controllers
 
                         ModelState.AddModelError("Allergy", "Drug allergy found");
 
-                        prescribe.AllergyID = int.Parse(dt.Rows[0]["AllergyID"].ToString());
+                        prescribe.AllergyID = dt.Rows[0]["AllergyID"].ToString();
 
                         //break;
                         //***********************************************************

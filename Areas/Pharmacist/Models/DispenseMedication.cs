@@ -11,9 +11,9 @@ namespace E_prescription.Areas.Pharmacist.Models
         public int MedicationID { get; set; }
         public int PatientID { get; set; }
         public int DosageID { get; set; }
-        public int ContraIndicationID { get; set; }
-        public int MedInteractionID { get; set; }
-        public int AllergyID { get; set; }
+        public string ContraIndicationID { get; set; }
+        public string MedInteractionID { get; set; }
+        public string AllergyID { get; set; }
         public int PharmacistID { get; set; }
         public int PrescriptionID { get; set; }
         public string MedicationName { get; set; }
