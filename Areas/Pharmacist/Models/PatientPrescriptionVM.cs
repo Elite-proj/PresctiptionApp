@@ -29,5 +29,8 @@ namespace E_prescription.Areas.Pharmacist.Models
         public string DoctorSurname { get; set; }
         public string ConditionDescription { get; set; }
         public string Date { get; set; }
+
+
+        
     }
 }

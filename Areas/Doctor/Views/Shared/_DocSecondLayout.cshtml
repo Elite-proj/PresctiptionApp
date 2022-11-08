@@ -38,7 +38,7 @@
             <a asp-controller="Prescription" asp-area="Doctor" asp-action="PatientDiagnosis" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-list"></i><span>Patient Diagnosis</span></a>
             <a asp-controller="Prescription" asp-area="Doctor" asp-action="PrescriptionList"><i class="fas fa-list"></i><span>Active Prescriptions</span></a>
             <a asp-controller="Prescription" asp-area="Doctor" asp-action="Search"><i class="fas fa-search"></i><span>Search Prescriptions</span></a>
-
+            <a asp-area="Doctor" asp-controller="Rejected" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
         </div>
     </div>
     <!--mobile navigation bar end-->
@@ -51,7 +51,7 @@
         <a asp-controller="Prescription" asp-area="Doctor" asp-action="PatientDiagnosis" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-list"></i><span>Patient Diagnosis</span></a>
         <a asp-controller="Prescription" asp-area="Doctor" asp-action="PrescriptionList"><i class="fas fa-list"></i><span>Active Prescriptions</span></a>
         <a asp-controller="Prescription" asp-area="Doctor" asp-action="Search"><i class="fas fa-search"></i><span>Search Prescriptions</span></a>
-
+        <a asp-area="Doctor" asp-controller="Rejected" asp-action="Display" asp-route-id="@Context.Session.GetInt32("PatientID")"><i class="fas fa-ban"></i><span>Rejected Prescriptions</span></a>
     </div>
     <!--sidebar end-->
 
