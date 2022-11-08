@@ -1,0 +1,68 @@
+﻿@using E_prescription.Areas.Patient.Models
+@{
+
+    ViewData["Title"] = "Patient Page";
+    Layout = "_PatientLayout";
+
+}
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h2 class="h2 mb-0 text-gray-800">Medical History</h2>
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-xl-8 col-lg-7">
+            <div class="col-9 border p-4">
+                <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Doctor Name</th>
+                            <th>Condition</th>
+                            <th>Medication Name</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (PatientPrescriptionDetailsModel patientPrescriptionDetail in ViewBag.Details)
+                            {
+                                <tr>
+                                    <td>@patientPrescriptionDetail.Date</td>
+                                    <td>@patientPrescriptionDetail.DoctorName @patientPrescriptionDetail.DoctorSurname</td>
+
+                                    <td>@patientPrescriptionDetail.ConditionDescription</td>
+                                    <td>@patientPrescriptionDetail.MedicationName</td>
+                                    <td>@patientPrescriptionDetail.DespensedStatus</td>
+                    
+
+                                </tr>
+                            }
+                           
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+            <br />
+            <br />
+           <div class="col-3 offset-3">
+                    <a asp-area="Patient" asp-action="Index" asp-controller="Home" class="btn btn-info form-control text-white">Back</a>
+                </div>
+               
+
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Technites E-Prescription Solution 2022</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+</div>

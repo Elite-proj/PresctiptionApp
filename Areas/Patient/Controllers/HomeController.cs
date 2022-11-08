@@ -42,7 +42,6 @@ namespace E_prescription.Areas.Patient.Controllers
                 patientPrescriptionDetail.ConditionDescription = dt.Rows[i]["ConditionDecription"].ToString();
 
 
-
                 patientPrescriptionDetails.Add(patientPrescriptionDetail);
             }
 
@@ -114,6 +113,7 @@ namespace E_prescription.Areas.Patient.Controllers
                 patientPrescriptionDetail.RepeatDescription = dt.Rows[i]["RepeatDescription"].ToString();
                 patientPrescriptionDetail.DespensedStatus = dt.Rows[i]["DispensedStatus"].ToString();
 
+               
                 patientPrescriptionDetails.Add(patientPrescriptionDetail);
             }
             dt.Clear();
@@ -155,5 +155,34 @@ namespace E_prescription.Areas.Patient.Controllers
             return View();
         }
 
+        public IActionResult MedicalHistory(int id)
+        {
+            data = new DataAccess(configuration);
+            dt = new DataTable();
+
+            dt = data.GetPrescriptionDetails(id);
+
+            List<PatientPrescriptionDetailsModel> patientPrescriptionDetails = new List<PatientPrescriptionDetailsModel>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PatientPrescriptionDetailsModel patientPrescriptionDetail = new PatientPrescriptionDetailsModel();
+                patientPrescriptionDetail.Date = dt.Rows[i]["Date"].ToString();
+                patientPrescriptionDetail.DoctorName = dt.Rows[i]["Name"].ToString();
+                patientPrescriptionDetail.DoctorSurname = dt.Rows[i]["Surname"].ToString();
+                patientPrescriptionDetail.PrescriptionId = int.Parse(dt.Rows[i]["PrescriptionID"].ToString());
+                patientPrescriptionDetail.ConditionDescription = dt.Rows[i]["ConditionDecription"].ToString();
+                patientPrescriptionDetail.MedicationName = dt.Rows[i]["MedicationName"].ToString();
+                patientPrescriptionDetail.DespensedStatus = dt.Rows[i]["DespensedStatus"].ToString();
+
+                patientPrescriptionDetails.Add(patientPrescriptionDetail);
+            }
+            dt.Clear();
+            ViewBag.Details = patientPrescriptionDetails.ToList();
+
+
+            return View();
+
+        }
     }
 }
