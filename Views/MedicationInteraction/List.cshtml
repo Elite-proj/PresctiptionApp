@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Medication Interaction List";
+    Layout = "_AdminLayout";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<div class="form-group">
+
+    @if (ViewBag.Interactions.Count > 0)
+    {
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (MedinteractionVM indication in ViewBag.Interactions)
+                {
+                <tr>
+
+                    <td>@indication.Description</td>
+                    <td><a asp-action="Update" asp-controller="MedicationInteraction" asp-route-id="@indication.MedInteractionID" class="btn btn-primary">Edit</a></td>
+                    <td><a asp-action="Update" asp-controller="MedicationInteraction" asp-route-id="@indication.MedInteractionID" class="btn btn-danger">Delete</a></td>
+
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else if (ViewBag.Interactions.Count == 0)
+    {
+        <h4 class="bg-warning text-center text-white p-2">No Medication interaction Records</h4>
+    }
+
+
+    <a asp-action="Add" asp-controller="ContraIndications" class="btn btn-primary">ADD NEW CONTRA-INDICATION</a>
+</div>
+
+

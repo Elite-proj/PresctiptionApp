@@ -37,7 +37,7 @@ namespace E_prescription.Controllers
                 doctor.FirstName = dt.Rows[i]["Name"].ToString();
                 doctor.Surname = dt.Rows[i]["Surname"].ToString();
                 doctor.Email = dt.Rows[i]["Email"].ToString();
-                doctor.ContactNo = int.Parse(dt.Rows[i]["ContactNo"].ToString());
+                doctor.ContactNo = dt.Rows[i]["ContactNo"].ToString();
                 doctor.AddressLine1 = dt.Rows[i]["AddressLine1"].ToString();
                 doctor.AddressLine2 = dt.Rows[i]["AddressLine2"].ToString();
                 doctor.SuburbID = int.Parse(dt.Rows[i]["SuburbID"].ToString());

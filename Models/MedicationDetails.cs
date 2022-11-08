@@ -10,6 +10,7 @@ namespace E_prescription.Models
         public int MedicationIngredientID { get; set; }
         public int MedicationID { get; set; }
         public int IngredientID { get; set; }
+        public string Strength { get; set; }
 
 
     }

@@ -21,11 +21,7 @@
         <h1 class="display-4">Add Active Ingredients</h1>
         <label asp-for="IngredientDescription" class="col-6">Ingredient Name</label>
         <input type="text" asp-for="IngredientDescription" class="col-6 form-control" />
-        <label asp-for="StrengthID" class="col-6">Strength</label>
-        <select asp-for="StrengthID" class="col-6 form-control" asp-items="@ViewBag.Strengths"></select>
-        <div class="d-grid gap-2 d-md-block">
-
-        </div>
+        
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
     

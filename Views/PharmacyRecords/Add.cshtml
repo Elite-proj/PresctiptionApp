@@ -78,9 +78,24 @@
                         <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
                     </div>
                     <div class="col-6 form-group">
+                        <label asp-for="PostalCode">Postal Code</label>
+                        <input class="form-control" asp-for="PostalCode" type="number" />
+                        <div><span asp-validation-for="PostalCode" class="text-danger"></span></div>
+                    </div>
+                    
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
                         <label asp-for="PharmacyContactNo">Pharmacy Contact number</label>
                         <input class="form-control" asp-for="PharmacyContactNo" type="number" />
                         <div><span asp-validation-for="PharmacyContactNo" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="PharmacistID">Responsible Pharmacist</label>
+                        <select asp-for="PharmacistID" asp-items="@ViewBag.Pharmacists" class="form-control">
+                            <option>-- Select responsible pharmacist --</option>
+                        </select>
+                        <div><span asp-validation-for="PharmacistID" class="text-danger"></span></div>
                     </div>
                 </div>
                 <div class="input-group">

@@ -1,42 +1,130 @@
-﻿@{
-    ViewData["Title"] = "ConditionDiagnosisModel";
-    Layout = null;
+﻿@model MedicalPractice
+@{
+    ViewBag.Title = "Update Medical Practice records";
+    Layout = "_AdminLayout";
 }
 
-<div class="row">
-    <div class="col-sm-2">
-        <a asp-controller="ConditionDiagnosisRec" asp-action="Add" class="btn btn-primary">Add Condition Diagnosis Record</a>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Prescription</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <main>
+            <div class="text-center">
+                <p2>
+                    You are required to fill all fields in this form.<br />
+                    If City/suburb you reside in is not listed, choose the nearest one.
+                </p2>
+            </div>
+
+            <br /><br />
+            <form asp-controller="MedicalPracticeRec" asp-action="Update" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="PracticeName">PracticeName</label>
+                        <input asp-for="PracticeName" class="form-control" />
+                        <div><span asp-validation-for="PracticeName" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="PracticeNo">Practice number</label>
+                        <input class="form-control" asp-for="PracticeNo" />
+                        <div><span asp-validation-for="PracticeNo" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="AddressLine1">AddressLine1</label>
+                        <textarea asp-for="AddressLine1" class="form-control" rows="5"></textarea>
+                        <div><span asp-validation-for="AddressLine1" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="AddressLine2">AddressLine2</label>
+                        <textarea asp-for="AddressLine2" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="ProvinceId">Province</label>
+                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
+                            <option>-- Select Province --</option>
+                        </select>
+                        <div><span asp-validation-for="ProvinceId" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="CityId">City</label>
+                        <select id="CityList" asp-for="CityId" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                            <option>-- Select City --</option>
+                        </select>
+                        <div><span asp-validation-for="CityId" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="SuburbId">Suburb</label>
+                        <select id="SuburbList" asp-for="SuburbId" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                            <option>-- Select Suburb --</option>
+                        </select>
+                        <div><span asp-validation-for="SuburbId" class="text-dark"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="PostalCode">Postal Code</label>
+                        <input class="form-control" asp-for="PostalCode"  />
+                        <div><span asp-validation-for="PostalCode" class="text-danger"></span></div>
+                    </div>
+
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="PracticeContactNo">Practice Contact number</label>
+                        <input class="form-control" asp-for="PracticeContactNo" type="number" />
+                        <div><span asp-validation-for="PracticeContactNo" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="PracticeEmail">Practice Email</label>
+                        <input class="form-control" asp-for="PracticeEmail" type="email" />
+                        <div><span asp-validation-for="PracticeEmail" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <input asp-for="MedicalPracticeId" hidden />
+                <button type="submit" class="btn btn-primary">Update medical Practice</button>
+
+            </form>
+
+        </main>
     </div>
-</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ProvinceList").change(function () {
+                $.getJSON("/MedicalPracticeRec/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
+                    var row = "";
+                    $("#CityList").empty();
+                    $("#SuburbList").empty();
+                    $.each(d, function (i, v) {
+                        row += "<option value=" + v.value + ">" + v.text + "</option>";
+                    });
+                    $("#CityList").html(row);
+                })
+            })
 
+            $("#CityList").change(function () {
+                $.getJSON("/MedicalPracticeRec/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+                    var row = "";
+                    $("#SuburbList").empty();
+                    $.each(d, function (i, v) {
+                        row += "<option value=" + v.value + ">" + v.text + "</option>";
+                    });
+                    $("#SuburbList").html(row);
+                })
+            })
+        })
+    </script>
 
-<div class="col-12 border p-3">
-    <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>Condition Diagnosis ID</th>
-                <th>Condition Description</th>
-                <th class="text-center">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var condition in Model)
-            {
-                <tr>
-                    <td>@condition.ConditionId</td>
-                    <td>@condition.ConditionDecription</td>
-                    <td>
-                        <a asp-controller="ConditionDiagnosisRec" asp-action="Update" asp-route-CenterID="@condition.ConditionId" class="material-icons">edit</a>
-                        @*<a asp-controller="Report" asp-action="DownloadCenterReport" asp-route-BudgetID="@center.CenterID" class="text-primary"><i class="material-icons">description</i></a>*@
-                        @*<a asp-controller="Center" asp-action="Centers" class="text-primary"><i class="material-icons"></i></a>*@
-                        <a href="javascript:deleteCenter(@condition.ConditionId);" class="text-danger"> <i class="material-icons">delete</i></a>
-                    </td>
-
-                </tr>
-
-            }
-        </tbody>
-
-    </table>
-
-</div>
+</body>

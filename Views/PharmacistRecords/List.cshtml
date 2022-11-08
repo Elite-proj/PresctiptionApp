@@ -16,6 +16,14 @@
 </head>
 
 <div class="form-group">
+    @if (TempData.Keys.Contains("PharmacistEdit"))
+    {
+        <h4 class="bg-success text-center text-white p-2">
+
+            @TempData["PharmacistEdit"]
+        </h4>
+        <br />
+    }
     @if (ViewBag.Pharmacists.Count > 0)
     {
         <table class="table table-striped table-bordered">

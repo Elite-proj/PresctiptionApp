@@ -25,7 +25,7 @@ namespace E_prescription.Models.Account
         public string ConfirmEmail { get; set; }
 
         [Required(ErrorMessage = "Please enter contact number.")]
-        public int ContactNo { get; set; }
+        public string ContactNo { get; set; }
 
         [Required(ErrorMessage = "Please select suburb.")]
         public int SuburbID { get; set; }
@@ -46,8 +46,11 @@ namespace E_prescription.Models.Account
 
         public int PharmacistId { get; set; }
         [Required(ErrorMessage ="Please enter registration number.")]
-        public int RegNumber { get; set; }
+        public string RegNumber { get; set; }
 
         public int? PharmacyID { get; set; }
+
+        [Required(ErrorMessage ="Please enter postal code")]
+        public string PostalCode { get; set; }
     }
 }

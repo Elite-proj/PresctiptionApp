@@ -3,6 +3,15 @@
     Layout = "_AdminLayout";
 }
 
+@if (TempData.Keys.Contains("PracticeEdit"))
+{
+    <h4 class="bg-success text-center text-white p-2">
+
+        @TempData["PracticeEdit"]
+    </h4>
+    <br />
+}
+
 <div class="row">
     <div class="col-sm-2">
         <a asp-controller="MedicalPracticeRec" asp-action="Add" class="btn btn-primary">Add Medication</a>
@@ -14,38 +23,29 @@
     <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>Medical Practice ID</th>
                 <th>Practice Name</th>
                 <th>Practice No</th>
                 <th>Practice Contact No</th>
                 <th>Practice Email</th>
                 <th>Address</th>
-                <th>Line</th>
-                <th>Province</th>
-                <th>City</th>
-                <th>Suburb</th>
-                <th class="text-center">Actions</th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach (var medicalPractice in Model)
+            @foreach (MedicalPractice medical in ViewBag.Practices)
             {
                 <tr>
-                    <td>@medicalPractice.MedicalPracticeId</td>
-                    <td>@medicalPractice.PracticeName</td>
-                    <td>@medicalPractice.PracticeNo</td>
-                    <td>@medicalPractice.PracticeContactNo</td>
-                    <td>@medicalPractice.PracticeEmail</td>
-                    <td>@medicalPractice.AddressLine1</td>
-                    <td>@medicalPractice.AddressLine2</td>
-                    <td>@medicalPractice.ProvinceId</td>
-                    <td>@medicalPractice.SuburbId</td>
-                    <td>@medicalPractice.CityId</td>
+
+                    <td>@medical.PracticeName</td>
+                    <td>@medical.PracticeNo</td>
+                    <td>@medical.PracticeContactNo</td>
+                    <td>@medical.PracticeEmail</td>
+                    <td>@medical.AddressLine1 @medical.AddressLine2</td>
+
+
                     <td>
-                        <a asp-controller="MedicalPracticeRec" asp-action="Update" asp-route-CenterID="@medicalPractice.MedicalPracticeId" class="material-icons">edit</a>
-                        @*<a asp-controller="Report" asp-action="DownloadCenterReport" asp-route-BudgetID="@center.CenterID" class="text-primary"><i class="material-icons">description</i></a>*@
-                        @*<a asp-controller="Center" asp-action="Centers" class="text-primary"><i class="material-icons"></i></a>*@
-                        <a href="javascript:deleteCenter(@medicalPractice.MedicalPracticeId);" class="text-danger"> <i class="material-icons">delete</i></a>
+                        <a asp-controller="MedicalPracticeRec" asp-action="Update" asp-route-id="@medical.MedicalPracticeId" class="material-icons">edit</a>
                     </td>
 
                 </tr>

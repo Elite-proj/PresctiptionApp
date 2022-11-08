@@ -93,13 +93,18 @@
                           </div>
                       </div>
                       <div class="input-group">
-                          <div class="col-12 form-group">
+                          <div class="col-6 form-group">
                               <label asp-for="DateOfBith">Date of Birth</label>
                               <input class="form-control" asp-for="DateOfBith" type="date" id="date" />
                               <div><span asp-validation-for="DateOfBith" class="text-danger"></span></div>
 
                           </div>
-                          
+                          <div class="col-6 form-group">
+                              <label asp-for="ContactNo">Contact number</label>
+                              <input class="form-control" asp-for="ContactNo" maxlength="10" type="number" />
+                              <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
+                          </div>
+
                       </div>
                       <div class="input-group">
                           <div class="col-6 form-group">
@@ -137,9 +142,9 @@
                               <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
                           </div>
                           <div class="col-6 form-group">
-                              <label asp-for="ContactNo">Contact number</label>
-                              <input class="form-control" asp-for="ContactNo" maxlength="10" type="tel" />
-                              <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
+                              <label asp-for="PostalCode">Postal Code</label>
+                              <input class="form-control" asp-for="PostalCode" type="number" />
+                              <div><span asp-validation-for="PostalCode" class="text-danger"></span></div>
                           </div>
                       </div>
                       <div class="input-group">

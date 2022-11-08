@@ -9,7 +9,7 @@ namespace E_prescription.Models
     {
         public int MedInteractionID { get; set; }
         public int Ingredient1 { get; set; }
-        public string Ingredient1Name { get; set; }
+        public string Description { get; set; }
         public int Ingredient2 { get; set; }
 
         public string Ingredient2Name { get; set; }

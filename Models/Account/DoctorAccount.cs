@@ -19,13 +19,13 @@ namespace E_prescription.Models.Account
         [EmailAddress(ErrorMessage = "Incorrect email.")]
         public string Email { get; set; }
 
-        //[Required(ErrorMessage = "Confirm email address.")]
-        //[EmailAddress(ErrorMessage = "Incorrect email address.")]
-        //[Display(Name = "Confirm Email")]
-        //public string ConfirmEmail { get; set; }
+        [Required(ErrorMessage = "Confirm email address.")]
+        [EmailAddress(ErrorMessage = "Incorrect email address.")]
+        [Display(Name = "Confirm Email")]
+        public string ConfirmEmail { get; set; }
 
         [Required(ErrorMessage = "Please enter contact number.")]
-        public int ContactNo { get; set; }
+        public string ContactNo { get; set; }
 
         [Required(ErrorMessage = "Please select suburb.")]
         public int SuburbID { get; set; }
@@ -50,5 +50,8 @@ namespace E_prescription.Models.Account
 
         [Required(ErrorMessage ="Please select medical practice")]
         public int MedicalPracticeID { get; set; }
+
+        [Required(ErrorMessage = "Please enter postal code.")]
+        public string PostalCode { get; set; }
     }
 }

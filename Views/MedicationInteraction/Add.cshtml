@@ -32,6 +32,8 @@
 <div class="text-center">
     <form asp-action="Add" asp-controller="MedicationInteraction" method="post">
         <h1 class="display-4">Add Medication Interactions</h1>
+        <label asp-for="Description"class="col-6">Description</label>
+        <input asp-for="Description" class="form-control" />
         <label asp-for="Ingredient1" class="col-6">Active Ingredient 1</label>
         <select class="form-control" id="cmbIngredient1" asp-for="Ingredient1" asp-items="@ViewBag.Ingredients"></select>
         <br />

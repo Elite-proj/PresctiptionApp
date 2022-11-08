@@ -81,7 +81,7 @@ namespace E_prescription.Controllers.Medication
             {
                 ActiveIngredientVM ingredient = new ActiveIngredientVM();
                 ingredient.IngredientID = int.Parse(ingredientDT.Rows[i]["IngredientID"].ToString());
-                ingredient.IngredientDescription = ingredientDT.Rows[i]["Name"].ToString();
+                ingredient.IngredientDescription = ingredientDT.Rows[i]["IngredientDescription"].ToString();
 
                 ingredients.Add(ingredient);
             }
@@ -110,7 +110,7 @@ namespace E_prescription.Controllers.Medication
                 medicationIngredient.MedicationName = dt.Rows[i]["MedicationName"].ToString();
                 medicationIngredient.IngredientDecription= dt.Rows[i]["IngredientDescription"].ToString();
                 medicationIngredient.DosageDescription= dt.Rows[i]["DosageDescription"].ToString();
-                medicationIngredient.StrengthDescription= dt.Rows[i]["StrengthDescription"].ToString();
+                medicationIngredient.StrengthDescription= dt.Rows[i]["Strength"].ToString();
 
                 medicationIngredients.Add(medicationIngredient);
             }
@@ -136,6 +136,7 @@ namespace E_prescription.Controllers.Medication
                     MedicationDetails medicationDetails = new MedicationDetails();
                     medicationDetails.MedicationID = medication.MedicationID;
                     medicationDetails.IngredientID = details.IngredientID;
+                    medicationDetails.Strength = details.Strength;
 
                     data.AddMedicationIngredient(medicationDetails);
                 }

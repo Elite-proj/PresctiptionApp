@@ -11,7 +11,8 @@ namespace E_prescription.Models
         {
             Doctors = new HashSet<Doctor>();
         }
-
+        public string Status { get; set; }
+        public string PostalCode { get; set; }
         public int MedicalPracticeId { get; set; }
         public string PracticeName { get; set; }
         public string AddressLine1 { get; set; }

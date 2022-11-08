@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data;
 using E_prescription.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using E_prescription.Models.Account;
 
 namespace E_prescription.Controllers.PharmacyRecords
 {
@@ -42,6 +43,23 @@ namespace E_prescription.Controllers.PharmacyRecords
             }
             var getProvinces = provinces.ToList();
             ViewBag.Provinces = new SelectList(getProvinces, "ProvinceID", "ProvinceName");
+            dt.Clear();
+
+
+            dt = data.GetPhamacists();
+
+            List<PharmacistAccount> pharmacists = new List<PharmacistAccount>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PharmacistAccount pharmacist = new PharmacistAccount();
+                pharmacist.PharmacistId = Convert.ToInt32(dt.Rows[i]["PharmacistID"]);
+                pharmacist.FirstName = dt.Rows[i]["NAMES"].ToString();
+        
+                pharmacists.Add(pharmacist);
+            }
+
+            ViewBag.Pharmacists = new SelectList(pharmacists.ToList(), "PharmacistId", "FirstName");
 
             return View("Add");
         }
@@ -127,7 +145,7 @@ namespace E_prescription.Controllers.PharmacyRecords
                 pharmacy.PharmacyId = Convert.ToInt32(dt.Rows[i]["PharmacyID"]);
                 pharmacy.PharmacyName = dt.Rows[i]["PharmacyName"].ToString();
                 pharmacy.PharmacyEmail = dt.Rows[i]["PharmacyEmail"].ToString();
-                pharmacy.PharmacyContactNo = int.Parse(dt.Rows[i]["PharmacyContactNo"].ToString());
+                pharmacy.PharmacyContactNo = dt.Rows[i]["PharmacyContactNo"].ToString();
 
                 pharmacies.Add(pharmacy);
             }
@@ -164,23 +182,61 @@ namespace E_prescription.Controllers.PharmacyRecords
             var getProvinces = provinces.ToList();
             ViewBag.Provinces = new SelectList(getProvinces, "ProvinceID", "ProvinceName");
 
+            dt.Clear();
+
+
+            dt = data.GetPhamacists();
+
+            List<PharmacistAccount> pharmacists = new List<PharmacistAccount>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PharmacistAccount pharmacist = new PharmacistAccount();
+                pharmacist.PharmacistId = Convert.ToInt32(dt.Rows[i]["PharmacistID"]);
+                pharmacist.FirstName = dt.Rows[i]["NAMES"].ToString();
+
+                pharmacists.Add(pharmacist);
+            }
+
+            ViewBag.Pharmacists = new SelectList(pharmacists.ToList(), "PharmacistId", "FirstName");
+            dt.Clear();
+
             dt = data.GetPharmacyById(id);
-            
-            
 
             PharmacyRecordsVM pharmacy = new PharmacyRecordsVM();
-            pharmacy.PharmacyId = Convert.ToInt32(dt.Rows[0]["PharmacyID"]);
-            pharmacy.PharmacyName = dt.Rows[0]["PharmacyName"].ToString();
-            pharmacy.PharmacyEmail = dt.Rows[0]["PharmacyEmail"].ToString();
-            pharmacy.PharmacyContactNo = int.Parse(dt.Rows[0]["PharmacyContactNo"].ToString());
-            pharmacy.LicenseNo = int.Parse(dt.Rows[0]["LicenseNo"].ToString());
-            pharmacy.AddressLine1 = dt.Rows[0]["AddressLine1"].ToString();
-            pharmacy.AddressLine2 = dt.Rows[0]["AddressLine2"].ToString();
-            pharmacy.SuburbID = int.Parse(dt.Rows[0]["SuburbID"].ToString());
-            city = data.GetSuburbById(int.Parse(pharmacy.SuburbID.ToString()));
-            pharmacy.CityId = int.Parse(city.Rows[0]["CityID"].ToString());
-            province = data.GetCityById(int.Parse(pharmacy.CityId.ToString()));
-            pharmacy.ProvinceId = int.Parse(province.Rows[0]["ProvinceID"].ToString());
+
+            if (dt.Rows.Count>0)
+            {
+                
+                pharmacy.PharmacyId = Convert.ToInt32(dt.Rows[0]["PharmacyID"]);
+                pharmacy.PharmacyName = dt.Rows[0]["PharmacyName"].ToString();
+                pharmacy.PharmacyEmail = dt.Rows[0]["PharmacyEmail"].ToString();
+                pharmacy.PharmacyContactNo = dt.Rows[0]["PharmacyContactNo"].ToString();
+                pharmacy.LicenseNo = dt.Rows[0]["LicenseNo"].ToString();
+                pharmacy.AddressLine1 = dt.Rows[0]["AddressLine1"].ToString();
+                pharmacy.AddressLine2 = dt.Rows[0]["AddressLine2"].ToString();
+                pharmacy.SuburbID = int.Parse(dt.Rows[0]["SuburbID"].ToString());
+                pharmacy.PostalCode = dt.Rows[0]["PostalCode"].ToString();
+                city = data.GetSuburbById(int.Parse(pharmacy.SuburbID.ToString()));
+                pharmacy.CityId = int.Parse(city.Rows[0]["CityID"].ToString());
+                province = data.GetCityById(int.Parse(pharmacy.CityId.ToString()));
+                pharmacy.ProvinceId = int.Parse(province.Rows[0]["ProvinceID"].ToString());
+
+                city.Clear();
+                suburb.Clear();
+                city = data.GetCityByCityId(pharmacy.CityId);
+                suburb = data.GetSuburbBySuburbId(int.Parse(dt.Rows[0]["SuburbID"].ToString()));
+
+                ViewBag.City = new SelectList(city.AsEnumerable(), "CityID", "CityName");
+
+                ViewBag.Suburb= new SelectList(suburb.AsEnumerable(), "SubrbID", "SuburbName");
+
+
+            }
+
+            ViewBag.City = new SelectList(city.AsEnumerable(), "CityID", "CityName");
+
+            ViewBag.Suburb = new SelectList(suburb.AsEnumerable(), "SubrbID", "SuburbName");
 
             return View(pharmacy);
         }
@@ -234,7 +290,89 @@ namespace E_prescription.Controllers.PharmacyRecords
                 var getProvinces = provinces.ToList();
                 ViewBag.Provinces = new SelectList(getProvinces, "ProvinceID", "ProvinceName");
 
+                dt.Clear();
+
+
+                dt = data.GetPhamacists();
+
+                List<PharmacistAccount> pharmacists = new List<PharmacistAccount>();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    PharmacistAccount pharmacist = new PharmacistAccount();
+                    pharmacist.PharmacistId = Convert.ToInt32(dt.Rows[i]["PharmacistID"]);
+                    pharmacist.FirstName = dt.Rows[i]["NAMES"].ToString();
+
+                    pharmacists.Add(pharmacist);
+                }
+
+                ViewBag.Pharmacists = new SelectList(pharmacists.ToList(), "PharmacistId", "FirstName");
+
+
                 return View(pharmacy);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(PharmacyRecordsVM pharmacyRecords)
+        {
+            if(ModelState.IsValid)
+            {
+                data = new DataAccess(configuration);
+                data.UpdatePharmacy(pharmacyRecords);
+                TempData["PharmacyEdit"] = $"Successfully updated pharmacy records.";
+                return RedirectToAction("List", "PharmacyRecords");
+            }
+            else
+            {
+                data = new DataAccess(configuration);
+
+
+                //Get provinces
+                DataTable dt = new DataTable();
+                DataTable city = new DataTable();
+                DataTable suburb = new DataTable();
+                DataTable province = new DataTable();
+                DataTable getProv = new DataTable();
+
+                getProv = data.GetProvinces();
+
+                List<ProvinceModel> provinces = new List<ProvinceModel>();
+
+                for (int i = 0; i < getProv.Rows.Count; i++)
+                {
+                    ProvinceModel prov = new ProvinceModel();
+                    prov.ProvinceID = Convert.ToInt32(getProv.Rows[i]["ProvinceID"]);
+                    prov.ProvinceName = getProv.Rows[i]["ProvinceName"].ToString();
+
+                    provinces.Add(prov);
+                }
+                var getProvinces = provinces.ToList();
+                ViewBag.Provinces = new SelectList(getProvinces, "ProvinceID", "ProvinceName");
+
+                dt.Clear();
+
+
+                dt = data.GetPhamacists();
+
+                List<PharmacistAccount> pharmacists = new List<PharmacistAccount>();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    PharmacistAccount pharmacist = new PharmacistAccount();
+                    pharmacist.PharmacistId = Convert.ToInt32(dt.Rows[i]["PharmacistID"]);
+                    pharmacist.FirstName = dt.Rows[i]["NAMES"].ToString();
+
+                    pharmacists.Add(pharmacist);
+                }
+
+                ViewBag.Pharmacists = new SelectList(pharmacists.ToList(), "PharmacistId", "FirstName");
+                dt.Clear();
+
+                
+               
+
+                return View(pharmacyRecords);
             }
         }
     }

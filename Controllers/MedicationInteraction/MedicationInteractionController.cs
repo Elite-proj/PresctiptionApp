@@ -35,7 +35,7 @@ namespace E_prescription.Controllers.MedicationInteraction
             {
                 ActiveIngredientVM ingredient = new ActiveIngredientVM();
                 ingredient.IngredientID = int.Parse(dt.Rows[i]["IngredientID"].ToString());
-                ingredient.IngredientDescription = dt.Rows[i]["Name"].ToString();
+                ingredient.IngredientDescription = dt.Rows[i]["IngredientDescription"].ToString();
 
                 ingredients.Add(ingredient);
             }
@@ -53,29 +53,37 @@ namespace E_prescription.Controllers.MedicationInteraction
                 data = new DataAccess(configuration);
                 data.AddMedicationInteraction(medinteraction);
 
-                return RedirectToAction("Add", "MedicationInteraction");
+                return RedirectToAction("List", "MedicationInteraction");
             }
             else
                 return View(medinteraction);
         }
 
-        //[HttpGet]
-        //public IActionResult List()
-        //{
-        //    data = new DataAccess(configuration);
-        //    dt = new DataTable();
+        [HttpGet]
+        public IActionResult List()
+        {
+            data = new DataAccess(configuration);
+            dt = new DataTable();
 
-        //    dt = data.GetMedicationInteractions();
+            dt = data.GetMedicationInteractions();
 
-        //    List<MedinteractionVM> medinteractions = new List<MedinteractionVM>();
+            List<MedinteractionVM> medinteractions = new List<MedinteractionVM>();
 
-        //    for(int i=0;i<dt.Rows.Count;i++)
-        //    {
-        //        MedinteractionVM medinteraction = new MedinteractionVM();
-        //        medinteraction.Ingredient1= dt
-        //    }
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                MedinteractionVM medinteraction = new MedinteractionVM();
+                medinteraction.Ingredient1 = int.Parse(dt.Rows[i]["ActiveIngredient1"].ToString());
+                medinteraction.Ingredient2 = int.Parse(dt.Rows[i]["ActiveIngredient2"].ToString());
+                medinteraction.Description = dt.Rows[i]["Description"].ToString();
+                medinteraction.MedInteractionID= int.Parse(dt.Rows[i]["MedInteractionID"].ToString());
 
-        //    return View();
-        //}
+                medinteractions.Add(medinteraction);
+
+            }
+
+            ViewBag.Interactions = medinteractions.ToList();
+
+            return View();
+        }
     }
 }

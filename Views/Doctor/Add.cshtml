@@ -74,10 +74,11 @@
                         <div><span asp-validation-for="SuburbID" class="text-danger"></span></div>
                     </div>
                     <div class="col-6 form-group">
-                        <label asp-for="ContactNo">Contact number</label>
-                        <input class="form-control" asp-for="ContactNo" type="tel" />
-                        <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
+                        <label asp-for="PostalCode">Postal Code</label>
+                        <input class="form-control" asp-for="PostalCode" type="number" />
+                        <div><span asp-validation-for="PostalCode" class="text-danger"></span></div>
                     </div>
+                    
                 </div>
                 <div class="input-group">
                     <div class="col-6 form-group">
@@ -102,9 +103,22 @@
                         <div><span asp-validation-for="MedicalPracticeID" class="text-danger"></span></div>
                     </div>
                     <div class="col-6 form-group">
+                        <label asp-for="ContactNo">Contact number</label>
+                        <input class="form-control" asp-for="ContactNo" type="number" />
+                        <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
+                    </div>
+                   
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
                         <label asp-for="Email">Email Address</label>
                         <input class="form-control" asp-for="Email" type="email" />
                         <div><span asp-validation-for="Email" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="ConfirmEmail">Confirm Email Address</label>
+                        <input class="form-control" asp-for="ConfirmEmail" type="email" />
+                        <div><span asp-validation-for="ConfirmEmail" class="text-danger"></span></div>
                     </div>
                 </div>
 

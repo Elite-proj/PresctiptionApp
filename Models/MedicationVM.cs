@@ -15,7 +15,7 @@ namespace E_prescription.Models
         public int ScheduleID { get; set; }
        // [Required(ErrorMessage ="Please select dosage form.")]
         public int DosageID { get; set; }
-
+        public string Strength { get; set; }
         public List<MedicationDetails> listOfmedicationDetails { get; set; }
 
         

@@ -27,7 +27,7 @@
             </div>
 
             <br /><br />
-            <form asp-controller="Account" asp-action="Register" method="post">
+            <form asp-controller="PharmacistRecords" asp-action="Edit" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="input-group">
@@ -64,7 +64,7 @@
                     <div class="col-6 form-group">
                         <label asp-for="CityID">City</label>
                         <select id="CityList" asp-for="CityID" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
-                            <option>-- Select City --</option>
+                           
                         </select>
                         <div><span asp-validation-for="CityID" class="text-danger"></span></div>
                     </div>
@@ -72,16 +72,17 @@
                 <div class="input-group">
                     <div class="col-6 form-group">
                         <label asp-for="SuburbID">Suburb</label>
-                        <select id="SuburbList" asp-for="SuburbID" asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
-                            <option>-- Select Suburb --</option>
+                        <select id="SuburbList" asp-for="SuburbID" selected asp-items="@(new SelectList(string.Empty,"Value","Text"))" class="form-control">
+                            <option value="@Model.SuburbID" selected></option>
                         </select>
                         <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
                     </div>
                     <div class="col-6 form-group">
-                        <label asp-for="ContactNo">Contact number</label>
-                        <input class="form-control" asp-for="ContactNo" type="tel" />
-                        <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
+                        <label asp-for="PostalCode">Postal Code</label>
+                        <input class="form-control" asp-for="PostalCode" value="@Model.PostalCode" />
+                        <div><span asp-validation-for="PostalCode" class="text-danger"></span></div>
                     </div>
+
                 </div>
                 <div class="input-group">
                     <div class="col-6 form-group">
@@ -91,21 +92,35 @@
                     </div>
                     <div class="col-6 form-group">
                         <label asp-for="PharmacyID">Pharmacy Name</label>
-                        <select asp-for="PharmacyID" asp-items="@ViewBag.Pharmacies" class="form-control" disabled>
-                            <option>-- Pharmacy Name --</option>
+                        <select asp-for="PharmacyID" asp-items="@ViewBag.Pharmacies" class="form-control">
+                    
                         </select>
                         <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="col-6 form-group">
+                        <label asp-for="ContactNo">Contact Number</label>
+                        <input asp-for="ContactNo" value="@Model.ContactNo"   class="form-control"  />
+                        <div><span asp-validation-for="ContactNo" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
                         <label asp-for="Email">Email Address</label>
                         <input class="form-control" asp-for="Email" type="email" />
                         <div><span asp-validation-for="Email" class="text-danger"></span></div>
                     </div>
-                    
+
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
+                        <label asp-for="ConfirmEmail">Confirm Email</label>
+                        <input asp-for="ConfirmEmail"  class="form-control"  />
+                        <div><span asp-validation-for="ConfirmEmail" class="text-danger"></span></div>
+                    </div>
+                  
                 </div>
 
+                <input asp-for="PharmacistId" hidden />
                 <button type="submit" class="btn btn-primary">Update pharmacist records</button>
 
             </form>
@@ -114,42 +129,18 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            $.getJSON("/PharmacistRecords/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
-                var row = "";
-               
-                
-                $.each(d, function (i, v) {
-                    row += "<option value=" + v.value + ">" + v.text + "</option>";
-                });
-                $("#CityList").html(row);
-                $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
+             
+            $("#ProvinceList").change(function () {
+                $.getJSON("/Account/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
                     var row = "";
+                    $("#CityList").empty();
                     $("#SuburbList").empty();
                     $.each(d, function (i, v) {
                         row += "<option value=" + v.value + ">" + v.text + "</option>";
                     });
-                    $("#SuburbList").html(row);
+                    $("#CityList").html(row);
                 })
             })
-            //$.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
-            //    var row = "";
-            //    $("#SuburbList").empty();
-            //    $.each(d, function (i, v) {
-            //        row += "<option value=" + v.value + ">" + v.text + "</option>";
-            //    });
-            //    $("#SuburbList").html(row);
-            //})
-            //$("#ProvinceList").change(function () {
-            //    $.getJSON("/Account/LoadCities", { id: $("#ProvinceList").val() }, function (d) {
-            //        var row = "";
-            //        $("#CityList").empty();
-            //        $("#SuburbList").empty();
-            //        $.each(d, function (i, v) {
-            //            row += "<option value=" + v.value + ">" + v.text + "</option>";
-            //        });
-            //        $("#CityList").html(row);
-            //    })
-            //})
 
             $("#CityList").change(function () {
                 $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
@@ -161,18 +152,6 @@
                     $("#SuburbList").html(row);
                 })
             })
-        })
-
-        $(document).ready(function () {
-            $.getJSON("/Account/LoadSuburbs", { id: $("#CityList").val() }, function (d) {
-                var row = "";
-                $("#SuburbList").empty();
-                $.each(d, function (i, v) {
-                    row += "<option value=" + v.value + ">" + v.text + "</option>";
-                });
-                $("#SuburbList").html(row);
-            })
-            
         })
     </script>
 </body>

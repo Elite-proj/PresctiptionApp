@@ -63,6 +63,7 @@ namespace E_prescription.Models
             dbComm.Parameters.AddWithValue("@DOB", patient.DateOfBith);
             dbComm.Parameters.AddWithValue("@FirstVisit", patient.FirstVisit);
             dbComm.Parameters.AddWithValue("@GenderID", patient.GenderID);
+            dbComm.Parameters.AddWithValue("@PostalCode", patient.PostalCode);
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
@@ -130,6 +131,7 @@ namespace E_prescription.Models
             dbComm.Parameters.AddWithValue("@HCRN", doctor.HCRN);
             dbComm.Parameters.AddWithValue("@QualificationID", doctor.QualificationID);
             dbComm.Parameters.AddWithValue("@MedicalPracticeID", doctor.MedicalPracticeID);
+            dbComm.Parameters.AddWithValue("@PostalCode", doctor.PostalCode);
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
@@ -170,11 +172,187 @@ namespace E_prescription.Models
             dbComm.Parameters.AddWithValue("@UserStatus", pharmacist.UserStatus);
             dbComm.Parameters.AddWithValue("@RegNumber", pharmacist.RegNumber.ToString());
             dbComm.Parameters.AddWithValue("@PharmacyID", pharmacist.PharmacyID);
-           
+            dbComm.Parameters.AddWithValue("@PostalCode", pharmacist.PostalCode);
+
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
 
             return x;
+        }
+
+        public int UpdatePharmacist(PharmacistAccount pharmacist)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_UpdatePharmacist", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+           
+
+            dbComm.Parameters.AddWithValue("@Name", pharmacist.FirstName);
+            dbComm.Parameters.AddWithValue("@Surname", pharmacist.Surname);
+
+            dbComm.Parameters.AddWithValue("@Contacts", pharmacist.ContactNo.ToString());
+            dbComm.Parameters.AddWithValue("@Email", pharmacist.Email);
+            dbComm.Parameters.AddWithValue("@AddressLine1", pharmacist.AddressLine1);
+            dbComm.Parameters.AddWithValue("@AddressLine2", pharmacist.AddressLine2);
+            
+            dbComm.Parameters.AddWithValue("@SuburbID", pharmacist.SuburbID);
+            
+            dbComm.Parameters.AddWithValue("@RegNumber", pharmacist.RegNumber.ToString());
+            dbComm.Parameters.AddWithValue("@PharmacyID", pharmacist.PharmacyID);
+            dbComm.Parameters.AddWithValue("@PostalCode", pharmacist.PostalCode);
+            dbComm.Parameters.AddWithValue("@PharmacistID", pharmacist.PharmacistId);
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+        public int UpdateMedicalPractice(MedicalPractice medical)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_UpdateMedicalPractice", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+
+          
+            dbComm.Parameters.AddWithValue("@PracticeName", medical.PracticeName);
+            dbComm.Parameters.AddWithValue("@Contacts", medical.PracticeContactNo);
+            dbComm.Parameters.AddWithValue("@Email", medical.PracticeEmail);
+            dbComm.Parameters.AddWithValue("@PracticeNo", medical.PracticeNo);
+            dbComm.Parameters.AddWithValue("@AddressLine1", medical.AddressLine1);
+
+            dbComm.Parameters.AddWithValue("@SuburbID", medical.SuburbId);
+
+            dbComm.Parameters.AddWithValue("@AddressLine2", medical.AddressLine2);
+            dbComm.Parameters.AddWithValue("@PostalCode", medical.PostalCode);
+            dbComm.Parameters.AddWithValue("@MedicalPracticeID", medical.MedicalPracticeId);
+
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+
+        public int AddMedicalPractice(MedicalPractice medical)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_AddMecicalPractice", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+
+            medical.Status = "Active";
+            dbComm.Parameters.AddWithValue("@PracticeName", medical.PracticeName);
+            dbComm.Parameters.AddWithValue("@Contacts", medical.PracticeContactNo);
+            dbComm.Parameters.AddWithValue("@Email", medical.PracticeEmail);
+            dbComm.Parameters.AddWithValue("@PracticeNo", medical.PracticeNo);
+            dbComm.Parameters.AddWithValue("@AddressLine1", medical.AddressLine1);
+
+            dbComm.Parameters.AddWithValue("@SuburbID", medical.SuburbId);
+
+            dbComm.Parameters.AddWithValue("@AddressLine2", medical.AddressLine2);
+            dbComm.Parameters.AddWithValue("@Status", medical.Status);
+            dbComm.Parameters.AddWithValue("@PostalCode", medical.PostalCode);
+            
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+
+        public DataTable GetMedicalPractices()
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetMedicalPractices", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+
+        public DataTable GetMedicalPracticeById(int practiceId)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetMedicalPracticeById", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@MedicalPracticeId", practiceId);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
         }
 
         public DataTable GetDoctors()
@@ -506,6 +684,10 @@ namespace E_prescription.Models
 
             pharmacy.Status = "Active";
             
+            if(pharmacy.PharmacistID== "-- Select responsible pharmacist --")
+            {
+                pharmacy.PharmacistID = null;
+            }
 
             dbComm.Parameters.AddWithValue("@Name", pharmacy.PharmacyName);
             dbComm.Parameters.AddWithValue("@Contacts", pharmacy.PharmacyContactNo.ToString());
@@ -515,8 +697,10 @@ namespace E_prescription.Models
             dbComm.Parameters.AddWithValue("@AddressLine1", pharmacy.AddressLine1);
             dbComm.Parameters.AddWithValue("@AddressLine2", pharmacy.AddressLine2);
             dbComm.Parameters.AddWithValue("@Status", pharmacy.Status);
+            dbComm.Parameters.AddWithValue("@PostalCode", pharmacy.PostalCode);
+            dbComm.Parameters.AddWithValue("@PharmacistID", pharmacy.PharmacistID);
 
-            
+
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
 
@@ -568,6 +752,60 @@ namespace E_prescription.Models
             dbComm.CommandType = CommandType.StoredProcedure;
 
             dbComm.Parameters.AddWithValue("@Id", id);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+        public DataTable GetCityByCityId(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetCityByCityId", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@id", id);
+
+            dt = new DataTable();
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+
+            return dt;
+        }
+        public DataTable GetSuburbBySuburbId(int id)
+        {
+            string connString = configuration.GetConnectionString("connString");
+
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_GetSuburbBySuburbId", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@id", id);
 
             dt = new DataTable();
             dbAdapter = new SqlDataAdapter(dbComm);
@@ -630,6 +868,9 @@ namespace E_prescription.Models
             dbComm.Parameters.AddWithValue("@AddressLine1", pharmacy.AddressLine1);
             dbComm.Parameters.AddWithValue("@AddressLine2", pharmacy.AddressLine2);
             dbComm.Parameters.AddWithValue("@Id", pharmacy.PharmacyId);
+            dbComm.Parameters.AddWithValue("@PostalCode", pharmacy.PostalCode);
+            dbComm.Parameters.AddWithValue("@PharmacistID", pharmacy.PharmacistID);
+
 
 
             int x = dbComm.ExecuteNonQuery();
@@ -660,7 +901,7 @@ namespace E_prescription.Models
             ingredient.Status = "Active";
 
             dbComm.Parameters.AddWithValue("@Description", ingredient.IngredientDescription);
-            dbComm.Parameters.AddWithValue("@StrengthID", ingredient.StrengthID);
+            //dbComm.Parameters.AddWithValue("@StrengthID", ingredient.StrengthID);
             dbComm.Parameters.AddWithValue("@Status", ingredient.Status);
 
 
@@ -778,7 +1019,8 @@ namespace E_prescription.Models
 
             dbComm.Parameters.AddWithValue("@MedicationID", medication.MedicationID);
             dbComm.Parameters.AddWithValue("@IngredientID", medication.IngredientID);
-            
+            dbComm.Parameters.AddWithValue("@Strength", medication.Strength);
+
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
@@ -2230,7 +2472,8 @@ namespace E_prescription.Models
 
             dbComm.Parameters.AddWithValue("@Ingredient1", medinteraction.Ingredient1);
             dbComm.Parameters.AddWithValue("@Ingredient2", medinteraction.Ingredient2);
-            
+            dbComm.Parameters.AddWithValue("@Description", medinteraction.Description);
+
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
             return x;

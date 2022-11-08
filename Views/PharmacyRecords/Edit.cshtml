@@ -27,7 +27,7 @@
             </div>
 
             <br /><br />
-            <form asp-controller="PharmacyRecords" asp-action="Add" method="post">
+            <form asp-controller="PharmacyRecords" asp-action="Edit" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="input-group">
@@ -56,7 +56,7 @@
                 <div class="input-group">
                     <div class="col-6 form-group">
                         <label asp-for="ProvinceId">Province</label>
-                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" asp-for="ProvinceId" class="form-control">
+                        <select id="ProvinceList" asp-items="@ViewBag.Provinces" class="form-control">
                             <option>-- Select Province --</option>
                         </select>
                         <div><span asp-validation-for="ProvinceId" class="text-danger"></span></div>
@@ -78,9 +78,24 @@
                         <div><span asp-validation-for="SuburbID" class="text-dark"></span></div>
                     </div>
                     <div class="col-6 form-group">
+                        <label asp-for="PostalCode">Postal Code</label>
+                        <input class="form-control" asp-for="PostalCode" type="number" />
+                        <div><span asp-validation-for="PostalCode" class="text-danger"></span></div>
+                    </div>
+                    
+                </div>
+                <div class="input-group">
+                    <div class="col-6 form-group">
                         <label asp-for="PharmacyContactNo">Pharmacy Contact number</label>
                         <input class="form-control" asp-for="PharmacyContactNo" type="number" />
                         <div><span asp-validation-for="PharmacyContactNo" class="text-danger"></span></div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="PharmacistID">Responsible Pharmacist</label>
+                        <select asp-for="PharmacistID" asp-items="@ViewBag.Pharmacists" class="form-control">
+                            <option>-- Select responsible pharmacist --</option>
+                        </select>
+                        <div><span asp-validation-for="PharmacistID" class="text-danger"></span></div>
                     </div>
                 </div>
                 <div class="input-group">
@@ -89,9 +104,14 @@
                         <input class="form-control" asp-for="PharmacyEmail" type="email" />
                         <div><span asp-validation-for="PharmacyEmail" class="text-danger"></span></div>
                     </div>
+                    <div class="col-6 form-group">
+                        <label asp-for="ConfirmEmail">Confirm Email Address</label>
+                        <input class="form-control" asp-for="ConfirmEmail" type="email" />
+                        <div><span asp-validation-for="ConfirmEmail" class="text-danger"></span></div>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Add Pharmacy</button>
+                <input asp-for="PharmacyId" hidden />
+                <button type="submit" class="btn btn-primary">Edit pharmacy</button>
 
             </form>
 

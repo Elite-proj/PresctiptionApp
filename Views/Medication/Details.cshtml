@@ -23,8 +23,14 @@
     // for adding selected ingredient
     function AddIngredient() {
         var index = $('input[name^="listOfmedicationDetails"]').length;
-        var ingredients = "<tr><td hidden >" + "<input type=" + '"text"' + "name=" + '"listOfmedicationDetails[' + index + '].IngredientID"' + " value=" + $("#cmbIngredient").val() + ">" + "</td><td>" + $("#cmbIngredient").find(":selected").text() + "</td><td><input onclick=" + '"Remove(this)"' +" id=" + '"delete"' + " type=" + '"button"' + " value=" + '"Remove"' + " class=" + '"btn btnDelete btn-danger"' + "/></td></tr>";
+        if (index > 0) {
+            index = parseInt($('tr:last td:first').html());
+            index = index + 1;
+        }
+
+        var ingredients = "<tr><td hidden >" + index + "</td><td hidden >" + "<input type=" + '"text"' + "name=" + '"listOfmedicationDetails[' + index + '].IngredientID"' + " value=" + $("#cmbIngredient").val() + ">" + "</td><td>" + $("#cmbIngredient").find(":selected").text() + "</td><td hidden >" + "<input type=" + '"text"' + "name=" + '"listOfmedicationDetails[' + index + '].Strength"' + " value=" + $("#txtStrength").val() + ">" + "</td><td>" + $("#txtStrength").val() + "</td><td><input onclick=" + '"Remove(this)"' + " id=" + '"delete"' + " type=" + '"button"' + " value=" + '"Remove"' + " class=" + '"btn btnDelete btn-danger"' + "/></td></tr>";
         $("#tblIngredients").last().append(ingredients);
+        $("$txtStrength").val('');
     }
 
     function Remove(button) {
@@ -60,6 +66,9 @@
                         <select asp-items="@ViewBag.Ingredients" id="cmbIngredient" class="form-control">
                         </select>
                         <div><span class="text-danger"></span></div>
+                        <br />
+                        <label>Active Ingredient Strength</label>
+                        <input asp-for="Strength" id="txtStrength" class="form-control" />
                     </div>
 
                 </div>
@@ -69,6 +78,7 @@
                     <thead>
                         <tr>
                             <th>Active Ingredient</th>
+                            <th>Strength</th>
                         </tr>
                     </thead>
                     <tbody>

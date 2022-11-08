@@ -14,6 +14,9 @@ namespace E_prescription.Models.Account
         [Required(ErrorMessage ="Please enter date of birth")]
         public string DateOfBith { get; set; }
 
+        [Required(ErrorMessage = "Please enter postal code")]
+        public string PostalCode { get; set; }
+
         public string FirstVisit { get; set; } 
         
     }

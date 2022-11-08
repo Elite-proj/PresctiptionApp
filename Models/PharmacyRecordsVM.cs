@@ -14,7 +14,7 @@ namespace E_prescription.Models
         public string PharmacyName { get; set; }
 
         [Required(ErrorMessage ="Please enter pharmacy contact number.")]
-        public double PharmacyContactNo { get; set; }
+        public string PharmacyContactNo { get; set; }
 
         [Required(ErrorMessage ="Please enter pharmacy email.")]
         [EmailAddress(ErrorMessage ="Invalid email.")]
@@ -27,7 +27,7 @@ namespace E_prescription.Models
         public string ConfirmEmail { get; set; }
 
         [Required(ErrorMessage ="Please enter license number.")]
-        public double LicenseNo { get; set; }
+        public string LicenseNo { get; set; }
         
         [Required(ErrorMessage ="Please enter address line 1.")]
         public string AddressLine1 { get; set; }
@@ -45,5 +45,9 @@ namespace E_prescription.Models
         public int ProvinceId { get; set; }
 
         public string Status { get; set; }
+        [Required(ErrorMessage ="Please enter postal code")]
+        public string PostalCode { get; set; }
+
+        public string PharmacistID { get; set; }
     }
 }

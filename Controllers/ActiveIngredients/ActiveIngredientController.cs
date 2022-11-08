@@ -22,23 +22,23 @@ namespace E_prescription.Controllers.ActiveIngredients
         [HttpGet]
         public IActionResult Add()
         {
-            data = new DataAccess(configuration);
-            DataTable dt = new DataTable();
+            //data = new DataAccess(configuration);
+            //DataTable dt = new DataTable();
 
-            dt = data.GetStrength();
+            //dt = data.GetStrength();
 
-            List<StrengthVM> strengths = new List<StrengthVM>();
+            //List<StrengthVM> strengths = new List<StrengthVM>();
 
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                StrengthVM strength = new StrengthVM();
-                strength.strengthID = Convert.ToInt32(dt.Rows[i]["StrengthID"].ToString());
-                strength.description = dt.Rows[i]["StrengthDescription"].ToString();
-                strength.Status = dt.Rows[i]["Status"].ToString();
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //{
+            //    StrengthVM strength = new StrengthVM();
+            //    strength.strengthID = Convert.ToInt32(dt.Rows[i]["StrengthID"].ToString());
+            //    strength.description = dt.Rows[i]["StrengthDescription"].ToString();
+            //    strength.Status = dt.Rows[i]["Status"].ToString();
 
-                strengths.Add(strength);
-            }
-            ViewBag.Strengths = new SelectList(strengths.ToList(), "strengthID", "description");
+            //    strengths.Add(strength);
+            //}
+            //ViewBag.Strengths = new SelectList(strengths.ToList(), "strengthID", "description");
 
            
             return View();
