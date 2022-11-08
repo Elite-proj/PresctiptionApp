@@ -3,12 +3,6 @@
     Layout = "_AdminLayout";
 }
 
-<div class="row">
-    <div class="col-sm-2">
-        <a asp-controller="DoctorRec" asp-action="Add" class="btn btn-primary">Add Doctor</a>
-    </div>
-</div>
-
 
 <div class="col-12 border p-3">
     <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
@@ -46,5 +40,5 @@
         </tbody>
 
     </table>
-
+    <a asp-controller="Doctor" asp-action="Add">Add Doctor</a>
 </div>

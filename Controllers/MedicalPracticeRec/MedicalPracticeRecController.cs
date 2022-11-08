@@ -166,32 +166,45 @@ namespace E_prescription.Controllers
             }
         }
 
-        [HttpGet]
         public JsonResult LoadCities(int id)
         {
+            data = new DataAccess(configuration);
+
+            //Get Cities
+            DataTable dtCities = new DataTable();
+            CityModel city = new CityModel();
+            city.ProvinceID = id;
+
+            dtCities = data.GetCities(city);
+
 
             List<SelectListItem> list = new List<SelectListItem>();
-            List<City> Clist = new List<City>();
-            Clist = _medicalPracticeRecService.GetCities(id);
 
-            for (int i = 0; i < Clist.Count; i++)
+            list.Add(new SelectListItem { Text = "-- Select City --", Value = "0" });
+            for (int i = 0; i < dtCities.Rows.Count; i++)
             {
-                list.Add(new SelectListItem { Text = Clist[i].CityName.ToString(), Value = Clist[i].CityId.ToString() });
+                list.Add(new SelectListItem { Text = dtCities.Rows[i]["CityName"].ToString(), Value = Convert.ToInt32(dtCities.Rows[i]["CityID"]).ToString() });
             }
 
             return Json(list);
         }
-        [HttpGet]
+        //Get Suburbs by city
         public JsonResult LoadSuburbs(int id)
         {
+            data = new DataAccess(configuration);
+
+            //Get Cities
+            DataTable dtSuburbs = new DataTable();
+            SuburbModel suburb = new SuburbModel();
+            suburb.CityID = id;
+
+            dtSuburbs = data.GetSuburbs(suburb);
 
             List<SelectListItem> list = new List<SelectListItem>();
-            List<Suburb> Slist = new List<Suburb>();
-            Slist = _medicalPracticeRecService.GetSuburbs(id);
 
-            for (int i = 0; i < Slist.Count; i++)
+            for (int i = 0; i < dtSuburbs.Rows.Count; i++)
             {
-                list.Add(new SelectListItem { Text = Slist[i].SuburbName.ToString(), Value = Slist[i].SuburbId.ToString() });
+                list.Add(new SelectListItem { Text = dtSuburbs.Rows[i]["SuburbName"].ToString(), Value = Convert.ToInt32(dtSuburbs.Rows[i]["SuburbID"]).ToString() });
             }
 
             return Json(list);

@@ -247,7 +247,7 @@ namespace E_prescription.Controllers.PharmacistRecords
 
 
             List<SelectListItem> list = new List<SelectListItem>();
-
+            list.Add(new SelectListItem { Text = "-- Select City --", Value = "0" });
             for (int i = 0; i < dtCities.Rows.Count; i++)
             {
                 list.Add(new SelectListItem { Text = dtCities.Rows[i]["CityName"].ToString(), Value = Convert.ToInt32(dtCities.Rows[i]["CityID"]).ToString() });

@@ -137,15 +137,15 @@ namespace E_prescription.Services
         }
 
 
-        public List<City> GetCities(int ProvinceId)
-        {
-            var Cities = _context.Cities.Where(c => c.ProvinceId == ProvinceId).ToList();
-            return Cities;
-        }
-        public List<Suburb> GetSuburbs(int CityId)
-        {
-            var Suburbs = _context.Suburbs.Where(c => c.CityId == CityId).ToList();
-            return Suburbs;
-        }
+        //public List<City> GetCities(int ProvinceId)
+        //{
+        //    var Cities = _context.Cities.Where(c => c.ProvinceId == ProvinceId).ToList();
+        //    return Cities;
+        //}
+        //public List<Suburb> GetSuburbs(int CityId)
+        //{
+        //    var Suburbs = _context.Suburbs.Where(c => c.CityId == CityId).ToList();
+        //    return Suburbs;
+        //}
     }
 }

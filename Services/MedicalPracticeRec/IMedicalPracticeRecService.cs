@@ -14,8 +14,8 @@ namespace E_prescription.Services.MedicalPracticeRec
         MedicalPractice GetMedicalPractice(int MedicalPracticeId);
 
         List<Province> GetProvinceList();
-        List<City> GetCities(int ProvinceId);
-        List<Suburb> GetSuburbs(int CityId);
+        //List<City> GetCities(int ProvinceId);
+        //List<Suburb> GetSuburbs(int CityId);
         List<MedicalPractice> List();
         List<MedicalPractice> ListByCity(int CityID);
         List<MedicalPractice> ListByProvince(int ProvinceID);
