@@ -2,53 +2,51 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewBag.Title = "Contra-Indications List";
-    Layout = "_AdminLayout";
+    ViewBag.Title = "Medications";
+    Layout = "_MedHistoryLayout";
 }
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - E-Prescription</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
-
-
-
 </head>
 
 <div class="form-group">
-   
-    @if (ViewBag.ContraIndications.Count > 0)
+    @if (ViewBag.Medications.Count > 0)
     {
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Description</th>
-                    
+                    <th>Medication Name</th>
+                    <th>Dosage Form</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (ContraIndication indication in ViewBag.ContraIndications)
+                @foreach (MedicationListVm medication in ViewBag.Medications)
                 {
                     <tr>
 
-                        <td>@indication.ContraIndicationName</td>
-                       
+                        <td>@medication.MedicationName</td>
+                        <td>@medication.DosageDescription</td>
 
                     </tr>
                 }
 
             </tbody>
         </table>
+       
+
     }
-    else if (ViewBag.ContraIndications.Count == 0)
+    else if (ViewBag.Medications.Count == 0)
     {
-        <h4 class="bg-warning text-center text-white p-2">No ContraIndications Records</h4>
+        <h4 class="bg-warning text-center text-white p-2">No medications Records</h4>
     }
 
-
-    <a asp-action="Add" asp-controller="ContraIndications" class="btn btn-primary">ADD NEW CONTRA-INDICATION</a>
 </div>
+
 

@@ -30,6 +30,18 @@ namespace E_prescription.Controllers.Account
             return View();
         }
 
+        [HttpGet]
+        public IActionResult logout()
+        {
+
+            HttpContext.Session.Remove("PatientID");
+            HttpContext.Session.Remove("DoctorID");
+            HttpContext.Session.Remove("PharmacistID");
+
+
+            return RedirectToAction("Index", "Home",new { area=""});
+        }
+
         //Display regitration page
         [HttpGet]
         public IActionResult Register()
