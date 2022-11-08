@@ -13,54 +13,17 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
 </head>
 
-<body>
-    <div class="container" style="padding:30px;">
-        <div class="section-title">
-            <h2>CONDITION DIAGNOSIS RECORD</h2>
-        </div>
-
-        <form method="post">
-            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    @* <div class="cold-6">
-                    <div>
-                    <label asp-for="ConditionId"> Condition ID</label>
-                    </div>
-                    <input asp-for="ConditionId" class="form-control" />
-                    <span asp-validation-for="ConditionId" class="text-danger"></span>
-                    </div>
-                    </div>*@
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <div class="cold-6">
-                                <div>
-                                    <label asp-for="ConditionDecription">Condition Description</label>
-                                </div>
-                                <input asp-for="ConditionDecription" class="form-control" />
-                                <span asp-validation-for="ConditionDecription" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <a asp-controller="ConditionDiagnosisRec" asp-action="Conditions" class="btn btn-success form-control">VIEW LIST</a>
-                        </div>
+<div class="text-center">
+    <form asp-action="Add" asp-controller="ConditionDiagnosisRec" method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <h1 class="display-4">Add Condition Diagnosis</h1>
+        <label asp-for="ConditionDecription" class="col-6">Condition Name</label>
+        <input type="text" asp-for="ConditionDecription" class="col-12 form-control" />
+        <span asp-validation-for="ConditionDecription" class="text-danger"></span>
+        <br />
+        <a asp-controller="ConditionDiagnosisRec" asp-action="Conditions" class="btn btn-primary">Vew List</a>
+        <button class="btn btn-primary" type="submit">Add Condition Diagnosis</button>
+    </form>
 
 
-                        <div class="col-sm-2 align-content-end">
-                            <button type="submit" class="btn btn-primary text-capitalize" form-control>
-                                ADD CONDITION DIAGNOSIS RECORD
-                            </button>
-                        </div>
-                    </div>
-
-        </form>
-    </div>
-
-</body>
-
-<partial name="_ValidationScriptsPartial" />
-
+</div>

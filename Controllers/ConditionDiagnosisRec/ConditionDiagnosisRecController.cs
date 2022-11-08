@@ -37,7 +37,7 @@ namespace E_prescription.Controllers
             var isSuccess = _conditionDiagnosisRecService.Add(conditionDiagnosisRec);
 
             if (isSuccess)
-                return Redirect("Conditions");
+                return RedirectToAction("Conditions", "ConditionDiagnosisRec");
 
             return View(conditionDiagnosisRec);
         }

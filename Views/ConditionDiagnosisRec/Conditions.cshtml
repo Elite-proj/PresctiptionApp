@@ -3,18 +3,17 @@
     Layout = "_AdminLayout";
 }
 
-<div class="row">
+@*<div class="row">
     <div class="col-sm-2">
         <a asp-controller="ConditionDiagnosisRec" asp-action="Add" class="btn btn-primary">Add Condition Diagnosis Record</a>
     </div>
-</div>
+</div>*@
 
 
 <div class="col-12 border p-3">
     <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>Condition Diagnosis ID</th>
                 <th>Condition Description</th>
                 <th class="text-center">Actions</th>
             </tr>
@@ -23,7 +22,6 @@
             @foreach (var condition in Model)
             {
                 <tr>
-                    <td>@condition.ConditionId</td>
                     <td>@condition.ConditionDecription</td>
                     <td>
                         <a asp-controller="ConditionDiagnosisRec" asp-action="Update" asp-route-CenterID="@condition.ConditionId" class="material-icons">edit</a>
@@ -38,5 +36,5 @@
         </tbody>
 
     </table>
-
+    <a asp-controller="ConditionDiagnosisRec" asp-action="Add" class="btn btn-primary">Add Condition Diagnosis Record</a>
 </div>
