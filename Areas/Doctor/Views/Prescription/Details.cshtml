@@ -33,6 +33,9 @@
                     <th>Quantity</th>
                     <th>Instructions</th>
                     <th>Repeat(s) Left</th>
+                    <th>Contra Indication Reason</th>
+                    <th>Medication Interaction Reason</th>
+                    <th>Drug Allergy Reason</th>
                     <th>Status</th>
                     <th></th>
                 </tr>
@@ -47,6 +50,9 @@
                         <td>@patient.Quantity</td>
                         <td>@patient.Instruction</td>
                         <td>@patient.RepeatDescription</td>
+                        <td>@patient.ContraIndicationReason</td>
+                        <td>@patient.MedInteractionReason</td>
+                        <td>@patient.AllergyRejection</td>
                         <td>@patient.DespensedStatus</td>
                         @if(patient.DoctorID==Convert.ToInt32(Context.Session.GetInt32("DoctorID")))
                         { 

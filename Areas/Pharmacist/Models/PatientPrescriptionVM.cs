@@ -30,7 +30,9 @@ namespace E_prescription.Areas.Pharmacist.Models
         public string ConditionDescription { get; set; }
         public string Date { get; set; }
 
-
+        public string ContraIndicationReason { get; set; }
+        public string MedInteractionReason { get; set; }
+        public string AllergyRejection { get; set; }
         
     }
 }

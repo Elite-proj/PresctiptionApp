@@ -32,6 +32,9 @@
                     <th>Quantity</th>
                     <th>Instructions</th>
                     <th>Repeat(s) Left</th>
+                    <th>Contra Indication Reason</th>
+                    <th>Medication Interaction Reason</th>
+                    <th>Drug Allergy Reason</th>
                     <th>Status</th>
                     <th></th>
                 </tr>
@@ -46,6 +49,9 @@
                         <td>@patient.Quantity</td>
                         <td>@patient.Instruction</td>
                         <td>@patient.RepeatDescription</td>
+                        <td>@patient.ContraIndicationReason</td>
+                        <td>@patient.MedInteractionReason</td>
+                        <td>@patient.AllergyRejection</td>
                         <td>@patient.DespensedStatus</td>
                         <td>
                             <a asp-action="Dispense" asp-area="Pharmacist" asp-controller="Prescriptions" asp-route-prescription="@patient.PrescriptionID" asp-route-medication="@patient.MedicationID" class="btn btn-primary">Dispense</a>

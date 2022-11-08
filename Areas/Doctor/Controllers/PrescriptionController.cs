@@ -467,6 +467,23 @@ namespace E_prescription.Areas.Doctor.Controllers
                 patient.Date = dt.Rows[i]["Date"].ToString();
                 patient.DoctorID = int.Parse(dt.Rows[i]["UserID"].ToString());
 
+                if (dt.Rows[i]["ContraIgnoreReason"]!=null)
+                {
+                    patient.ContraIndicationReason = dt.Rows[i]["ContraIgnoreReason"].ToString();
+                }
+
+                if (dt.Rows[i]["AllergyIgnoreReason"] != null)
+                {
+                    patient.AllergyRejection = dt.Rows[i]["AllergyIgnoreReason"].ToString();
+                }
+
+                if (dt.Rows[i]["WarningIgnoreReason"] != null)
+                {
+                    patient.MedInteractionReason = dt.Rows[i]["WarningIgnoreReason"].ToString();
+                }
+
+
+
                 patients.Add(patient);
             }
             dt.Clear();
