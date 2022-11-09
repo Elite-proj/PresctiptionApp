@@ -17,6 +17,7 @@ namespace E_prescription.Models.Account
 
         [Required(ErrorMessage = "Please enter your email address.")]
         [EmailAddress(ErrorMessage = "Incorrect email.")]
+        [RegularExpression("[a - z0 - 9._ % +-] +@[a-z0 - 9.-]+\\.[a-z]{ 2,4}$",ErrorMessage ="Email not in Correct format")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Confirm email address.")]

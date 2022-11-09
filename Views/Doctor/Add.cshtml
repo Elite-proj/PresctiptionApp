@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Register Doctor";
     Layout = "_AdminLayout";
+
+   
 }
 <head>
     <meta charset="utf-8" />
@@ -129,7 +131,7 @@
                 <div class="input-group">
                     <div class="col-6 form-group">
                         <label asp-for="Email">Email Address</label>
-                        <input class="form-control" asp-for="Email" type="email" />
+                        <input class="form-control" asp-for="Email"  type="email" />
                         <div><span asp-validation-for="Email" class="text-danger"></span></div>
                     </div>
                     <div class="col-6 form-group">
