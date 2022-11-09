@@ -50,7 +50,7 @@ namespace E_prescription.Models.Account
 
         public int? PharmacyID { get; set; }
 
-        [Required(ErrorMessage ="Please enter postal code")]
+        //[Required(ErrorMessage ="Please enter postal code")]
         public string PostalCode { get; set; }
     }
 }
