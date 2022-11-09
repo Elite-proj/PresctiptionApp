@@ -17,12 +17,13 @@ namespace E_prescription.Models.Account
 
         [Required(ErrorMessage = "Please enter your email address.")]
         [EmailAddress(ErrorMessage = "Incorrect email.")]
-        [RegularExpression("[a - z0 - 9._ % +-] +@[a-z0 - 9.-]+\\.[a-z]{ 2,4}$",ErrorMessage ="Email not in Correct format")]
+        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$",ErrorMessage ="Invalid format")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Confirm email address.")]
         [EmailAddress(ErrorMessage = "Incorrect email address.")]
         [Display(Name = "Confirm Email")]
+        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid format")]
         public string ConfirmEmail { get; set; }
 
         [Required(ErrorMessage = "Please enter contact number.")]
