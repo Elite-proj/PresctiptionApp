@@ -79,7 +79,7 @@ namespace E_prescription.Controllers
             {
                 MedicalPractice medicalPractice = new MedicalPractice();
                 medicalPractice.MedicalPracticeId = Convert.ToInt32(PracDt.Rows[i]["MedicalPracticeID"]);
-                medicalPractice.PracticeName = PracDt.Rows[i]["PracticeName"].ToString();
+                medicalPractice.PracticeName = PracDt.Rows[i]["PracticeDescription"].ToString();
 
                 medicalPractices.Add(medicalPractice);
             }
