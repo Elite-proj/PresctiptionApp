@@ -32,7 +32,7 @@ namespace E_prescription.Models
         [Required(ErrorMessage ="Please enter address line 1.")]
         public string AddressLine1 { get; set; }
 
-        [Required(ErrorMessage ="Please enter address line 2.")]
+        
         public string AddressLine2 { get; set; }
 
         [Required(ErrorMessage ="Please select suburb.")]
