@@ -117,7 +117,60 @@ namespace E_prescription.Controllers
                 return RedirectToAction("Doctors", "Doctor");
             }
             else
+            {
+                data = new DataAccess(configuration);
+
+                //Get provinces
+                DataTable dt = new DataTable();
+                List<ProvinceModel> provinces = new List<ProvinceModel>();
+                dt = data.GetProvinces();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ProvinceModel province = new ProvinceModel();
+                    province.ProvinceID = Convert.ToInt32(dt.Rows[i]["ProvinceID"]);
+                    province.ProvinceName = dt.Rows[i]["ProvinceName"].ToString();
+
+                    provinces.Add(province);
+                }
+                var getProvinces = provinces.ToList();
+                ViewBag.Provinces = new SelectList(getProvinces, "ProvinceID", "ProvinceName");
+
+                DataTable PracDt = new DataTable();
+
+                PracDt = data.GetMedicalPractice();
+                List<MedicalPractice> medicalPractices = new List<MedicalPractice>();
+
+                for (int i = 0; i < PracDt.Rows.Count; i++)
+                {
+                    MedicalPractice medicalPractice = new MedicalPractice();
+                    medicalPractice.MedicalPracticeId = Convert.ToInt32(PracDt.Rows[i]["MedicalPracticeID"]);
+                    medicalPractice.PracticeName = PracDt.Rows[i]["PracticeDescription"].ToString();
+
+                    medicalPractices.Add(medicalPractice);
+                }
+
+                ViewBag.MedicalPractices = new SelectList(medicalPractices.ToList(), "MedicalPracticeId", "PracticeName");
+
+                DataTable QuaDt = new DataTable();
+
+                QuaDt = data.GetQualifications();
+                List<HighestQualification> qualifications = new List<HighestQualification>();
+
+                for (int j = 0; j < QuaDt.Rows.Count; j++)
+                {
+                    HighestQualification qualification = new HighestQualification();
+
+                    qualification.QualificationId = int.Parse(QuaDt.Rows[j]["QualificationID"].ToString());
+                    qualification.QualificationName = QuaDt.Rows[j]["QualificationName"].ToString();
+
+                    qualifications.Add(qualification);
+                }
+
+                ViewBag.Qualifications = new SelectList(qualifications.ToList(), "QualificationId", "QualificationName");
+
                 return View(doctor);
+            }
+                
         }
 
         public JsonResult LoadCities(int id)
