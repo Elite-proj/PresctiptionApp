@@ -172,7 +172,7 @@ namespace E_prescription.Models
             dbComm.Parameters.AddWithValue("@UserStatus", pharmacist.UserStatus);
             dbComm.Parameters.AddWithValue("@RegNumber", pharmacist.RegNumber.ToString());
             dbComm.Parameters.AddWithValue("@PharmacyID", pharmacist.PharmacyID);
-            dbComm.Parameters.AddWithValue("@PostalCode", pharmacist.PostalCode);
+            //dbComm.Parameters.AddWithValue("@PostalCode", pharmacist.PostalCode);
 
             int x = dbComm.ExecuteNonQuery();
             dbconn.Close();
